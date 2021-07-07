@@ -1,0 +1,12 @@
+Download
+========
+
+Install EPTA from command line
+------------------------------
+
+You can install EPTA easily from PIPL or Annaconda
+
+- PIPL:
+
+    -pip instal easy_protein_tree_annotating
+    

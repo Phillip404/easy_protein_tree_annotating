@@ -1,0 +1,50 @@
+.. Protein Tree Annotating documentation master file, created by
+   sphinx-quickstart on Tue Jun 22 15:52:10 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Protein Phylogenetic Tree Annotating's documentation!
+================================================================
+
+.. toctree::
+   :maxdepth: 2
+   Features
+   Installation
+
+Easy Protein Tree Annotating
+============================
+
+Easy Protein Tree Annotating (EPTA) will solve your problem of how to build an informative protein phylogenetic tree easil
+to help you to build a protein tree from FASTA files.
+
+Features
+--------
+
+- Fetch protein profile from databases automatically
+- Run Pfamscan online for protein domain prediction
+- Human-readable dataframe for data inspect
+
+Installation
+------------
+
+Install (EPTA) by running:
+
+    pip install easyproteintreeannotating
+    or
+    conda install easyproteintreeannotating
+
+Contribute
+----------
+
+- Source Code: https://github.com/Phillip404/easy_protein_tree_annotating
+
+Support
+-------
+
+If you are having issues, please let us know.
+We have a mailing list located at: xu2742zh-s@student.lu.se
+
+License
+-------
+
+The project is licensed under the GNUn 3.0 license.

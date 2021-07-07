@@ -8,20 +8,12 @@ from datetime import datetime
 from Bio import SeqIO
 import pandas as pd
 import argparse
+from global_var import *
+from pfamscan import pfam_main
+from pfamscan import pfam_retry
 
-########## Parsing arguments ###########
-desc=''''''
-parser=argparse.ArgumentParser(description=desc)
-parser.add_argument('-i',metavar='Input_File',help='Input your file here',dest='infile')
-parser.add_argument('-o',metavar='Output_File',help='Output file name',dest='outfile')
-parser.add_argument('-dh',help='Keep duplicate headers in FASTA file.', action='store_true')
-parser.add_argument('-fl',metavar='Filter_length', help='How long you want to filter sequences?',dest='filter_length', required=False)
-parser.add_argument('-tax',help='Search for taxonomy information for each sequence.', action='store_true')
-parser.add_argument('-dbn',help='Search for identification information (protein name and organism) for each sequence.', action='store_true')
-parser.add_argument('-dbd',help='Search for domain information for each sequence in Entrenz database (no evalue and bit score).', action='store_true')
-parser.add_argument('-pfs',help='Run Pfamsacn (domain prediction) for each sequence.', action='store_true')
-args=parser.parse_args()
-########################################
+args = args()
+
 
 # function gives unique 16-bit string
 def generate_random_str(randomlength,randID_dic):
@@ -86,7 +78,7 @@ def outfile_check():
                 exit()
 
 def load_infile(filename):
-    global dataframe
+    # global dataframe
     logging.info ('='*40)
     if len(filename.split('.')) >= 2 and filename.split('.')[-2] + filename.split('.')[-1] == 'targz':
         logging.info ('input file name: %s' % (os.path.basename(filename)))
@@ -219,7 +211,7 @@ def read_fasta(fasta):
                     continue
 
         # skip local sequences
-        if header.startswith('lcl|'):
+        if header.startswith('>lcl|'):
             continue
 
         # give a unique random ID to every sequence
@@ -276,16 +268,24 @@ def read_fasta(fasta):
     logging.info('\nChecking local sequence...')
     local_seq_count, local_seq_tax = 0, 0
     for seq_record in SeqIO.parse(fasta,'fasta'):
+
+        # record header
         header = str(seq_record.description)
-        if str(seq_record.description).startswith('lcl|'):
+
+        # parse local headers
+        if str(seq_record.description).startswith('>lcl|'):
+
             local_seq_count += 1
             ranID = generate_random_str(16,randID_dic)
             sequence = seq_record.seq
+
+            # find ID and name
             ID = ''.join( [x for x in header.split('|') if x.find('[ID]') != -1]).replace('[ID]','').lstrip()
             name = ''.join( [x for x in header.split('|') if x.find('[NAME]') != -1]).replace('[NAME]','').lstrip()
 
             record_info = pd.DataFrame([[header,ID,name]], columns=['Header', 'ID', 'Name'], index=[ranID])
 
+            # find orgism lineage
             if args.tax:
                 try:
                     taxon = ''.join( [x for x in header.split('|') if x.find('[TAXON]') != -1]).replace('[TAXON]','').lstrip()
@@ -338,7 +338,7 @@ def entrez_search(accID):
     from Bio import Entrez
 
     # annouce I'm using entrens module in a tool
-    Entrez.tool = 'MyLocalScript'
+    Entrez.tool = 'EasyProteinTreeAnnotating'
     # visit Entrez with API key to boost quiry sbumit
     Entrez.api_key = '9fd2a1797ace2bfec0aae67bda7f4a530009'
     # Always tell NCBI who you are
@@ -485,22 +485,13 @@ def fasta_parser():
     dataframe = pd.DataFrame(columns=['Header', 'ID', 'Name'])
     if args.tax:
         taxonomy = []
-        dataframe["Organism Lineage"] = taxonomy
+        dataframe['Organism Lineage'] = taxonomy
     if args.dbd:
         # a list record all domains and count how many times they appeared
         domain_count = []
 
         domains = []
-        dataframe["Domain Overview [NCBI]"] = domains
-
-    if args.pfs:
-        # a list record all domains and count how many times they appeared
-        domain_count = []
-
-        domains = []
-        domains_detail = []
-        dataframe["Domain Overview [Pfamsacn]"] = domains
-        dataframe["Domain Full Record [Pfamsacn]"] = domains_detail
+        dataframe['Domain Overview [NCBI]'] = domains
 
     # build a empty dictionary to save random ID
     randID_dic = {}
@@ -516,4 +507,9 @@ def fasta_parser():
 
     # output dataframe
     index_path = args.outfile + '\\info_index.tsv'
-    dataframe.to_csv(path_or_buf=index_path,sep='\t')
+    dataframe.to_csv(index_path,sep='\t')
+
+    if args.pfs:
+        pfam_main()
+    if args.pretry:
+        pfam_retry()

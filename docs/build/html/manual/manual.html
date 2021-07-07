@@ -1,0 +1,501 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Use EPTA &#8212; Easy Protein Tree Annotating  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Download" href="../download/download.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../download/download.html" title="Download"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Easy Protein Tree Annotating  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Use EPTA</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="use-epta">
+<h1>Use EPTA<a class="headerlink" href="#use-epta" title="Permalink to this headline">¶</a></h1>
+<section id="before-you-start">
+<h2>Before you start<a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
+<section id="configuration-file">
+<h3>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h3>
+<p>A configuration file named ‘Config.ini’ can be found under the root path of the EPTA folder,
+which stores all default command-related parameters. Users can edit it manually to change
+the default settings of the tool.</p>
+</section>
+<section id="log-file">
+<h3>Log file<a class="headerlink" href="#log-file" title="Permalink to this headline">¶</a></h3>
+<p>Our tool automatically generates a log file that records everything that happened during a run.
+Users can find the log under the output path of each run.</p>
+</section>
+<section id="play-with-epta">
+<h3>Play with EPTA<a class="headerlink" href="#play-with-epta" title="Permalink to this headline">¶</a></h3>
+<p>We provide a set of test files to help users get familiar with how to use our tool,
+you can find them in the ‘test_file’ folder under the root path. Feel free to play
+a little with EPTA!</p>
+</section>
+</section>
+<section id="make-a-tree-from-fasta-file">
+<h2>Make a tree from FASTA file<a class="headerlink" href="#make-a-tree-from-fasta-file" title="Permalink to this headline">¶</a></h2>
+<p>An annotated phylogenetic tree can be built directly from FASTA file, and able to add protein ID, description,
+organism lineage, protein domain are able to be added to the tree.</p>
+<section id="example-command-line">
+<h3>Example command-line<a class="headerlink" href="#example-command-line" title="Permalink to this headline">¶</a></h3>
+<p>Under construction</p>
+</section>
+<section id="input-file">
+<h3>Input file<a class="headerlink" href="#input-file" title="Permalink to this headline">¶</a></h3>
+<p>A ‘-i’ flag is what we used to declare input file, which is obligatorily required. The inputted file can be a FASTA file
+in plain text format, or contained in a gunzip or tar.gz compressed file, or a folder contains any the
+aforementioned file types.</p>
+<blockquote>
+<div><p>Input a FASTA file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i test_fasta.fasta -o ./test
+</pre></div>
+</div>
+<p>Input a gunzip file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i test_fasta.gz -o ./test
+</pre></div>
+</div>
+<p>Input a tar.gz file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i test_fasta.tar.gz -o ./test
+</pre></div>
+</div>
+<p>Input a folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-ls ./fasta_files
+<span class="s1">&#39;test_fasta.fasta&#39;</span> <span class="s1">&#39;test_fasta.gz&#39;</span> <span class="s1">&#39;test_fasta.tar.gz&#39;</span>
+
+epta -i ./fasta_files -o ./test
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="output-path">
+<h3>Output path<a class="headerlink" href="#output-path" title="Permalink to this headline">¶</a></h3>
+<p>A ‘-i’ flag is what we used to store output file, which is obligatory required.</p>
+<p>Our tool will automatically detect whether the output path exists and if it is,
+you will see the following caution:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Output directory is existed, do you want to continue? (Y/N)
+</pre></div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Once the user input <strong>Y</strong> and <strong>press enter</strong>, all tool-related files, including the previous dataframe,
+parsed fasta file, etc., will be <strong>removed</strong> from that path.</p>
+</div>
+</div></blockquote>
+</section>
+<section id="parse-fasta">
+<h3>Parse FASTA<a class="headerlink" href="#parse-fasta" title="Permalink to this headline">¶</a></h3>
+<section id="sequence-recognition">
+<h4>Sequence recognition<a class="headerlink" href="#sequence-recognition" title="Permalink to this headline">¶</a></h4>
+<p>We introduced Biopython module to distinguish sequence info. By default, protein name and ID
+will be extracted from sequence headers automatically. Users do not need any command-line flags to make
+it happen.</p>
+</section>
+<section id="dataframe">
+<h4>Dataframe<a class="headerlink" href="#dataframe" title="Permalink to this headline">¶</a></h4>
+<p>Our tool will generate a human-readable dataframe called ‘info_index.tsv’ in tsv format under the output
+path after parse all inputted files. Furthermore, if users choose to run Pfamscan, an independent tsv
+file named ‘Pfamscan_result.tsv’ will be generated under the output path in order to inspect all
+domain-related data.</p>
+<p>For a line in the dataframe file, index is a unique random ID assigned by EPTA, and columns are arranged
+as:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 8%" />
+<col style="width: 13%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Random ID</p></th>
+<th class="head"><p>Header</p></th>
+<th class="head"><p>ID</p></th>
+<th class="head"><p>Name</p></th>
+<th class="head"><p>Organism Lineage</p></th>
+<th class="head"><p>Domain Information[database]</p></th>
+<th class="head"><p>Domain Information[Pfamscan]</p></th>
+<th class="head"><p>Pfamscan JSON data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>If a parameter is not requested, the following columns will move forward in order.</p>
+</section>
+<section id="duplicate-headers">
+<h4>Duplicate headers?<a class="headerlink" href="#duplicate-headers" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="local-data">
+<h4>Local data?<a class="headerlink" href="#local-data" title="Permalink to this headline">¶</a></h4>
+<p>Local sequences that contained in FASTA file need to be marked with a <strong>‘lcl|’</strong> identifier, in order to extract
+information from it <strong>automatically</strong>. Protein name, ID, and taxonomy can be directly included in a header with specific
+identifiers and splited with a vertical bar (‘|’), while the order of their <strong>arrangements doesn’t matter</strong>. And,
+Pfamscan data should be included in another file if you do not want to fetch domain information or run Pfamscan
+by EPTA, and the format of domain information should be in a JSON format which is the same with Pfamscan’s result.</p>
+<blockquote>
+<div><p>Parameter identifiers:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 55%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Identifiers</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Name</p></td>
+<td><p>[NAME]</p></td>
+</tr>
+<tr class="row-odd"><td><p>ID</p></td>
+<td><p>[ID]</p></td>
+</tr>
+<tr class="row-even"><td><p>Taxonomy</p></td>
+<td><p>[TAXON]</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Example of a local sequence:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  &gt;lcl| [ID]]OAO11745.1 | [NMAE]hydrogenase | [TAXON] cellular organisms; Eukaryota; Sar; Stramenopiles; Bigyra; Opalozoa; Opalinata; Blastocystidae; Blastocystis; Blastocystis sp. subtypes; Blastocystis sp. subtype 1
+<span class="linenos">2</span>  MLSRLSRIATTKSMLVMNAARSFAAEAQGKLVSVKINGNEYKVPEGMTVLEACQAQGIHVPFVCHHPRLKPLGKCRVCVVEIRGDEFPIKTSCNTKVEEGMDIWTNSPKARSASNEALKTLMAGTPIDTKFKTMEMDEVLTESADDCYALHRDMSRCVDCKRCARACSELQGMNVLENNPQEGGFPVVPTGYHLLKDTECISCGQCNVVCPTGAIVEQSHIPRVKQAMKAGKVMVMQTAPATRVAFGENFGREPGEITTGKMIACAKALGFQYVFDTNFGADMTIMEEGTELLERIKNNGPFPMFTSCCPGWVNMAEKCYPEILPNLSSCRSPHMMVGSTLKTYWAKKMNLKPEDIYVVSLMPCTAKKDEIERKNMWLDEKTPFVDAVLTTKELGDFCKQEGITNWDNMAEMPFDTPLGTSSGAGDIFGVSGGVMEAALRTAYQLQTGKPLEKIVVDEARGLDGTKRFSVDMNGKKINCAVVHSKFARELVENVKAGKEDLQFVEVMACPGGCISGGGQPHSNRADTIEKRMNAIYKIDAGKTLRRSMDNPEIQTLYKEFFEKPNSHKAHELLHTTYAPQYVRSREEKVEEPAEAGGEGGEGSDVGEDGVTILYGSETGTTAKAAKALQSKFKAAGISSAVIPMNKIDVESLPEKKKLVLMTCTYGAGEFPAMAQEFWENLSDESLDDDFLEGVEFGVFGLGSKAFKQFCEAAHQLDERMEELGAERVVDCGEGNEKDPQQYKTAFEPWSKEAVEAFK
+</pre></div>
+</div>
+<p>Example of a domain information format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  &gt;lcl| [ID]]OAO11745.1
+<span class="linenos">2</span>  [{&quot;model_length&quot;:&quot;82&quot;,&quot;align&quot;:[&quot;#HMM       pvtltfDGkevtvpeGdtvasAllangvdvprsckygrprgelcaggeCrnClVeveg..epnvracstpvedGlkvetqt&quot;,&quot;#MATCH      v+++++G+e++vpeG tv++A++a+g++vp  c++      l++ g+Cr C+Ve+ g   p   +c t+ve+G+ + t++&quot;,&quot;#PP        6899********************************....789*************86215556*************9986&quot;,&quot;#SEQ       LVSVKINGNEYKVPEGMTVLEACQAQGIHVPFVCHH----PRLKPLGKCRVCVVEIRGdeFPIKTSCNTKVEEGMDIWTNS&quot;],&quot;env&quot;:{&quot;to&quot;:&quot;108&quot;,&quot;from&quot;:&quot;29&quot;},&quot;name&quot;:&quot;Fer2_4&quot;,&quot;acc&quot;:&quot;PF13510.6&quot;,&quot;sig&quot;:1,&quot;evalue&quot;:&quot;1.4e-17&quot;,&quot;desc&quot;:&quot;2Fe-2S iron-sulfur cluster binding domain&quot;,&quot;hmm&quot;:{&quot;to&quot;:&quot;81&quot;,&quot;from&quot;:&quot;3&quot;},&quot;act_site&quot;:null,&quot;type&quot;:&quot;Domain&quot;,&quot;bits&quot;:&quot;63.5&quot;,&quot;clan&quot;:&quot;CL0486&quot;,&quot;seq&quot;:{&quot;to&quot;:&quot;107&quot;,&quot;from&quot;:&quot;31&quot;,&quot;name&quot;:&quot;EMBOSS_001&quot;}},{&quot;model_length&quot;:&quot;52&quot;,&quot;align&quot;:[&quot;#HMM       rCigCgaCvaaCp....vkaieldeeenekgt.....ekveidpekClgCgaCvavCPtga&quot;,&quot;#MATCH     rC+ C++C++aC+    ++++e +++  e g+      +  ++ ++C++Cg+C  vCPtga&quot;,&quot;#PP        8***********87544555555543..333433322333667899*************98&quot;,&quot;#SEQ       RCVDCKRCARACSelqgMNVLENNPQ--EGGFpvvptGYHLLKDTECISCGQCNVVCPTGA&quot;],&quot;env&quot;:{&quot;to&quot;:&quot;214&quot;,&quot;from&quot;:&quot;156&quot;},&quot;name&quot;:&quot;Fer4_7&quot;,&quot;acc&quot;:&quot;PF12838.7&quot;,&quot;sig&quot;:1,&quot;evalue&quot;:&quot;3.2e-06&quot;,&quot;desc&quot;:&quot;4Fe-4S dicluster domain&quot;,&quot;hmm&quot;:{&quot;to&quot;:&quot;52&quot;,&quot;from&quot;:&quot;1&quot;},&quot;act_site&quot;:null,&quot;type&quot;:&quot;Domain&quot;,&quot;bits&quot;:&quot;27.6&quot;,&quot;clan&quot;:&quot;CL0344&quot;,&quot;seq&quot;:{&quot;to&quot;:&quot;214&quot;,&quot;from&quot;:&quot;156&quot;,&quot;name&quot;:&quot;EMBOSS_001&quot;}},{&quot;model_length&quot;:&quot;243&quot;,&quot;align&quot;:[&quot;#HMM       kvvvqvAPavrvalgeefglsv.aattgklvaalrklGfdkVfdtafgadltimeeasellerleeeeklpmitScCPgwvkyvekkypellpnlssvkSPqqilgaliKkylaek.....ekivvVsimPCtaKklEaareefksag..rdvDavlTtrElaellkeagidl.akleeeeldnplgessgagki...................................egvkeaevelegktlkvavvnGlknikklleklkageakydfiEvmaCpgGCigGg&quot;,&quot;#MATCH      +v+q+APa+rva+ge+fg ++ + ttgk++a+ + lGf++Vfdt+fgad+timee++eller++++ + pm+tScCPgwv+++ek ype+lpnlss++SP++++g+ +K+y+a+k     e+i+vVs+mPCtaKk E++r+++  ++    vDavlTt+El++  k++gi+  +++ e ++d+plg+ssgag i                                   +g+k+ +v+++gk++++avv+  k +++l+e++kag+ + +f+EvmaCpgGCi Gg&quot;,&quot;#PP        689***************************************************************99****************************************************************************9855579*******************9655****************************************************************************96.889*****************************8&quot;,&quot;#SEQ       VMVMQTAPATRVAFGENFGREPgEITTGKMIACAKALGFQYVFDTNFGADMTIMEEGTELLERIKNNGPFPMFTSCCPGWVNMAEKCYPEILPNLSSCRSPHMMVGSTLKTYWAKKmnlkpEDIYVVSLMPCTAKKDEIERKNMWLDEktPFVDAVLTTKELGDFCKQEGITNwDNMAEMPFDTPLGTSSGAGDIfgvsggvmeaalrtayqlqtgkplekivvdearglDGTKRFSVDMNGKKINCAVVHS-KFARELVENVKAGKEDLQFVEVMACPGGCISGG&quot;],&quot;env&quot;:{&quot;to&quot;:&quot;517&quot;,&quot;from&quot;:&quot;232&quot;},&quot;name&quot;:&quot;Fe_hyd_lg_C&quot;,&quot;acc&quot;:&quot;PF02906.14&quot;,&quot;sig&quot;:1,&quot;evalue&quot;:&quot;7.5e-87&quot;,&quot;desc&quot;:&quot;Iron only hydrogenase large subunit, C-terminal domain&quot;,&quot;hmm&quot;:{&quot;to&quot;:&quot;243&quot;,&quot;from&quot;:&quot;2&quot;},&quot;act_site&quot;:null,&quot;type&quot;:&quot;Domain&quot;,&quot;bits&quot;:&quot;291.0&quot;,&quot;clan&quot;:&quot;No_clan&quot;,&quot;seq&quot;:{&quot;to&quot;:&quot;517&quot;,&quot;from&quot;:&quot;233&quot;,&quot;name&quot;:&quot;EMBOSS_001&quot;}},{&quot;model_length&quot;:&quot;56&quot;,&quot;align&quot;:[&quot;#HMM       dvrkkRakalykiDkkkklrkSheNpevkklYkeflgeplsekahelLHThYtd&quot;,&quot;#MATCH     d+++kR++a+ykiD+ k+lr+S +Npe++ lYkef+++p+s+kahelLHT+Y +&quot;,&quot;#PP        789*************************************************76&quot;,&quot;#SEQ       DTIEKRMNAIYKIDAGKTLRRSMDNPEIQTLYKEFFEKPNSHKAHELLHTTYAP&quot;],&quot;env&quot;:{&quot;to&quot;:&quot;580&quot;,&quot;from&quot;:&quot;525&quot;},&quot;name&quot;:&quot;Fe_hyd_SSU&quot;,&quot;acc&quot;:&quot;PF02256.17&quot;,&quot;sig&quot;:1,&quot;evalue&quot;:&quot;6.2e-24&quot;,&quot;desc&quot;:&quot;Iron hydrogenase small subunit&quot;,&quot;hmm&quot;:{&quot;to&quot;:&quot;55&quot;,&quot;from&quot;:&quot;2&quot;},&quot;act_site&quot;:null,&quot;type&quot;:&quot;Domain&quot;,&quot;bits&quot;:&quot;83.8&quot;,&quot;clan&quot;:&quot;No_clan&quot;,&quot;seq&quot;:{&quot;to&quot;:&quot;579&quot;,&quot;from&quot;:&quot;526&quot;,&quot;name&quot;:&quot;EMBOSS_001&quot;}},{&quot;model_length&quot;:&quot;143&quot;,&quot;align&quot;:[&quot;#HMM       ilYgSetGnteklAkqlaeelgehgfnadvvslsdydeslseieeealllvvtsTfgnGdppengesffqdllelkgdeledgdlsgvrfavfglGdsayenFcaagkkldekleelGaerllkllegdednqegqeeafrkW&quot;,&quot;#MATCH     ilYgSetG+t k Ak+l+ +++++g+++ v+ ++++d  +++++e++ l++ t T+g G++p  ++ +f++ l +++  l+d+ l+gv+f vfglG++a ++Fc+a+++lde++eelGaer++  +eg+e++ + +++af+ W&quot;,&quot;#PP        89***********************************..68*********************7777.8888888885..67777***********************************************99********99&quot;,&quot;#SEQ       ILYGSETGTTAKAAKALQSKFKAAGISSAVIPMNKID--VESLPEKKKLVLMTCTYGAGEFPAMAQ-EFWENLSDES--LDDDFLEGVEFGVFGLGSKAFKQFCEAAHQLDERMEELGAERVVDCGEGNEKDPQQYKTAFEPW&quot;],&quot;env&quot;:{&quot;to&quot;:&quot;749&quot;,&quot;from&quot;:&quot;612&quot;},&quot;name&quot;:&quot;Flavodoxin_1&quot;,&quot;acc&quot;:&quot;PF00258.25&quot;,&quot;sig&quot;:1,&quot;evalue&quot;:&quot;1.5e-33&quot;,&quot;desc&quot;:&quot;Flavodoxin&quot;,&quot;hmm&quot;:{&quot;to&quot;:&quot;143&quot;,&quot;from&quot;:&quot;1&quot;},&quot;act_site&quot;:null,&quot;type&quot;:&quot;Domain&quot;,&quot;bits&quot;:&quot;116.0&quot;,&quot;clan&quot;:&quot;CL0042&quot;,&quot;seq&quot;:{&quot;to&quot;:&quot;749&quot;,&quot;from&quot;:&quot;612&quot;,&quot;name&quot;:&quot;EMBOSS_001&quot;}}]
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Only a local sequence tag and a [ID] block would be fine for EPTA to recognize a sequence.</p>
+</div>
+</div></blockquote>
+</section>
+<section id="taxonomy-information">
+<h4>Taxonomy information<a class="headerlink" href="#taxonomy-information" title="Permalink to this headline">¶</a></h4>
+<p>When using a ‘-tax’ flags to enable the taxonomy finding functionality, EPTA can fetch organism lineage
+automatically from the NCBI database with a given protein ID, and the taxonomy information will be stored
+in dataframe in the following format:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cellular organisms; Eukaryota; Sar; Stramenopiles; Bigyra; Opalozoa; Opalinata; Blastocystidae; Blastocystis; Blastocystis sp. subtypes; Blastocystis sp. subtype 1
+</pre></div>
+</div>
+</div></blockquote>
+<p>Once a sequence has organism lineage, it would be easy for show species or select proteins from organism under a certain classification in later process.</p>
+<blockquote>
+<div><p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="protein-name-from-database">
+<h4>Protein name from database<a class="headerlink" href="#protein-name-from-database" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="protein-domains-from-database">
+<h4>Protein domains from database<a class="headerlink" href="#protein-domains-from-database" title="Permalink to this headline">¶</a></h4>
+<p>For those proteins who have domain data recorded in NCBI database, EPTA can retrieve that data for users by command-line
+flag ‘-dbd’ (database domain).</p>
+<p>Database retrieve functionality only gets domain position, domain name, and Pfam ID of that domain. In addition, there are
+considerable proportion of proteins on NCBI <strong>DO NOT</strong> have domain data. Therefore, Pfamsacn search functionality are recommanded to
+use to gain domain data.</p>
+<blockquote>
+<div><p>Example of domain data retrieves from database:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;2Fe-2S iron-sulfur cluster binding domain; pfam13510&#39;: &#39;29..108&#39;, &#39;4Fe-4S dicluster domain; cl19102&#39;: &#39;148..222&#39;, &#39;[FeFe] hydrogenase, group A; TIGR02512&#39;: &#39;149..522&#39;, &#39;Iron only hydrogenase large subunit, C-terminal domain; pfam02906&#39;: &#39;232..520&#39;, &#39;Iron hydrogenase small subunit; pfam02256&#39;: &#39;526..577&#39;, &#39;Flavodoxin; pfam00258&#39;: &#39;611..748&#39;}
+</pre></div>
+</div>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn -dbd
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="run-pfamscan">
+<h4>Run Pfamscan<a class="headerlink" href="#run-pfamscan" title="Permalink to this headline">¶</a></h4>
+<p>Given that not all proteins on NCBI have their domain information, ‘-pfs’ flag is introduced to run Pfamscan to gain domain information.</p>
+<p>Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
+Which is a recommended way to obtain protein domain information.</p>
+<p>Alongside ‘-pfs’ flag, ‘-pfev [E-value]’ and ‘-pfas’ can be used to spicify a e-value and to enable active site functionality in Pfamscan
+search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
+Pfamscan search in order to provide detailed information of protein domains.</p>
+<p>We also introduced the ‘-em’ flag for users to provide an email address for receive protein messages from web services (for example, you are
+temporarily banned).</p>
+<blockquote>
+<div><p>Example of Pfamscan result in dataframe:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;Iron only hydrogenase large subunit, C-terminal domain; PF02906.14; evalue=1.3e-42; bits=146.1&#39;: &#39;1...186&#39;, &#39;Iron hydrogenase small subunit; PF02256.17; evalue=4.3e-26; bits=90.7&#39;: &#39;195...249&#39;, &#39;Flavodoxin; PF00258.25; evalue=2.5e-31; bits=108.8&#39;: &#39;276...415&#39;, &#39;FAD binding domain; PF00667.20; evalue=3.9e-42; bits=144.3&#39;: &#39;458...666&#39;, &#39;Oxidoreductase NAD-binding domain ; PF00175.21; evalue=2.2e-10; bits=41.1&#39;: &#39;701...800&#39;}
+</pre></div>
+</div>
+<p>Example of Pfamscan details form:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                 seq_name   seq_id     alignment_start  alignment_end  envelope_start  envelope_end  hmm_acc     hmm_name     hmm_desc                                               type   hmm_start  hmm_end  hmm_length  bit score  E-value  significance  clan  predicted_active_site_residues
+
+i6j8l50wKOrP7Xpz GIQ79514.1 GIQ79514.1 1                186            1               186           PF02906.14  Fe_hyd_lg_C  Iron only hydrogenase large subunit, C-terminal domain Domain 104        243      243         146.1      1.3e-42  1             No_clan
+i6j8l50wKOrP7Xpz GIQ79514.1 GIQ79514.1 195              249            194             249           PF02256.17  Fe_hyd_SSU   Iron hydrogenase small subunit                         Domain 2          56       56          90.7       4.3e-26  1             No_clan
+i6j8l50wKOrP7Xpz GIQ79514.1 GIQ79514.1 276              415            276             415           PF00258.25  Flavodoxin_1 Flavodoxin                                             Domain 1          143      143         108.8      2.5e-31  1             CL0042
+</pre></div>
+</div>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn -dbd -pfs -pfev <span class="m">10</span> -pfas -em test@example.com
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs.</p>
+<p>Therefore, if you have more than 1500 sequences that need to run Pfamscan search, please do not run our tool again immediately
+after keyboard interrupting a running that has already submit sequences to the server, and better to wait for at least 10 minutes before the next run.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="make-a-tree-from-alignment-file">
+<h2>Make a tree from alignment file<a class="headerlink" href="#make-a-tree-from-alignment-file" title="Permalink to this headline">¶</a></h2>
+<p>Under construction</p>
+</section>
+<section id="annotate-a-tree-file">
+<h2>Annotate a tree file<a class="headerlink" href="#annotate-a-tree-file" title="Permalink to this headline">¶</a></h2>
+<p>Under construction</p>
+</section>
+</section>
+<section id="commands">
+<h1>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h1>
+<section id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<section id="i-file-or-path">
+<h3>-i [file or path]<a class="headerlink" href="#i-file-or-path" title="Permalink to this headline">¶</a></h3>
+<p>Specify input file in normal, gunzip, or tar.gz, or a path includes all needed input files.</p>
+</section>
+<section id="o-file-or-path">
+<h3>-o [file or path]<a class="headerlink" href="#o-file-or-path" title="Permalink to this headline">¶</a></h3>
+<p>Specify output path.</p>
+</section>
+<section id="em-email-address">
+<h3>-em [email address]<a class="headerlink" href="#em-email-address" title="Permalink to this headline">¶</a></h3>
+<p>Email address that you want receive potential information from web tools.</p>
+</section>
+</section>
+<section id="id1">
+<h2>Parse FASTA<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<section id="dh">
+<h3>-dh<a class="headerlink" href="#dh" title="Permalink to this headline">¶</a></h3>
+<p>Keep duplicate headers.</p>
+</section>
+<section id="tax">
+<h3>-tax<a class="headerlink" href="#tax" title="Permalink to this headline">¶</a></h3>
+<p>Search for taxonomy information for each sequence in Entrenz database.</p>
+</section>
+<section id="dbn">
+<h3>-dbn<a class="headerlink" href="#dbn" title="Permalink to this headline">¶</a></h3>
+<p>Search for protein name for each sequence in Entrenz database.</p>
+</section>
+<section id="dbd">
+<h3>-dbd<a class="headerlink" href="#dbd" title="Permalink to this headline">¶</a></h3>
+<p>Search for domain information for each sequence in Entrenz database (no evalue and bit score)</p>
+</section>
+<section id="pfs">
+<h3>-pfs<a class="headerlink" href="#pfs" title="Permalink to this headline">¶</a></h3>
+<p>Run Pfamsacn (domain prediction) for each sequence.</p>
+</section>
+<section id="pfev-e-value">
+<h3>-pfev [E-value]<a class="headerlink" href="#pfev-e-value" title="Permalink to this headline">¶</a></h3>
+<p>E-value of Pfamscan search.</p>
+<blockquote>
+<div><p><strong>Avaliable E-value</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">50</span>
+<span class="mi">20</span>
+<span class="mi">10</span>
+<span class="mi">5</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="mf">0.1</span>
+<span class="mf">0.01</span>
+<span class="mf">0.001</span>
+<span class="mf">0.0001</span>
+<span class="mf">1e-5</span>
+<span class="mf">1e-10</span>
+<span class="mf">1e-50</span>
+<span class="mf">1e-100</span>
+<span class="mf">1e-300</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="pfas">
+<h3>-pfas<a class="headerlink" href="#pfas" title="Permalink to this headline">¶</a></h3>
+<p>Enable active sites prediction in Pfamscan.</p>
+</section>
+</section>
+<section id="make-alignment">
+<h2>Make alignment<a class="headerlink" href="#make-alignment" title="Permalink to this headline">¶</a></h2>
+<p>Under construction</p>
+</section>
+<section id="make-phylogenetic-tree">
+<h2>Make phylogenetic tree<a class="headerlink" href="#make-phylogenetic-tree" title="Permalink to this headline">¶</a></h2>
+<p>Under construction</p>
+</section>
+<section id="tree-annotating">
+<h2>Tree Annotating<a class="headerlink" href="#tree-annotating" title="Permalink to this headline">¶</a></h2>
+<p>Under construction</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Use EPTA</a><ul>
+<li><a class="reference internal" href="#before-you-start">Before you start</a><ul>
+<li><a class="reference internal" href="#configuration-file">Configuration file</a></li>
+<li><a class="reference internal" href="#log-file">Log file</a></li>
+<li><a class="reference internal" href="#play-with-epta">Play with EPTA</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-a-tree-from-fasta-file">Make a tree from FASTA file</a><ul>
+<li><a class="reference internal" href="#example-command-line">Example command-line</a></li>
+<li><a class="reference internal" href="#input-file">Input file</a></li>
+<li><a class="reference internal" href="#output-path">Output path</a></li>
+<li><a class="reference internal" href="#parse-fasta">Parse FASTA</a><ul>
+<li><a class="reference internal" href="#sequence-recognition">Sequence recognition</a></li>
+<li><a class="reference internal" href="#dataframe">Dataframe</a></li>
+<li><a class="reference internal" href="#duplicate-headers">Duplicate headers?</a></li>
+<li><a class="reference internal" href="#local-data">Local data?</a></li>
+<li><a class="reference internal" href="#taxonomy-information">Taxonomy information</a></li>
+<li><a class="reference internal" href="#protein-name-from-database">Protein name from database</a></li>
+<li><a class="reference internal" href="#protein-domains-from-database">Protein domains from database</a></li>
+<li><a class="reference internal" href="#run-pfamscan">Run Pfamscan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-a-tree-from-alignment-file">Make a tree from alignment file</a></li>
+<li><a class="reference internal" href="#annotate-a-tree-file">Annotate a tree file</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commands">Commands</a><ul>
+<li><a class="reference internal" href="#general">General</a><ul>
+<li><a class="reference internal" href="#i-file-or-path">-i [file or path]</a></li>
+<li><a class="reference internal" href="#o-file-or-path">-o [file or path]</a></li>
+<li><a class="reference internal" href="#em-email-address">-em [email address]</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Parse FASTA</a><ul>
+<li><a class="reference internal" href="#dh">-dh</a></li>
+<li><a class="reference internal" href="#tax">-tax</a></li>
+<li><a class="reference internal" href="#dbn">-dbn</a></li>
+<li><a class="reference internal" href="#dbd">-dbd</a></li>
+<li><a class="reference internal" href="#pfs">-pfs</a></li>
+<li><a class="reference internal" href="#pfev-e-value">-pfev [E-value]</a></li>
+<li><a class="reference internal" href="#pfas">-pfas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-alignment">Make alignment</a></li>
+<li><a class="reference internal" href="#make-phylogenetic-tree">Make phylogenetic tree</a></li>
+<li><a class="reference internal" href="#tree-annotating">Tree Annotating</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../download/download.html"
+                        title="previous chapter">Download</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/manual/manual.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../download/download.html" title="Download"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Easy Protein Tree Annotating  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Use EPTA</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Xuran Zhao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+    </div>
+  </body>
+</html>
