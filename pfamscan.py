@@ -137,8 +137,8 @@ def read_pfam_result(result):
             brief_tag = '%s; %s; evalue=%s; bits=%s' % (desc, acc, evalue, bits)
             brief_position = seq
 
-            print(dataframe)
-            print(dataframe.at[ranID,'Domain Overview [Pfamscan]'])
+            # print(dataframe)
+            # print(dataframe.at[ranID,'Domain Overview [Pfamscan]'])
             breif_info = dataframe.at[ranID,'Domain Overview [Pfamscan]']
             full_info = str(dataframe.at[ranID,'Domain Full Record [Pfamscan]'])
 
