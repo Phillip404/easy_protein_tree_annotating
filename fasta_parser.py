@@ -8,12 +8,28 @@ from datetime import datetime
 from Bio import SeqIO
 import pandas as pd
 import argparse
-from global_var import *
-from pfamscan import pfam_main
-from pfamscan import pfam_retry
+from global_var import args
 
 args = args()
 
+# #####################################TEST####################################
+# def create_log():
+#     # issue a log files
+#     logging.basicConfig(level=logging.DEBUG,
+#                         format='%(asctime)s %(message)s',
+#                         datefmt='%m-%d %H:%M',
+#                         filename=args.outfile + '/log_file.log',
+#                         filemode='w')
+#     console = logging.StreamHandler()
+#     console.setLevel(logging.INFO)
+#     # add timestamp to console if asked
+#     logging.getLogger('').addHandler(console)
+# ###############################################################################
+#
+# # create log file
+# create_log()
+#
+# #############################################################################
 
 # function gives unique 16-bit string
 def generate_random_str(randomlength,randID_dic):
@@ -54,35 +70,39 @@ def outfile_check():
     if not os.path.exists(args.outfile.rstrip()):
         os.makedirs(args.outfile.rstrip())
     else:
-        # Let user decide whether they want to continue
-        while True:
-            # if continue, delete all file with open('a') property
-            check = input('Output directory is existed, do you want to continue? (Y/N) : ')
-            if check == 'Y':
-                # record input action in log
-                logging.debug ('Output directory is existed, do you want to continue? (Y/N) : Y')
+        if not args.redo:
+            # Let user decide whether they want to continue
+            while True:
+                # if continue, delete all file with open('a') property
+                check = input('Output directory is existed, do you want to OVERWRITE it? (Y/N) : ')
+                if check == 'Y':
+                    # record input action in log
+                    logging.debug ('Output directory is existed, do you want to OVERWRITE it? (Y/N) : Y')
 
-                # specify path of parsed fasta file
-                path = args.outfile.rstrip() + './00_Parsed_Fasta/Parsed_Fasta.fasta'
-                # if the file exist, delete it so that a new empty one will be create later
-                # I do that because I used open(,'w+') in gz reader, it requires a empty file to write in
-                if os.path.exists(path):
-                    os.remove(path)
-                break
-            # if they dont, quit
-            elif check == 'N':
-                print('Quiting',end = '')
-                for i in range(3):
-                    print('.',end = '',flush = True)
-                    time.sleep(0.05)
-                exit()
+                    # specify path of parsed fasta file
+                    path = args.outfile.rstrip() + '00_Parsed_Fasta/Parsed_Fasta.fasta'
+                    path2 = args.outfile.rstrip() + 'check_point.log'
+                    # if the file exist, delete it so that a new empty one will be create later
+                    # I do that because I used open(,'w+') in gz reader, it requires a empty file to write in
+                    if os.path.exists(path):
+                        os.remove(path)
+                    if os.path.exists(path2):
+                        os.remove(path2)
+                    break
+                # if they dont, quit
+                elif check == 'N':
+                    print('Quiting',end = '')
+                    for i in range(3):
+                        print('.',end = '',flush = True)
+                        time.sleep(0.05)
+                    exit()
 
 def load_infile(filename):
     # global dataframe
-    logging.info ('='*40)
+    logging.info ('='*20)
     if len(filename.split('.')) >= 2 and filename.split('.')[-2] + filename.split('.')[-1] == 'targz':
-        logging.info ('input file name: %s' % (os.path.basename(filename)))
-        logging.info ('input file format: tar.gz')
+        logging.info ('Input file name: %s' % (os.path.basename(filename)))
+        logging.info ('Input file format: tar.gz')
         logging.info ('Extracting and processing tar.gz file...')
         # express file
         read_targz(filename)
@@ -110,9 +130,9 @@ def load_infolder():
     # logging.info ('='*20)
     for file in files:
         # check file
-        if os.path.isfile(path + '\\' + file):
+        if os.path.isfile(path + '/' + file):
             # read file in input folder
-            load_infile(path + '\\' + file)
+            load_infile(path + '/' + file)
 
 # function reads gunzip file
 def read_gz(gzfile):
@@ -185,7 +205,8 @@ def read_fasta(fasta):
     outpath = args.outfile.rstrip() + '/00_Parsed_Fasta/'
     if not os.path.exists(outpath):
         os.makedirs(outpath)
-    outfasta = open(outpath + 'Parsed_Fasta.fasta','a')
+    global outfasta
+    outfasta = open(outpath + 'Parsed_Fasta.fasta','a+')
 
     # count sequences in fasta file, using in progress bar
     sequence_count = 0
@@ -196,92 +217,111 @@ def read_fasta(fasta):
 
     progress_detail = {'In_Database':0}
     if args.tax: progress_detail['Taxon'] = 0
-    if args.dbn: progress_detail['Name'] = 0
-    if args.dbd: progress_detail['Domain'] = 0
+    if args.name: progress_detail['Name'] = 0
+    if args.dom: progress_detail['Domain'] = 0
+
+    # list used in duplicate header filter
+    dh_check = set()
 
     # read sequences
     for seq_record in SeqIO.parse(fasta,'fasta'):
 
         header = str(seq_record.description)
 
-        # duplicate headers check
-        if not args.dh:
-            for headers in dataframe['Header']:
-                if header in headers:
+        # skip local sequences
+        if not header.startswith('lcl|'):
+            if args.dh is False:
+
+
+                for headers in dataframe['Header']:
+                    dh_check.add(headers)
+                if header in dh_check:
                     continue
 
-        # skip local sequences
-        if header.startswith('>lcl|'):
-            continue
 
-        # give a unique random ID to every sequence
-        ranID = generate_random_str(16,randID_dic)
-        # information from sequence header in the order of :
-        # header, ID, name, taxon, {domain_db}
-        sequence_attrb = read_header(seq_record, ranID)
+                else:
+                    # give a unique random ID to every sequence
+                    ranID = generate_random_str(15,randID_dic)
+                    # information from sequence header in the order of :
+                    # header, ID, name, taxon, {domain_db}
+                    sequence_attrb = read_header(seq_record, ranID)
 
-        # quick_search = threading.Thread(targe)
+                    # quick_search = threading.Thread(targe)
 
-        ID = sequence_attrb[0]
-        name = sequence_attrb[1]
-        taxon = sequence_attrb[2]
-        domain_db = sequence_attrb[3]
+                    ID = sequence_attrb[0]
+                    name = sequence_attrb[1]
+                    taxon = sequence_attrb[2]
+                    domain_db = sequence_attrb[3]
 
-        # output data
-        # add sequence information to dataframe and parsed fasta file
-        record_info = pd.DataFrame([[header,ID,name]], columns=['Header', 'ID', 'Name'], index=[ranID])
-        if args.tax:
-            record_info['Organism Lineage'] = [taxon]
-        if args.dbd:
-            record_info['Domain Information'] = [domain_db]
+                    # output data
+                    # add sequence information to dataframe and parsed fasta file
+                    record_info = pd.DataFrame([[header,ID,name]], columns=['Header', 'ID', 'Name'], index=[ranID])
+                    if args.tax:
+                        record_info['Organism Lineage'] = [taxon]
+                    if args.dom:
+                        record_info['Domain Information'] = [domain_db]
 
-        dataframe = dataframe.append(record_info)
+                    dataframe = dataframe.append(record_info)
 
-        # output sequences with random IDs to 'Parsed_Fasta.fasta'.
-        print('>%s\n%s' % (ranID,seq_record.seq), file=outfasta)
+                    # output sequences with random IDs to 'Parsed_Fasta.fasta'.
+                    print('>%s\n%s' % (ranID,seq_record.seq), file=outfasta)
 
+                    # record progress of database search
+                    if args.tax or args.name or args.dom:
+                        currently_done += 1
 
-        # record progress of database search
-        if args.tax or args.dbn or args.dbd:
-            currently_done += 1
+                        if taxon or domain_db: progress_detail['In_Database'] += 1
 
-            if taxon or domain_db: progress_detail['In_Database'] += 1
+                        if taxon: progress_detail['Taxon'] += 1
 
-            if taxon: progress_detail['Taxon'] += 1
+                        if name != 'Description In Database Not Found': progress_detail['Name'] += 1
 
-            if name != 'Description In Database Not Found': progress_detail['Name'] += 1
+                        if domain_db: progress_detail['Domain'] += 1
 
-            if domain_db: progress_detail['Domain'] += 1
+                        progress_bar(sequence_count,currently_done,progress_detail)
 
-            progress_bar(sequence_count,currently_done,progress_detail)
-
-    if args.tax or args.dbn or args.dbd:
+    if args.tax or args.name or args.dom:
         sys.stderr.write('\n')
         logging.debug('Searching in database...')
 
         logging.info('Database Search Done.\n%s in %s proteins founded in Database.' % (progress_detail['In_Database'],sequence_count))
         if args.tax: logging.info('%s of them have organism lineage.' % (progress_detail['Taxon']))
-        if args.dbn: logging.info('%s of them have name or description.' % (progress_detail['Name']))
-        if args.dbd: logging.info('%s of them have domain information.' % (progress_detail['Domain']))
+        if args.name: logging.info('%s of them have name or description.' % (progress_detail['Name']))
+        if args.dom: logging.info('%s of them have domain information.' % (progress_detail['Domain']))
 
+    read_local(fasta)
+
+    return(dataframe)
+
+def read_local(fasta):
+    global dataframe
     # read and parse local sequences
     logging.info('\nChecking local sequence...')
+
     local_seq_count, local_seq_tax = 0, 0
+    # read fasta
     for seq_record in SeqIO.parse(fasta,'fasta'):
 
         # record header
         header = str(seq_record.description)
 
         # parse local headers
-        if str(seq_record.description).startswith('>lcl|'):
+        if header.startswith('>lcl|') or header.startswith('lcl|'):
 
             local_seq_count += 1
-            ranID = generate_random_str(16,randID_dic)
+            ranID = generate_random_str(15,randID_dic)
             sequence = seq_record.seq
 
             # find ID and name
-            ID = ''.join( [x for x in header.split('|') if x.find('[ID]') != -1]).replace('[ID]','').lstrip()
-            name = ''.join( [x for x in header.split('|') if x.find('[NAME]') != -1]).replace('[NAME]','').lstrip()
+            if header.find('[ID]'):
+                ID = ''.join( [x for x in header.split('|') if x.find('[ID]') != -1]).replace('[ID]','').lstrip()
+            else:
+                ID = header.replace('>lcl|','').lstrip()
+
+            if header.find('[NAME]'):
+                name = ''.join( [x for x in header.split('|') if x.find('[NAME]') != -1]).replace('[NAME]','').lstrip()
+            else:
+                name = ID
 
             record_info = pd.DataFrame([[header,ID,name]], columns=['Header', 'ID', 'Name'], index=[ranID])
 
@@ -302,9 +342,6 @@ def read_fasta(fasta):
         logging.info('%s local sequences have been found.' % (local_seq_count))
         if args.tax: logging.info('%s of them have orgism lineage.' % (local_seq_tax))
 
-
-    return(dataframe)
-
 # retrive information from FASTA headers and search in databases if correspond flags inputed
 def read_header(record, ranID):
     taxon, domain_db = False, False
@@ -313,7 +350,7 @@ def read_header(record, ranID):
     name = str(record.name)
 
     # add taxonomy information if asked
-    if (args.tax and ID) or args.dbn or args.dbd:
+    if (args.tax and ID) or args.name or args.dom:
         # return search result in entrez in the order of [organism_lineage, protein_name, domain_dict]
         entrez_result = entrez_search(ID)
 
@@ -322,13 +359,13 @@ def read_header(record, ranID):
             taxon = entrez_result[0]
 
         # if function returns a name of protein, take it as the new name in dataFrame
-        if args.dbn and entrez_result[1]:
+        if args.name and entrez_result[1]:
             name = entrez_result[1]
         else:
             name = 'Description In Database Not Found'
 
         # get a dict with element formation of 'domain_name' = 'location'
-        if args.dbd:
+        if args.dom:
             domain_db = entrez_result[2]
 
     return(ID, name, taxon, domain_db)
@@ -359,7 +396,7 @@ def entrez_search(accID):
         handle = Entrez.efetch(db='protein',id=record , retmode='xml')
         record = Entrez.read(handle)
 
-        if args.tax or args.dbn:
+        if args.tax or args.name:
             protein_name = record[0]["GBSeq_definition"]
             record_b = record[0]["GBSeq_organism"]
             # print(record)
@@ -376,7 +413,7 @@ def entrez_search(accID):
             organism_lineage = Entrez.read(handle)[0]['Lineage']
 
 
-        if args.dbd:
+        if args.dom:
             # dict to store domain name and location info
             domain_dict = {}
             # retrive feature table of target protein
@@ -405,7 +442,7 @@ def entrez_search(accID):
 
     except:
         # code of these two flag are binded
-        if args.tax or args.dbn:
+        if args.tax or args.name:
             # try find target in identical protein group (IPG) database
             try:
                 # search database ID of target accession number
@@ -475,7 +512,7 @@ def progress_bar(total, current, detail, width=60, symbol='▮'):
         info += '%s: %s ' % (arguments.lstrip().replace('_',' '), detail[arguments])
 
     full_bar = (bar + ' ' + general + ' ' + info).lstrip()
-    sys.stderr.write(full_bar + '\r')
+    sys.stderr.write(full_bar+'\r')
     sys.stderr.flush()
 
 def fasta_parser():
@@ -483,33 +520,60 @@ def fasta_parser():
     global randID_dic
     # build a empty dataframe to save data
     dataframe = pd.DataFrame(columns=['Header', 'ID', 'Name'])
+    # run mode reminder
+    run_mode = ''
+
+    if args.name:
+        run_mode += 'protein_name\t'
     if args.tax:
         taxonomy = []
         dataframe['Organism Lineage'] = taxonomy
-    if args.dbd:
+        run_mode += 'taxonomy\t'
+    if args.dom:
         # a list record all domains and count how many times they appeared
         domain_count = []
 
         domains = []
         dataframe['Domain Overview [NCBI]'] = domains
+        run_mode += 'database_domain'
+
+    if run_mode == '':
+        run_mode = 'simple'
 
     # build a empty dictionary to save random ID
     randID_dic = {}
 
+
     # output directory check
     outfile_check()
 
+    logging.info('='*20)
+    logging.info('FASTA parser parameters:')
+    logging.info('Run mode: %s' % (run_mode))
+    logging.info('='*20)
+    logging.info('Parsing input file...')
+    start = time.perf_counter()
+
     # check and process input files
     infile_process()
-    logging.info ('='*40)
-    logging.info ('All FASTA files parsed.')
+    # logging.info ('='*20)
+    # logging.info ('All FASTA files parsed.')
     dataframe.index.name = 'Random ID'
 
     # output dataframe
-    index_path = args.outfile + '\\info_index.tsv'
+    index_path = args.outfile + 'info_index.tsv'
     dataframe.to_csv(index_path,sep='\t')
 
-    if args.pfs:
-        pfam_main()
-    if args.pretry:
-        pfam_retry()
+    end = time.perf_counter()
+    runtime = end - start
+    logging.info('='*20)
+    logging.info('All input files parsed. Runtime: %s second\n' % (round(runtime,2)))
+
+
+    path = args.outfile + 'check_point.log'
+    with open(path, mode='a+') as check_point:
+        record = ''.join(check_point.readlines())
+        if record.find('fasta_parser') == -1:
+            check_point.write('fasta_parser\n')
+
+# fasta_parser()

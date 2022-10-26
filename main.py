@@ -1,49 +1,45 @@
 # G:
-# cd G:\Desktop\Protein Phylogeny Tool project\Code\FASTA parser
-# py fasta_parser.py -i ./Hydrogenase_test.fasta -o ./test -tax -dbn -dbd -ts
+# cd G:\Desktop\Protein_Phylogeny_Tool_project\Program\Code
+# python3 main_standalone.py -i ./test/Hydrogenase_test.fasta -o ./test/
+# python3 main_standalone.py -i ./test/Hydrogenase_test.fasta -o ./test/ -tax -dom -bl -bs -bif -leg -iqmod LG+I+G4
+# python3 main_standalone.py -i ./test3/groupA_FeFe_hyddb-results_acc_seq_converted.fasta -o ./test3/ -iqmod LG+I+G4
+# python3 main_standalone.py -i ./test3/groupA_FeFe_hyddb-results_acc_seq_converted.fasta -o ./test3/ -tax -dom -bl -bs -bif -leg -iqmod LG+I+G4 -redo
+# epta -i ./test3/Hydrogenase_test.fasta -o ./test3/ -iqmod LG+I+G4
+# python3 main.py -i ./test3/Hydrogenase_test0.fasta -o ./test3/ -bl -bs -bif -leg -iqmod LG+I+G4 -redo
+# python3 main.py -i ./test/Hydrogenase_test.fasta -o ./test/ -bl -bs -bif -leg -tax -dom
 
-from fasta_parser import fasta_parser
+from cmd_check import cmd_check
+from check_point import check_point, file_rmv
+from fasta_parser_standalone import fasta_parser
+from pfamscan_standalone import pfam_main
+from mafft_standalone import mafft_standalone
+from muscle_standalone import muscle_standalone
+from trimal_standalone import trimAl_standalone
+from iqtree_standalone import iqtree_standalone
+from ete3_epta import ete3_run
 
+import os
+import time
 import logging
 import argparse
-from configparser import ConfigParser
-from global_var import *
+from global_var import args
 
-
+global args
 args = args()
-
-# def read_config():
-#     cfg = ConfigParser()
-#     cfg.read('config.ini')
-#     if not args.dh:
-#         args.dh = cfg.getboolean('FASTA parser','keep_duplicate_headers')
-#     if not args.tax:
-#         args.tax = cfg.getboolean('FASTA parser','organism_lineage')
-#     if not args.dbn:
-#         args.dbn = cfg.getboolean('FASTA parser','protein_name_from_database')
-#     if not args.dbd:
-#         args.dbd = cfg.getboolean('FASTA parser','domian_from_database')
-#     if not args.pfs:
-#         args.dbd = cfg.getboolean('FASTA parser','pfamscan_search')
-#     if not args.pfev:
-#         args.pfev = cfg.getfloat('FASTA parser','E-value')
-#         if args.pfev > 1:
-#             args.pfev = int(args.pfev)
-#     if not args.pfas:
-#         args.pfas = cfg['FASTA parser']['active_sites']
-#     else:
-#         args.pfas = 'true'
-#     if not args.email:
-#         args.email = cfg['FASTA parser']['email']
-
 
 # create log file
 def create_log():
     # issue a log files
+    log_file = args.outfile + '/log_file.log'
+
+    if not os.path.exists(log_file):
+        open(log_file,'a+')
+
+
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(message)s',
                         datefmt='%m-%d %H:%M',
-                        filename=args.outfile + '/log_file.log',
+                        filename=log_file,
                         filemode='w')
     console = logging.StreamHandler()
     console.setLevel(logging.INFO)
@@ -51,8 +47,71 @@ def create_log():
     logging.getLogger('').addHandler(console)
 ###############################################################################
 
-# create log file
-create_log()
 
-# parse fasta
-fasta_parser()
+def epta_standalone():
+
+
+    # check out path
+    if not os.path.exists(args.outfile):
+        os.makedirs(args.outfile)
+
+    start = time.perf_counter()
+
+    # create log file
+    create_log()
+
+    logging.info('EPTA beta     August 15th, 2022\nDeveloper Xuran Zhao\n')
+
+    # check command line
+    cmd_check()
+
+    #check point
+    new_start = None
+    if not args.redo:
+        new_start = check_point()
+    elif args.redo:
+        file_rmv()
+
+    # print(new_start)
+
+    wokrflow = ['fasta_parser','pfam_scan', 'multiple_alignment', 'trimal', 'iqtree', 'ete3']
+    # parse fasta
+    if new_start in wokrflow[:1] or new_start == None:
+        fasta_parser()
+        logging.info('')
+
+    # pfamScan
+    if args.dom and (new_start in wokrflow[:2] or new_start == None):
+        pfam_main()
+        logging.info('')
+
+    # mulitiple sequence alignment
+    if new_start in wokrflow[:3] or new_start == None:
+        if args.muscle:
+            muscle_standalone()
+            logging.info('')
+        else:
+            mafft_standalone()
+            logging.info('')
+
+    # trimal
+    if new_start in wokrflow[:4] or new_start == None:
+        trimAl_standalone()
+        logging.info('')
+
+    # tree making
+    if new_start in wokrflow[:5] or new_start == None:
+        iqtree_standalone()
+        logging.info('')
+
+    # tree drawing
+    ete3_run()
+    logging.info('')
+
+    end = time.perf_counter()
+    runtime = end - start
+    logging.info('All proces done. Total runtime: %s second\n' % (round(runtime,2)))
+
+
+if __name__ == '__main__':
+    epta_standalone()
