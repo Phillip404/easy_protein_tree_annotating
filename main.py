@@ -10,7 +10,7 @@
 
 from cmd_check import cmd_check
 from check_point import check_point, file_rmv
-from fasta_parser_standalone import fasta_parser
+from fasta_parser import fasta_parser
 from pfamscan_standalone import pfam_main
 from mafft_standalone import mafft_standalone
 from muscle_standalone import muscle_standalone
