@@ -89,33 +89,10 @@ def ete3_drawing():
     new_tree = path + '/02_Tree_File/new_IQ-tree.contree'
     t = PhyloTree(new_tree)
 
-    ts = TreeStyle()
-
-    #set not style
-    nstyle = NodeStyle()
-    nstyle['shape'] = 'square'
-    nstyle['size'] = 1
-    nstyle['fgcolor'] = 'black'
-    for n in t.traverse():
-       n.set_style(nstyle)
-
-    ts.show_leaf_name = False
-
-    if args.bl:
-        ts.show_branch_length = True
-
-    if args.bs:
-        ts.show_branch_support = True
-
-    ts.scale = 750*args.xzoom
-    ts.branch_vertical_margin = 15*args.yzoom
-
     # color_list = ['LightCoral', 'Gold', 'Aquamarine', 'YellowGreen', 'Pink', 'Tan', 'Orange', 'Orchid', 'DarkSeaGreen', 'SkyBlue']
     color_list = args.color_list
-    tax_color_list = ['#6B8E23', '#3498DB', '#BF6EE0', '#D25852', '#D47500', '#AA8F00', '#03A678', '#006080', '#AA0000', '#807D67']
 
-    # taxonomy back ground color
-    if args.tax:
+    if args.marktax:
         total_seq = len(dataframe['Organism Lineage'])
         num_standard = round(total_seq*0.5*0.2) - 5
         p = 0
@@ -152,12 +129,14 @@ def ete3_drawing():
             # print(p)
             # print(i)
             if len(tax_num_final) >= p:
+                global class_num
                 class_num = i
                 # print(tax_num_final)
+                global tax_num_sort
                 sort_list = sorted(tax_num_final.items(),key=lambda x:x[1], reverse=True) # sort taxonomy class dictionary
                 tax_num_sort = [a for a,b in sort_list]
                 # print(tax_num_sort)
-                # break
+
 
     for node in t:
         if node.is_leaf():
@@ -171,29 +150,23 @@ def ete3_drawing():
                           taxonomy = ';'.join(taxonomy.split(';')[:5]) + ';' + ';'.join(taxonomy.split(';')[-2:-1]).strip()
                       elif taxonomy.strip() == '':
                           taxonomy = 'Unknow'
+
+                      # node.add_feature('taxonomy',taxonomy)
+                      if args.marktax:
+                          try:
+                             node.add_feature('classify',taxonomy.split(';')[class_num])
+                          except:
+                              node.add_feature('classify','No')
+                          # print(node.classify)
                       # add tax name face
                       tax_face = TextFace(taxonomy,fstyle='italic')
                       tax_face.margin_left = 30
 
-                      try:
-                          tax_class = taxonomy.split(';')[class_num].strip()  # class_num comes from the result of back ground color loop
-                          tax_color = tax_num_sort.index(tax_class)
-                          tax_color = tax_color_list[tax_color]
-                          tax_face = TextFace(taxonomy,fstyle='italic')
-                          if node.is_leaf() and node.name == 'NPU90158.1':
-                            node.img_style["bgcolor"] = tax_color
-                            # print(tax_color)
-                          # tax_face.background.color=tax_color
-                      except:
-                          tax_face = TextFace(taxonomy,fstyle='italic')
-                          node.img_style["bgcolor"] = 'white'
-
-
                       node.add_face(tax_face, column=0, position='aligned')
                     else:
                       i += 1
-            # annotate domains
 
+            # annotate domains
             if args.dom:
                 global pfam_df
                 pfam_df = pd.read_csv('pfamscan_details.tsv', sep='\t')
@@ -205,36 +178,12 @@ def ete3_drawing():
                 # empty list to combine domain motifs
                 simple_motifs = []
 
-                # specified motif align test
-                # chosen motif: Fe_hyd_lg_C
-                # simple_motif list example:
-                # [[17, 92, '[]', None, 10, 'Aquamarine', 'Aquamarine', 'arial|1|black|Fer2_4'], [99, 136, '[]', None, 10, 'YellowGreen', 'YellowGreen', 'arial|1|black|NADH-G_4Fe-4S_3'], [240, 523, '[]', None, 10, 'LightCoral', 'LightCoral', 'arial|1|black|Fe_hyd_lg_C'], [532, 586, '[]', None, 10, 'Gold', 'Gold', 'arial|1|black|Fe_hyd_SSU']]
-                # start_dom = 'Fe_hyd_lg_C'
-                # p = 0
-                # for ID in pfam_df['seq_id']:
-                #     if ID == node.name:
-                #         print (str(pfam_df['hmm_name'][p]))
-                #         if str(pfam_df['hmm_name'][p]) == start_dom:
-                #             x = start_dom_start = pfam_df['alignment_start'][p]
-                #             y = start_dom_end = pfam_df['alignment_end'][p]
-                #             print(p)
-                #             print(x,y)
-                #         p += 1
-                #     else:
-                #         p += 1
-
                 for ID in pfam_df['seq_id']:
                     if ID == node.name:
                         start = pfam_df['alignment_start'][j]
                         end = pfam_df['alignment_end'][j]
                         domain_name = pfam_df['hmm_name'][j]
                         col_num = domain_list.index(domain_name)
-                        # print(col_num)
-                        # if domain_name == start_dom:
-                        #     x = start_dom_start = start
-                        #     y = start_dom_end = end
-                        #     start = 0
-                        #     end = end - start
                         if  col_num < 10:
                             if 2>1:
                                 domain_name = ''
@@ -252,9 +201,55 @@ def ete3_drawing():
                     seqFace.margin_left = 30
                     node.add_face(seqFace, 1, 'aligned')
 
-    for n in t.traverse():
-       if not node.is_leaf():
-           node.img_style["bgcolor"] = 'red'
+        # taxonomy background color
+        global tax_color_list
+        tax_color_list = ['#6B8E23', '#3498DB', '#BF6EE0', '#D25852', '#D47500', '#AA8F00', '#03A678', '#006080', '#AA0000', '#807D67']
+
+
+        def mylayout(node):
+            #set node style
+            if node:
+                node.img_style['shape'] = 'square'
+                node.img_style['size'] = 1
+                node.img_style['fgcolor'] = 'black'
+
+            if node.is_leaf() and node.classify != '' and args.marktax:
+                # print(node.classify)
+                tax_class = node.classify.strip() # class_num comes from the result of former back ground color loop
+                if tax_class in tax_num_sort:
+                    tax_color = tax_num_sort.index(tax_class)
+                    tax_color = tax_color_list[tax_color]
+                    node.img_style["size"] = 9
+                    node.img_style["shape"] = "circle"
+                    node.img_style["fgcolor"] = tax_color
+                    node.img_style["vt_line_width"] = 3
+                    node.img_style["vt_line_color"] = tax_color
+                    node.img_style["hz_line_width"] = 3
+                    node.img_style["hz_line_color"] = tax_color
+            if len(node)>1:
+                leaf_num = 0
+                child_list = []
+                for child in node.traverse():
+                    if child.is_leaf() and child.classify:
+                        # print(tax_num_sort)
+                        # print(child.classify)
+                        # if str(child.classify) == tax_num_sort[0]:
+                        #     print('YES')
+                        child_list.append(child.classify)
+
+                leaf_num += 1
+                child_list = list(set(child_list))
+                if len(child_list) == 1 and child_list[0].strip() in tax_num_sort:
+                    tax_color = tax_num_sort.index(child_list[0].strip())
+                    tax_color = tax_color_list[tax_color]
+                    node.img_style["fgcolor"] = tax_color
+                    node.img_style["vt_line_width"] = 3
+                    node.img_style["vt_line_color"] = tax_color
+                    node.img_style["hz_line_width"] = 3
+                    node.img_style["hz_line_color"] = tax_color
+
+
+
 
     # add bifurcate number face
     bif_file = open(path + 'bif_log.txt','w')
@@ -309,10 +304,22 @@ def ete3_drawing():
             ts.legend.add_face(TextFace(domain_list[q]), column=1)
         ts.legend_position = 4
 
+    ts = TreeStyle()
+    ts.layout_fn = mylayout
+    # ts.show_leaf_name = False
+
+    if args.bl:
+        ts.show_branch_length = True
+
+    if args.bs:
+        ts.show_branch_support = True
+
+    ts.scale = 750*args.xzoom
+    ts.branch_vertical_margin = 15*args.yzoom
     # render the tree
     # image_path = path + ''.join(''.join(args.infile.split('/')[-1]).split('.')[:-1]) + '.png'
     image_path = path + 'tree_image.%s' % str(args.format).lower()
-    t.render(image_path, h=100*i, dpi=300, tree_style=ts)
+    t.render(image_path, h=100*len(dataframe['ID']), dpi=300, tree_style=ts)
     # t.show(tree_style=ts)
 
 # ete3_drawing()

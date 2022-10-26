@@ -46,6 +46,7 @@ def args():
     parser.add_argument('-reroot',metavar='Reroot the tree',help='Reroot the tree according to bifurcation number.',type=int)
     parser.add_argument('-redo',help='Redo all processing',action='store_true')
     parser.add_argument('-format',metavar='Tree image format',help='Format of ETE3 output image.')
+    parser.add_argument('-marktax',help='Mark taxonomy information on the tree.',action='store_true')
     args=parser.parse_args()
     ########################################
 
