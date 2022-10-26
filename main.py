@@ -18,6 +18,11 @@ from trimal_standalone import trimAl_standalone
 from iqtree_standalone import iqtree_standalone
 from ete3_epta import ete3_run
 
+from multi_align_lite import muilt_align
+from pfamscan_lite import run_pfamscan
+from trimal_lite import trimla_lite
+from iqtree_lite import iqtree_lite
+
 import os
 import time
 import logging
@@ -112,6 +117,66 @@ def epta_standalone():
     runtime = end - start
     logging.info('All proces done. Total runtime: %s second\n' % (round(runtime,2)))
 
+def epta_lite():
+    # check out path
+    if not os.path.exists(args.outfile):
+        os.makedirs(args.outfile)
+
+    start = time.perf_counter()
+
+    # create log file
+    create_log()
+
+    logging.info('EPTA beta     August 15th, 2022\nDeveloper Xuran Zhao\n')
+
+    # check command line
+    cmd_check()
+
+    #check point
+    new_start = None
+    if not args.redo:
+        new_start = check_point()
+    elif args.redo:
+        file_rmv()
+
+    # print(new_start)
+
+    wokrflow = ['fasta_parser','pfam_scan', 'multiple_alignment', 'trimal', 'iqtree', 'ete3']
+    # parse fasta
+    if new_start in wokrflow[:1] or new_start == None:
+        fasta_parser()
+        logging.info('')
+
+    # pfamScan
+    if args.dom and (new_start in wokrflow[:2] or new_start == None):
+        run_pfamscan()
+        logging.info('')
+
+    # mulitiple sequence alignment
+    if new_start in wokrflow[:3] or new_start == None:
+        muilt_align
+
+    # trimal
+    if new_start in wokrflow[:4] or new_start == None:
+        trimal_lite()
+        logging.info('')
+
+    # tree making
+    if new_start in wokrflow[:5] or new_start == None:
+        iqtree_lite()
+        logging.info('')
+
+    # tree drawing
+    ete3_run()
+    logging.info('')
+
+    end = time.perf_counter()
+    runtime = end - start
+    logging.info('All proces done. Total runtime: %s second\n' % (round(runtime,2)))
+
 
 if __name__ == '__main__':
-    epta_standalone()
+    if args.lite:
+        epta_lite()
+    else:
+        epta_standalone()

@@ -8,7 +8,7 @@ from global_var import args
 
 args = args()
 
-def iqtree_lite():
+def trimal_lite():
 
     logging.info('Initializing trimAl...')
 
@@ -198,4 +198,4 @@ if __name__ == '__main__':
     # create log file
     create_log()
 
-    iqtree_lite()
+    trimal_lite()
