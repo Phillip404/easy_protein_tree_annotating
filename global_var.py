@@ -53,19 +53,57 @@ def args():
     parser.add_argument('-format',metavar='Tree image format',help='Format of ETE3 output image.')
     parser.add_argument('-marktax',help='Mark taxonomy information on the tree.',action='store_true')
     parser.add_argument('-remake',help='Rebuilding the tree only.',action='store_true')
+    parser.add_argument('-test',help='Run with test file.',action='store_true')
     args=parser.parse_args()
     ########################################
 
+    # check os platform
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+        delimiter  = '/'
+    elif sys.platform.startswith('win32') and args.standalone:
+        print('Running Standalone Mode detected, only Lite Mode supported on Windows.')
+        print('Setting run mode to Lite Mode.')
+        args.standalone = False
+        args.lite = True
+    elif sys.platform.startswith('win32'):
+        delimiter  = '\\'
+    args.delim = delimiter
+
+
+
+    # get absolute path
+    script_path = __file__
+    if script_path.find(delimiter) != -1:
+        abs_dir = script_path[:script_path.rfind(delimiter)] + delimiter
+    else:
+        abs_dir = './'
+
+    # set test file path for test mode
+    if args.test:
+        # set test file path
+        test_path = abs_dir + delimiter + 'test' + delimiter + 'test.fasta'
+        test_out = './EPTA_test/'
+        args.infile = test_path
+        args.outfile = test_out
+
+    # ensure input and output path format is correct
+    if os.path.isdir(args.infile) and not args.infile.endswith(delimiter):
+        args.infile = args.infile + delimiter
+
+    if not args.outfile.endswith(delimiter):
+        args.outfile = args.outfile + delimiter
+
     # config file check
     if os.path.isdir(args.infile):
-        cfg_path = args.infile + 'Congfig.ini'
+        cfg_path = args.infile + 'Config.ini'
     elif os.path.isfile(args.infile):
-        cfg_path = '/'.join(args.infile.split('/')[:-1]) + '/Congfig.ini'
+        cfg_path = delimiter.join(args.infile.split(delimiter)[:-1]) + '/Config.ini'
+    args.cfg_path = cfg_path
 
     if os.path.isfile(cfg_path):
         pass
     else:
-        cfg_file = open('Config.ini','r') # ./standalone/
+        cfg_file = open('%sConfig.ini'%(abs_dir),'r') # ./standalone/
         cfg_content = cfg_file.read()
         new_cfg_file = open(cfg_path,'w')
         new_cfg_file.write(cfg_content)
@@ -154,29 +192,12 @@ def args():
     if not args.format:
         args.format = cfg['Tree Visualizing']['format'].replace('\'','')
 
+
+
     args.dom_color_list = eval(cfg['Tree Visualizing']['dom_color_list'])
     args.tax_color_list = eval(cfg['Tree Visualizing']['tax_color_list'])
 
-    # enable test mode
-    if args.test:
-        script_path = __file__
-        # check os platform
-        if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
-            delimiter  = '/'
-        elif sys.platform.startswith('win32'):
-            delimiter  = '\\'
-            print(script_path.find(delimiter))
 
-        # set test file path
-        if script_path.find(delimiter) != -1:
-            abs_dir = script_path[:script_path.rfind(delimiter)]
-        else:
-            abs_dir = '.'
-
-        test_path = abs_dir + delimiter + 'test' + delimiter + 'test.fasta'
-        test_out = './EPTA_test/'
-        args.infile = test_path
-        args.outfile = test_out
 
     return args
 

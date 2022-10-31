@@ -69,7 +69,7 @@ def outfile_check():
     # create a new folder if output directory does not exist
     if not os.path.exists(args.outfile.rstrip()):
         os.makedirs(args.outfile.rstrip())
-    else:
+    elif os.path.exists(args.outfile.rstrip()+'00_Parsed_Fasta'):
         if not args.redo:
             # Let user decide whether they want to continue
             while True:

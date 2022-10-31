@@ -13,6 +13,7 @@ from .pfamscan_lite import run_pfamscan
 from .trimal_lite import trimal_lite
 from .iqtree_lite import iqtree_lite
 
+import sys
 import os
 import time
 import logging
@@ -55,7 +56,7 @@ def epta_standalone():
     # create log file
     create_log()
 
-    logging.info('EPTA beta     August 15th, 2022\nDeveloper Xuran Zhao\n')
+    logging.info('EPTA 1.0     Novermber 31st, 2022\nDeveloper Xuran Zhao\n')
 
     # check command line
     cmd_check()
@@ -146,7 +147,7 @@ def epta_lite():
 
     # mulitiple sequence alignment
     if new_start in wokrflow[:3] or new_start == None:
-        muilt_align
+        muilt_align()
 
     # trimal
     if new_start in wokrflow[:4] or new_start == None:
@@ -168,7 +169,10 @@ def epta_lite():
 
 
 if __name__ == '__main__':
-    if args.lite:
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+        if args.lite:
+            epta_lite()
+        else:
+            epta_standalone()
+    elif sys.platform.startswith('win32'):
         epta_lite()
-    else:
-        epta_standalone()

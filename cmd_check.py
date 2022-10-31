@@ -4,10 +4,12 @@ import sys
 from global_var import args
 from configparser import ConfigParser
 
-cfg = ConfigParser()
-cfg.read('config.ini')
-
 args = args()
+
+cfg = ConfigParser()
+cfg.read(args.cfg_path)
+
+
 def cmd_check():
     # mafft
     # matrix
@@ -64,11 +66,7 @@ def cmd_check():
     if args.marktax and not args.tax:
         logging.error('Error: \'-marktax\' flag must run with \'-tax\' command.')
         sys.exit(1)
-    else:
-        pass
 
     if args.redo and args.remake:
         logging.error('Error: -redo flag and -remake flag cannot exist at the same time.')
         sys.exit(1)
-    else:
-        pass

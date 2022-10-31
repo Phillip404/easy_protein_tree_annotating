@@ -111,25 +111,27 @@ def check_info():
     return(new_start)
 
 def check_point():
-    while True:
-        # if continue, delete all file with open('a') property
-        check = input('Output directory is existed, do you want to read check point? (Y/N) : ')
-        if check == 'Y':
-            # record input action in log
-            logging.debug ('Output directory is existed, do you want to read check point? (Y/N) : Y')
+    outfile = args.outfile.rstrip() + '00_Parsed_Fasta'
+    if os.path.isdir(outfile) or os.path.isfile(outfile):
+        while True:
+            # if continue, delete all file with open('a') property
+            check = input('Output directory is existed, do you want to read check point? (Y/N) : ')
+            if check.upper() == 'Y':
+                # record input action in log
+                logging.debug ('Output directory is existed, do you want to read check point? (Y/N) : Y')
 
-            logging.info('Checking progress of previous run...')
+                logging.info('Checking progress of previous run...')
 
-            new_start = check_info()
+                new_start = check_info()
 
-            return(new_start)
+                return(new_start)
 
-            break
-        # if not, continue
-        elif check == 'N':
-            new_start = None
-            return(new_start)
-            break
+                break
+            # if not, continue
+            elif check.upper() == 'N':
+                new_start = None
+                return(new_start)
+                break
 
 def file_rmv():
     if args.redo:

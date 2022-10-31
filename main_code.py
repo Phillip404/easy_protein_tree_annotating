@@ -65,7 +65,7 @@ def epta_standalone():
     # create log file
     create_log()
 
-    logging.info('EPTA beta     August 15th, 2022\nDeveloper Xuran Zhao\n')
+    logging.info('EPTA 1.0     Novermber 31st, 2022\nDeveloper Xuran Zhao\n')
 
     # check command line
     cmd_check()
@@ -156,7 +156,7 @@ def epta_lite():
 
     # mulitiple sequence alignment
     if new_start in wokrflow[:3] or new_start == None:
-        muilt_align
+        muilt_align()
 
     # trimal
     if new_start in wokrflow[:4] or new_start == None:
