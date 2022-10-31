@@ -6,19 +6,26 @@ Install EPTA from command line
 
 You can install EPTA easily from PIPL or Annaconda
 
-- PIPL:
+  **Full version**
 
-    -pip instal easy_protein_tree_annotating
+  .. code-block:: bash
 
-- Conda
+    -conda create -n run_epta python=3.8
+    -conda activate run_epta
+    -conda install epta
 
-    -conda install easy_protein_tree_annotating
+  **Lite version**
 
+  .. code-block:: bash
+
+    -conda create -n run_epta_lite python=3.8
+    -conda activate run_epta_lite
+    -conda install epta_lite
 
 Download EPTA manually:
 --------------------------
 
-You can also download EPTA manually:
+You can also download EPTA Lite manually:
 
       #. Go to our Github page : https://github.com/Phillip404/easy_protein_tree_annotating
       #. Press the green button **'Code'**
@@ -26,6 +33,7 @@ You can also download EPTA manually:
       #. Unzip the zip file
       #. Download **pandas** package
       #. Download **biopython** package
+      #. Download **ETE3** package
       #. Open your console, whatever it is
       #. Go to the folder you unzipped EPTA
       #. Run EPTA and check command line flags:
@@ -36,7 +44,7 @@ You can also download EPTA manually:
 
             .. Caution::
 
-              'python3' could be different identifier according to your envorinment.
+              'python3' could be a different command according to your envorinment.
 
               For example: python, py, py3
 

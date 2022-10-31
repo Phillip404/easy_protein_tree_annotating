@@ -90,7 +90,7 @@ def ete3_drawing():
     t = PhyloTree(new_tree)
 
     # color_list = ['LightCoral', 'Gold', 'Aquamarine', 'YellowGreen', 'Pink', 'Tan', 'Orange', 'Orchid', 'DarkSeaGreen', 'SkyBlue']
-    color_list = args.color_list
+    color_list = args.dom_color_list
 
     if args.marktax:
         total_seq = len(dataframe['Organism Lineage'])
@@ -203,8 +203,8 @@ def ete3_drawing():
 
         # taxonomy background color
         global tax_color_list
-        tax_color_list = ['#6B8E23', '#3498DB', '#BF6EE0', '#D25852', '#D47500', '#AA8F00', '#03A678', '#006080', '#AA0000', '#807D67']
-
+        # tax_color_list = ['#6B8E23', '#3498DB', '#BF6EE0', '#D25852', '#D47500', '#AA8F00', '#03A678', '#006080', '#AA0000', '#807D67']
+        tax_color_list = args.tax_color_list
 
         def mylayout(node):
             #set node style
@@ -213,40 +213,35 @@ def ete3_drawing():
                 node.img_style['size'] = 1
                 node.img_style['fgcolor'] = 'black'
 
-            if node.is_leaf() and node.classify != '' and args.marktax:
-                # print(node.classify)
-                tax_class = node.classify.strip() # class_num comes from the result of former back ground color loop
-                if tax_class in tax_num_sort:
-                    tax_color = tax_num_sort.index(tax_class)
-                    tax_color = tax_color_list[tax_color]
-                    node.img_style["size"] = 9
-                    node.img_style["shape"] = "circle"
-                    node.img_style["fgcolor"] = tax_color
-                    node.img_style["vt_line_width"] = 3
-                    node.img_style["vt_line_color"] = tax_color
-                    node.img_style["hz_line_width"] = 3
-                    node.img_style["hz_line_color"] = tax_color
-            if len(node)>1:
-                leaf_num = 0
-                child_list = []
-                for child in node.traverse():
-                    if child.is_leaf() and child.classify:
-                        # print(tax_num_sort)
-                        # print(child.classify)
-                        # if str(child.classify) == tax_num_sort[0]:
-                        #     print('YES')
-                        child_list.append(child.classify)
+            if args.marktax:
+                if node.is_leaf() and node.classify != '':
+                    # print(node.classify)
+                    tax_class = node.classify.strip() # class_num comes from the result of former back ground color loop
+                    if tax_class in tax_num_sort:
+                        tax_color = tax_num_sort.index(tax_class)
+                        tax_color = tax_color_list[tax_color]
+                        node.img_style["size"] = 9
+                        node.img_style["shape"] = "circle"
+                        node.img_style["fgcolor"] = tax_color
+                        node.img_style["vt_line_width"] = 3
+                        node.img_style["vt_line_color"] = tax_color
+                        node.img_style["hz_line_width"] = 3
+                        node.img_style["hz_line_color"] = tax_color
+                if len(node)>1:
+                    child_list = []
+                    for child in node.traverse():
+                        if child.is_leaf() and child.classify:
+                            child_list.append(child.classify)
 
-                leaf_num += 1
-                child_list = list(set(child_list))
-                if len(child_list) == 1 and child_list[0].strip() in tax_num_sort:
-                    tax_color = tax_num_sort.index(child_list[0].strip())
-                    tax_color = tax_color_list[tax_color]
-                    node.img_style["fgcolor"] = tax_color
-                    node.img_style["vt_line_width"] = 3
-                    node.img_style["vt_line_color"] = tax_color
-                    node.img_style["hz_line_width"] = 3
-                    node.img_style["hz_line_color"] = tax_color
+                    child_list = list(set(child_list))
+                    if len(child_list) == 1 and child_list[0].strip() in tax_num_sort:
+                        tax_color = tax_num_sort.index(child_list[0].strip())
+                        tax_color = tax_color_list[tax_color]
+                        node.img_style["fgcolor"] = tax_color
+                        node.img_style["vt_line_width"] = 3
+                        node.img_style["vt_line_color"] = tax_color
+                        node.img_style["hz_line_width"] = 3
+                        node.img_style["hz_line_color"] = tax_color
 
 
 

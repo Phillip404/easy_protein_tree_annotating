@@ -52,22 +52,24 @@
 <section id="install-epta-from-command-line">
 <h2>Install EPTA from command line<a class="headerlink" href="#install-epta-from-command-line" title="Permalink to this headline">¶</a></h2>
 <p>You can install EPTA easily from PIPL or Annaconda</p>
-<ul>
-<li><p>PIPL:</p>
 <blockquote>
-<div><p>-pip instal easy_protein_tree_annotating</p>
+<div><p><strong>Full version</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-conda create -n run_epta <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+-conda activate run_epta
+-conda install epta
+</pre></div>
+</div>
+<p><strong>Lite version</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-conda create -n run_epta_lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+-conda activate run_epta_lite
+-conda install epta_lite
+</pre></div>
+</div>
 </div></blockquote>
-</li>
-<li><p>Conda</p>
-<blockquote>
-<div><p>-conda install easy_protein_tree_annotating</p>
-</div></blockquote>
-</li>
-</ul>
 </section>
 <section id="download-epta-manually">
 <h2>Download EPTA manually:<a class="headerlink" href="#download-epta-manually" title="Permalink to this headline">¶</a></h2>
-<p>You can also download EPTA manually:</p>
+<p>You can also download EPTA Lite manually:</p>
 <blockquote>
 <div><ol class="arabic">
 <li><p>Go to our Github page : <a class="reference external" href="https://github.com/Phillip404/easy_protein_tree_annotating">https://github.com/Phillip404/easy_protein_tree_annotating</a></p></li>
@@ -76,6 +78,7 @@
 <li><p>Unzip the zip file</p></li>
 <li><p>Download <strong>pandas</strong> package</p></li>
 <li><p>Download <strong>biopython</strong> package</p></li>
+<li><p>Download <strong>ETE3</strong> package</p></li>
 <li><p>Open your console, whatever it is</p></li>
 <li><p>Go to the folder you unzipped EPTA</p></li>
 <li><p>Run EPTA and check command line flags:</p>
@@ -84,7 +87,7 @@
 
 .. Caution::
 
-  <span class="s1">&#39;python3&#39;</span> could be different identifier according to your envorinment.
+  <span class="s1">&#39;python3&#39;</span> could be a different <span class="nb">command</span> according to your envorinment.
 
   For example: python, py, py3
 </pre></div>

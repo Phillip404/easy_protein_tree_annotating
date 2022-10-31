@@ -11,18 +11,23 @@ A configuration file named 'Config.ini' can be found under the root path of the 
 which stores all default command-related parameters. Users can edit it manually to change
 the default settings of the tool.
 
+Additionally, EPTA generates a 'Config.ini' file in the input file path after a run. Thus, if
+one needs to run EPTA multiple times using the same input file, edit configuration file in the
+input file path is also a option.
+
 Log file
 ^^^^^^^^^^
 
-Our tool automatically generates a log file that records everything that happened during a run.
+EPTA automatically generates a log file that records everything that happened during a run.
 Users can find the log under the output path of each run.
+
+Also, a configuration log will be automatically generated in the output path that allows user
+check or confirm configuration of a run.
 
 Play with EPTA
 ^^^^^^^^^^^^^^
 
-We provide a set of test files to help users get familiar with how to use our tool,
-you can find them in the 'test_file' folder under the root path. Feel free to play
-a little with EPTA!
+...
 
 
 
@@ -74,6 +79,7 @@ aforementioned file types.
 
 Output path
 ^^^^^^^^^^^
+
 A '-i' flag is what we used to store output file, which is obligatory required.
 
 Our tool will automatically detect whether the output path exists and if it is,
@@ -87,6 +93,23 @@ you will see the following caution:
 
     Once the user input **Y** and **press enter**, all tool-related files, including the previous dataframe,
     parsed fasta file, etc., will be **removed** from that path.
+
+If you would like to skip manual confirmation, add **-redo** flag in your command line.
+
+Check point
+^^^^^^^^^^^
+
+EPTA will automatically generates a check point after it starting a run. You will
+see the following caution if any check point file has been found in the output path:
+
+.. code-block:: text
+
+  Output directory is existed, do you want to read check point? (Y/N)
+
+To continue the run from the place where last run ended, input **Y** and press enter.
+
+Same as output path check, if you would like to skip manual confirmation, add **-redo**
+flag in your command line.
 
 Parse FASTA
 ^^^^^^^^^^^
@@ -123,6 +146,9 @@ If a parameter is not requested, the following columns will move forward in orde
 
 Duplicate headers?
 """"""""""""""""""
+
+If you want to keep all duplicate sequence in your file, add **-dh** command to your
+command line.
 
 Local data?
 """""""""""
@@ -165,7 +191,7 @@ by EPTA, and the format of domain information should be in a JSON format which i
 
   .. Hint::
 
-    Only a local sequence tag and a [ID] block would be fine for EPTA to recognize a sequence.
+    A local sequence tag and a [ID] block is the minimun requirment for EPTA to recognize a sequence.
 
 Taxonomy information
 """"""""""""""""""""
@@ -191,44 +217,30 @@ Once a sequence has organism lineage, it would be easy for show species or selec
 Protein name from database
 """""""""""""""""""""""""""""""""
 
-  Command-line example:
-
-  .. code-block:: bash
-
-    epta -i ./fasta_files -o ./test -tax -dbn
-
-Protein domains from database
-"""""""""""""""""""""""""""""
-
-For those proteins who have domain data recorded in NCBI database, EPTA can retrieve that data for users by command-line
-flag '-dbd' (database domain).
-
-Database retrieve functionality only gets domain position, domain name, and Pfam ID of that domain. In addition, there are
-considerable proportion of proteins on NCBI **DO NOT** have domain data. Therefore, Pfamsacn search functionality are recommanded to
-use to gain domain data.
-
-  Example of domain data retrieves from database:
-
-  .. code-block:: text
-
-    {'2Fe-2S iron-sulfur cluster binding domain; pfam13510': '29..108', '4Fe-4S dicluster domain; cl19102': '148..222', '[FeFe] hydrogenase, group A; TIGR02512': '149..522', 'Iron only hydrogenase large subunit, C-terminal domain; pfam02906': '232..520', 'Iron hydrogenase small subunit; pfam02256': '526..577', 'Flavodoxin; pfam00258': '611..748'}
+EPTA can search protein name according to accession numbers from Entrez database.
+To enable this function, add **-name** flag to the command line.
 
   Command-line example:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -dbn -dbd
+    epta -i ./fasta_files -o ./test -tax -name
 
-Run Pfamscan
+
+Run PfamScan
 """"""""""""
 
-Given that not all proteins on NCBI have their domain information, '-pfs' flag is introduced to run Pfamscan to gain domain information.
+EPTA introduced PfamScan to allow users annotate protein domains on the tree.
+
+Add **'-dom'** flag to the command line to enable domain annotating.
+
+Add **'-pfam'** flag to the command line to run PfamScan to search domain information.
 
 Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.
 
-Alongside '-pfs' flag, '-pfev [E-value]' and '-pfas' can be used to spicify a e-value and to enable active site functionality in Pfamscan
-search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
+Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'**[active sites] can be used to spicify a e-value and to enable active site functionality
+in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.
 
 We also introduced the '-em' flag for users to provide an email address for receive protein messages from web services (for example, you are
@@ -254,18 +266,157 @@ temporarily banned).
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -dbn -dbd -pfs -pfev 10 -pfas -em test@example.com
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -pev 10 -pas -em test@example.com
 
 .. Caution::
-  According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs.
+  According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs when using the Lite version.
 
   Therefore, if you have more than 1500 sequences that need to run Pfamscan search, please do not run our tool again immediately
-  after keyboard interrupting a running that has already submit sequences to the server, and better to wait for at least 10 minutes before the next run.
+  after keyboard interrupting a run that has already submit sequences to the server.
+
+Multiple sequence alignment
+-------------------------------
+EPTA introduced MAFFT and MUSCLE as multiple sequence alignment programs. The default
+program is MAFFT, which could be changed in the configuration file.
+
+After run multiple sequence alignment, trimAl was introduced to provide further sequence
+trim.
+
+.. Hint::
+
+  If both MAFFT and MUSCLE are set as default program, MAFFT is the prioritized one.
+
+
+MAFFT
+^^^^^^^^^^^
+
+Run MAFFT
+""""""""""""""""""""
+MAFFT will automatically run, do not need extra command line flags. However, users
+still able to run MAFFT manually by adding **'-mafft'** flag.
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft
+
+There are also several command line flags for changing paramters of MAFFT:
+
+  **Matrix**
+  Commnad line flag of matrix selecting is **'-matrix [Matrix Abbreviation]'**,
+  identical to the command line flag '--bl' or '--jtt' of MAFFT.
+
+  Command-line example:
+
+  .. code-block:: bash
+
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -matrix bl62
+
+  **Opening Score And Extension Score**
+  Commnad line flag of opening score setting is **'-op [Number]'**, identical to the command
+  line flag '--op' of MAFFT.
+
+  Commnad line flag of extension score setting is **'-ep [Number]'**, identical to the command
+  line flag '--ep' of MAFFT.
+
+  Command-line example:
+
+  .. code-block:: bash
+
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -op 1.53 -ep 0.123
+
+
+  **Tree Rebuilding Number**
+
+  Commnad line flag of tree rebuilding number is **'-retree [Number]'**, identical to the command
+  line flag '--retree' of MAFFT. This flag can determine the guide tree built times in the progressive
+  stage.
+
+  Command-line example:
+
+  .. code-block:: bash
+
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -retree 2
+
+  **Max Iterate Number**
+
+  Commnad line flag of maximum iteration is **'-maxiterate [Number]'**, identical to the command
+  line flag '--maxiterate' of MAFFT. This flag can determine the cycles number of iterative refinement.
+
+  Command-line example:
+
+  .. code-block:: bash
+
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -maxiterate 2
+
+  **Fast Fourier Transform Algorithm**
+
+  Commnad line flag of choose FFTS (Fast Fourier Transform) method is **'-ffts [Mode]'**,
+  identical to the command line flag '--localpair', '--genafpair' and '--globalpair' of MAFFT.
+  For each command, **'-ffts localpair'** stands for the Smith-Waterman algorithm, **'-ffts genafpair'**
+  stands for generalized affine gap cost, **'-ffts globalpair'** stands for Needleman-Wunsch
+  algorithm.
+
+  Command-line example:
+
+  .. code-block:: bash
+
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -ffts localpair
+
+
+MUSCLE
+^^^^^^^^^^^
+
+Run MUSCLE
+""""""""""""""""""""
+To run MUSCLE as the multiple sequence alignment program, add **-muscle** flag to
+the command line. MUSCLE will automatically run, do not need any parameter settings.
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -muscle
+
+trimAl
+^^^^^^^^^^^
+
+Run trimAl
+""""""""""""""""""""
+As the default setting, rimAl automatically runs in the EPTA pipline. One can also
+manually add **-trimal** flag to the command line to run trimAl.
+
+**trimAl Run Mode**
+
+Commnad line flag of selecting trimAl run mode **'-tmod [Mode]'**. There are four
+mode selectable, 'automated1', 'gappyout', 'strict', and 'strictplus', identical to
+corresponding command of trimAl command line. Only 'automated1' mode is accessable in
+the Lite mode.
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -tmod automated1
+
+**Remove Spurious Sequences**
+
+The flag **'-rmss [Residue overlap/Sequence overlap]'** able to remove spurious
+sequences when triming multiple alignment sequences. **Residue overlap** is identical to
+the flag '-resoverla' of trimAl, in charge of keep "good positions" according to
+a given minimum overlap of a positions with other positions in the column. **Sequence overlap**
+is identical to the flag '-seqoverlap' of trimAl, which means a minimum percentage of
+"good positions" that a sequence must have in order to be conserved.
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -rmss 0.75/80
 
 Make a tree from alignment file
 -------------------------------
-
-Under construction
 
 Annotate a tree file
 --------------------------
@@ -307,22 +458,22 @@ Keep duplicate headers.
 
 Search for taxonomy information for each sequence in Entrenz database.
 
--dbn
+-name
 ^^^^^^^^^^^^^^^^
 
 Search for protein name for each sequence in Entrenz database.
 
--dbd
+-dom
 ^^^^^^^^^^^^^^^^
 
-Search for domain information for each sequence in Entrenz database (no evalue and bit score)
+Annotate protein domians on the tree.
 
--pfs
+-pfam
 ^^^^^^^^^^^^^^^^
 
 Run Pfamsacn (domain prediction) for each sequence.
 
--pfev [E-value]
+-pev [E-value]
 ^^^^^^^^^^^^^^^^
 
 E-value of Pfamscan search.
@@ -345,7 +496,7 @@ E-value of Pfamscan search.
       1e-100
       1e-300
 
--pfas
+-pas
 ^^^^^^^^^^^^^^^^
 
 Enable active sites prediction in Pfamscan.

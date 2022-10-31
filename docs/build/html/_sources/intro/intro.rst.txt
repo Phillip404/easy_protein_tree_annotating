@@ -6,7 +6,7 @@ Features
 
 - Fetch protein profile from databases automatically
 - Run Pfamscan online for protein domain prediction
-- Human-readable dataframe for data inspect
+- Readable dataframe for data inspect
 
 Github
 ----------

@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 from configparser import ConfigParser
 
 def args():
@@ -9,8 +10,12 @@ def args():
     parser=argparse.ArgumentParser(description=desc)
     parser.add_argument('-lite',help='Run Lite mode.',action='store_true')
     parser.add_argument('-standalone',help='Run standalone mode.',action='store_true')
-    parser.add_argument('-i',metavar='Input_File',help='Input your file here',dest='infile',required=True)
-    parser.add_argument('-o',metavar='Output_File',help='Output file name',dest='outfile',required=True)
+    if not '-test' in sys.argv:
+        parser.add_argument('-i',metavar='Input_File',help='Input your file here',dest='infile',required=True)
+        parser.add_argument('-o',metavar='Output_File',help='Output file name',dest='outfile',required=True)
+    else:
+        parser.add_argument('-i',metavar='Input_File',help='Input your file here',dest='infile')
+        parser.add_argument('-o',metavar='Output_File',help='Output file name',dest='outfile')
     parser.add_argument('-dh',help='Keep duplicate headers in FASTA file.',action='store_true')
     parser.add_argument('-tax',help='Search for taxonomy information for each sequence.',action='store_true')
     parser.add_argument('-name',help='Search for protein name for each sequence.',action='store_true')
@@ -47,6 +52,7 @@ def args():
     parser.add_argument('-redo',help='Redo all processing',action='store_true')
     parser.add_argument('-format',metavar='Tree image format',help='Format of ETE3 output image.')
     parser.add_argument('-marktax',help='Mark taxonomy information on the tree.',action='store_true')
+    parser.add_argument('-remake',help='Rebuilding the tree only.',action='store_true')
     args=parser.parse_args()
     ########################################
 
@@ -148,7 +154,29 @@ def args():
     if not args.format:
         args.format = cfg['Tree Visualizing']['format'].replace('\'','')
 
-    args.color_list = eval(cfg['Tree Visualizing']['color_list'])
+    args.dom_color_list = eval(cfg['Tree Visualizing']['dom_color_list'])
+    args.tax_color_list = eval(cfg['Tree Visualizing']['tax_color_list'])
+
+    # enable test mode
+    if args.test:
+        script_path = __file__
+        # check os platform
+        if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+            delimiter  = '/'
+        elif sys.platform.startswith('win32'):
+            delimiter  = '\\'
+            print(script_path.find(delimiter))
+
+        # set test file path
+        if script_path.find(delimiter) != -1:
+            abs_dir = script_path[:script_path.rfind(delimiter)]
+        else:
+            abs_dir = '.'
+
+        test_path = abs_dir + delimiter + 'test' + delimiter + 'test.fasta'
+        test_out = './EPTA_test/'
+        args.infile = test_path
+        args.outfile = test_out
 
     return args
 

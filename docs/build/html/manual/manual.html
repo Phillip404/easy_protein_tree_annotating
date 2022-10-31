@@ -52,17 +52,20 @@
 <p>A configuration file named ‘Config.ini’ can be found under the root path of the EPTA folder,
 which stores all default command-related parameters. Users can edit it manually to change
 the default settings of the tool.</p>
+<p>Additionally, EPTA generates a ‘Config.ini’ file in the input file path after a run. Thus, if
+one needs to run EPTA multiple times using the same input file, edit configuration file in the
+input file path is also a option.</p>
 </section>
 <section id="log-file">
 <h3>Log file<a class="headerlink" href="#log-file" title="Permalink to this headline">¶</a></h3>
-<p>Our tool automatically generates a log file that records everything that happened during a run.
+<p>EPTA automatically generates a log file that records everything that happened during a run.
 Users can find the log under the output path of each run.</p>
+<p>Also, a configuration log will be automatically generated in the output path that allows user
+check or confirm configuration of a run.</p>
 </section>
 <section id="play-with-epta">
 <h3>Play with EPTA<a class="headerlink" href="#play-with-epta" title="Permalink to this headline">¶</a></h3>
-<p>We provide a set of test files to help users get familiar with how to use our tool,
-you can find them in the ‘test_file’ folder under the root path. Feel free to play
-a little with EPTA!</p>
+<p>…</p>
 </section>
 </section>
 <section id="make-a-tree-from-fasta-file">
@@ -115,6 +118,18 @@ you will see the following caution:</p>
 parsed fasta file, etc., will be <strong>removed</strong> from that path.</p>
 </div>
 </div></blockquote>
+<p>If you would like to skip manual confirmation, add <strong>-redo</strong> flag in your command line.</p>
+</section>
+<section id="check-point">
+<h3>Check point<a class="headerlink" href="#check-point" title="Permalink to this headline">¶</a></h3>
+<p>EPTA will automatically generates a check point after it starting a run. You will
+see the following caution if any check point file has been found in the output path:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Output directory is existed, do you want to read check point? (Y/N)
+</pre></div>
+</div>
+<p>To continue the run from the place where last run ended, input <strong>Y</strong> and press enter.</p>
+<p>Same as output path check, if you would like to skip manual confirmation, add <strong>-redo</strong>
+flag in your command line.</p>
 </section>
 <section id="parse-fasta">
 <h3>Parse FASTA<a class="headerlink" href="#parse-fasta" title="Permalink to this headline">¶</a></h3>
@@ -172,6 +187,8 @@ as:</p>
 </section>
 <section id="duplicate-headers">
 <h4>Duplicate headers?<a class="headerlink" href="#duplicate-headers" title="Permalink to this headline">¶</a></h4>
+<p>If you want to keep all duplicate sequence in your file, add <strong>-dh</strong> command to your
+command line.</p>
 </section>
 <section id="local-data">
 <h4>Local data?<a class="headerlink" href="#local-data" title="Permalink to this headline">¶</a></h4>
@@ -218,7 +235,7 @@ by EPTA, and the format of domain information should be in a JSON format which i
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Only a local sequence tag and a [ID] block would be fine for EPTA to recognize a sequence.</p>
+<p>A local sequence tag and a [ID] block is the minimun requirment for EPTA to recognize a sequence.</p>
 </div>
 </div></blockquote>
 </section>
@@ -242,38 +259,24 @@ in dataframe in the following format:</p>
 </section>
 <section id="protein-name-from-database">
 <h4>Protein name from database<a class="headerlink" href="#protein-name-from-database" title="Permalink to this headline">¶</a></h4>
+<p>EPTA can search protein name according to accession numbers from Entrez database.
+To enable this function, add <strong>-name</strong> flag to the command line.</p>
 <blockquote>
 <div><p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn
-</pre></div>
-</div>
-</div></blockquote>
-</section>
-<section id="protein-domains-from-database">
-<h4>Protein domains from database<a class="headerlink" href="#protein-domains-from-database" title="Permalink to this headline">¶</a></h4>
-<p>For those proteins who have domain data recorded in NCBI database, EPTA can retrieve that data for users by command-line
-flag ‘-dbd’ (database domain).</p>
-<p>Database retrieve functionality only gets domain position, domain name, and Pfam ID of that domain. In addition, there are
-considerable proportion of proteins on NCBI <strong>DO NOT</strong> have domain data. Therefore, Pfamsacn search functionality are recommanded to
-use to gain domain data.</p>
-<blockquote>
-<div><p>Example of domain data retrieves from database:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>{&#39;2Fe-2S iron-sulfur cluster binding domain; pfam13510&#39;: &#39;29..108&#39;, &#39;4Fe-4S dicluster domain; cl19102&#39;: &#39;148..222&#39;, &#39;[FeFe] hydrogenase, group A; TIGR02512&#39;: &#39;149..522&#39;, &#39;Iron only hydrogenase large subunit, C-terminal domain; pfam02906&#39;: &#39;232..520&#39;, &#39;Iron hydrogenase small subunit; pfam02256&#39;: &#39;526..577&#39;, &#39;Flavodoxin; pfam00258&#39;: &#39;611..748&#39;}
-</pre></div>
-</div>
-<p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn -dbd
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name
 </pre></div>
 </div>
 </div></blockquote>
 </section>
 <section id="run-pfamscan">
-<h4>Run Pfamscan<a class="headerlink" href="#run-pfamscan" title="Permalink to this headline">¶</a></h4>
-<p>Given that not all proteins on NCBI have their domain information, ‘-pfs’ flag is introduced to run Pfamscan to gain domain information.</p>
+<h4>Run PfamScan<a class="headerlink" href="#run-pfamscan" title="Permalink to this headline">¶</a></h4>
+<p>EPTA introduced PfamScan to allow users annotate protein domains on the tree.</p>
+<p>Add <strong>‘-dom’</strong> flag to the command line to enable domain annotating.</p>
+<p>Add <strong>‘-pfam’</strong> flag to the command line to run PfamScan to search domain information.</p>
 <p>Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.</p>
-<p>Alongside ‘-pfs’ flag, ‘-pfev [E-value]’ and ‘-pfas’ can be used to spicify a e-value and to enable active site functionality in Pfamscan
-search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
+<p>Alongside <strong>‘-pfam’</strong> flag, <strong>‘-pev [E-value]’</strong> and <a href="#id1"><span class="problematic" id="id2">**</span></a>’-pas’<a href="#id3"><span class="problematic" id="id4">**</span></a>[active sites] can be used to spicify a e-value and to enable active site functionality
+in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.</p>
 <p>We also introduced the ‘-em’ flag for users to provide an email address for receive protein messages from web services (for example, you are
 temporarily banned).</p>
@@ -291,22 +294,128 @@ i6j8l50wKOrP7Xpz GIQ79514.1 GIQ79514.1 276              415            276      
 </pre></div>
 </div>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -dbn -dbd -pfs -pfev <span class="m">10</span> -pfas -em test@example.com
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -pev <span class="m">10</span> -pas -em test@example.com
 </pre></div>
 </div>
 </div></blockquote>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
-<p>According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs.</p>
+<p>According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs when using the Lite version.</p>
 <p>Therefore, if you have more than 1500 sequences that need to run Pfamscan search, please do not run our tool again immediately
-after keyboard interrupting a running that has already submit sequences to the server, and better to wait for at least 10 minutes before the next run.</p>
+after keyboard interrupting a run that has already submit sequences to the server.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="multiple-sequence-alignment">
+<h2>Multiple sequence alignment<a class="headerlink" href="#multiple-sequence-alignment" title="Permalink to this headline">¶</a></h2>
+<p>EPTA introduced MAFFT and MUSCLE as multiple sequence alignment programs. The default
+program is MAFFT, which could be changed in the configuration file.</p>
+<p>After run multiple sequence alignment, trimAl was introduced to provide further sequence
+trim.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If both MAFFT and MUSCLE are set as default program, MAFFT is the prioritized one.</p>
+</div>
+<section id="mafft">
+<h3>MAFFT<a class="headerlink" href="#mafft" title="Permalink to this headline">¶</a></h3>
+<section id="run-mafft">
+<h4>Run MAFFT<a class="headerlink" href="#run-mafft" title="Permalink to this headline">¶</a></h4>
+<p>MAFFT will automatically run, do not need extra command line flags. However, users
+still able to run MAFFT manually by adding <strong>‘-mafft’</strong> flag.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft
+</pre></div>
+</div>
+<p>There are also several command line flags for changing paramters of MAFFT:</p>
+<blockquote>
+<div><p><strong>Matrix</strong>
+Commnad line flag of matrix selecting is <strong>‘-matrix [Matrix Abbreviation]’</strong>,
+identical to the command line flag ‘–bl’ or ‘–jtt’ of MAFFT.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -matrix bl62
+</pre></div>
+</div>
+<p><strong>Opening Score And Extension Score</strong>
+Commnad line flag of opening score setting is <strong>‘-op [Number]’</strong>, identical to the command
+line flag ‘–op’ of MAFFT.</p>
+<p>Commnad line flag of extension score setting is <strong>‘-ep [Number]’</strong>, identical to the command
+line flag ‘–ep’ of MAFFT.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -op <span class="m">1</span>.53 -ep <span class="m">0</span>.123
+</pre></div>
+</div>
+<p><strong>Tree Rebuilding Number</strong></p>
+<p>Commnad line flag of tree rebuilding number is <strong>‘-retree [Number]’</strong>, identical to the command
+line flag ‘–retree’ of MAFFT. This flag can determine the guide tree built times in the progressive
+stage.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -retree <span class="m">2</span>
+</pre></div>
+</div>
+<p><strong>Max Iterate Number</strong></p>
+<p>Commnad line flag of maximum iteration is <strong>‘-maxiterate [Number]’</strong>, identical to the command
+line flag ‘–maxiterate’ of MAFFT. This flag can determine the cycles number of iterative refinement.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -maxiterate <span class="m">2</span>
+</pre></div>
+</div>
+<p><strong>Fast Fourier Transform Algorithm</strong></p>
+<p>Commnad line flag of choose FFTS (Fast Fourier Transform) method is <strong>‘-ffts [Mode]’</strong>,
+identical to the command line flag ‘–localpair’, ‘–genafpair’ and ‘–globalpair’ of MAFFT.
+For each command, <strong>‘-ffts localpair’</strong> stands for the Smith-Waterman algorithm, <strong>‘-ffts genafpair’</strong>
+stands for generalized affine gap cost, <strong>‘-ffts globalpair’</strong> stands for Needleman-Wunsch
+algorithm.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -ffts localpair
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+</section>
+<section id="muscle">
+<h3>MUSCLE<a class="headerlink" href="#muscle" title="Permalink to this headline">¶</a></h3>
+<section id="run-muscle">
+<h4>Run MUSCLE<a class="headerlink" href="#run-muscle" title="Permalink to this headline">¶</a></h4>
+<p>To run MUSCLE as the multiple sequence alignment program, add <strong>-muscle</strong> flag to
+the command line. MUSCLE will automatically run, do not need any parameter settings.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -muscle
+</pre></div>
+</div>
+</section>
+</section>
+<section id="trimal">
+<h3>trimAl<a class="headerlink" href="#trimal" title="Permalink to this headline">¶</a></h3>
+<section id="run-trimal">
+<h4>Run trimAl<a class="headerlink" href="#run-trimal" title="Permalink to this headline">¶</a></h4>
+<p>As the default setting, rimAl automatically runs in the EPTA pipline. One can also
+manually add <strong>-trimal</strong> flag to the command line to run trimAl.</p>
+<p><strong>trimAl Run Mode</strong></p>
+<p>Commnad line flag of selecting trimAl run mode <strong>‘-tmod [Mode]’</strong>. There are four
+mode selectable, ‘automated1’, ‘gappyout’, ‘strict’, and ‘strictplus’, identical to
+corresponding command of trimAl command line. Only ‘automated1’ mode is accessable in
+the Lite mode.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -tmod automated1
+</pre></div>
+</div>
+<p><strong>Remove Spurious Sequences</strong></p>
+<p>The flag <strong>‘-rmss [Residue overlap/Sequence overlap]’</strong> able to remove spurious
+sequences when triming multiple alignment sequences. <strong>Residue overlap</strong> is identical to
+the flag ‘-resoverla’ of trimAl, in charge of keep “good positions” according to
+a given minimum overlap of a positions with other positions in the column. <strong>Sequence overlap</strong>
+is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum percentage of
+“good positions” that a sequence must have in order to be conserved.</p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -rmss <span class="m">0</span>.75/80
+</pre></div>
 </div>
 </section>
 </section>
 </section>
 <section id="make-a-tree-from-alignment-file">
 <h2>Make a tree from alignment file<a class="headerlink" href="#make-a-tree-from-alignment-file" title="Permalink to this headline">¶</a></h2>
-<p>Under construction</p>
 </section>
 <section id="annotate-a-tree-file">
 <h2>Annotate a tree file<a class="headerlink" href="#annotate-a-tree-file" title="Permalink to this headline">¶</a></h2>
@@ -330,8 +439,8 @@ after keyboard interrupting a running that has already submit sequences to the s
 <p>Email address that you want receive potential information from web tools.</p>
 </section>
 </section>
-<section id="id1">
-<h2>Parse FASTA<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<section id="id5">
+<h2>Parse FASTA<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <section id="dh">
 <h3>-dh<a class="headerlink" href="#dh" title="Permalink to this headline">¶</a></h3>
 <p>Keep duplicate headers.</p>
@@ -340,20 +449,20 @@ after keyboard interrupting a running that has already submit sequences to the s
 <h3>-tax<a class="headerlink" href="#tax" title="Permalink to this headline">¶</a></h3>
 <p>Search for taxonomy information for each sequence in Entrenz database.</p>
 </section>
-<section id="dbn">
-<h3>-dbn<a class="headerlink" href="#dbn" title="Permalink to this headline">¶</a></h3>
+<section id="name">
+<h3>-name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
 <p>Search for protein name for each sequence in Entrenz database.</p>
 </section>
-<section id="dbd">
-<h3>-dbd<a class="headerlink" href="#dbd" title="Permalink to this headline">¶</a></h3>
-<p>Search for domain information for each sequence in Entrenz database (no evalue and bit score)</p>
+<section id="dom">
+<h3>-dom<a class="headerlink" href="#dom" title="Permalink to this headline">¶</a></h3>
+<p>Annotate protein domians on the tree.</p>
 </section>
-<section id="pfs">
-<h3>-pfs<a class="headerlink" href="#pfs" title="Permalink to this headline">¶</a></h3>
+<section id="pfam">
+<h3>-pfam<a class="headerlink" href="#pfam" title="Permalink to this headline">¶</a></h3>
 <p>Run Pfamsacn (domain prediction) for each sequence.</p>
 </section>
-<section id="pfev-e-value">
-<h3>-pfev [E-value]<a class="headerlink" href="#pfev-e-value" title="Permalink to this headline">¶</a></h3>
+<section id="pev-e-value">
+<h3>-pev [E-value]<a class="headerlink" href="#pev-e-value" title="Permalink to this headline">¶</a></h3>
 <p>E-value of Pfamscan search.</p>
 <blockquote>
 <div><p><strong>Avaliable E-value</strong>:</p>
@@ -376,8 +485,8 @@ after keyboard interrupting a running that has already submit sequences to the s
 </div>
 </div></blockquote>
 </section>
-<section id="pfas">
-<h3>-pfas<a class="headerlink" href="#pfas" title="Permalink to this headline">¶</a></h3>
+<section id="pas">
+<h3>-pas<a class="headerlink" href="#pas" title="Permalink to this headline">¶</a></h3>
 <p>Enable active sites prediction in Pfamscan.</p>
 </section>
 </section>
@@ -415,6 +524,7 @@ after keyboard interrupting a running that has already submit sequences to the s
 <li><a class="reference internal" href="#example-command-line">Example command-line</a></li>
 <li><a class="reference internal" href="#input-file">Input file</a></li>
 <li><a class="reference internal" href="#output-path">Output path</a></li>
+<li><a class="reference internal" href="#check-point">Check point</a></li>
 <li><a class="reference internal" href="#parse-fasta">Parse FASTA</a><ul>
 <li><a class="reference internal" href="#sequence-recognition">Sequence recognition</a></li>
 <li><a class="reference internal" href="#dataframe">Dataframe</a></li>
@@ -422,8 +532,22 @@ after keyboard interrupting a running that has already submit sequences to the s
 <li><a class="reference internal" href="#local-data">Local data?</a></li>
 <li><a class="reference internal" href="#taxonomy-information">Taxonomy information</a></li>
 <li><a class="reference internal" href="#protein-name-from-database">Protein name from database</a></li>
-<li><a class="reference internal" href="#protein-domains-from-database">Protein domains from database</a></li>
-<li><a class="reference internal" href="#run-pfamscan">Run Pfamscan</a></li>
+<li><a class="reference internal" href="#run-pfamscan">Run PfamScan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#multiple-sequence-alignment">Multiple sequence alignment</a><ul>
+<li><a class="reference internal" href="#mafft">MAFFT</a><ul>
+<li><a class="reference internal" href="#run-mafft">Run MAFFT</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#muscle">MUSCLE</a><ul>
+<li><a class="reference internal" href="#run-muscle">Run MUSCLE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#trimal">trimAl</a><ul>
+<li><a class="reference internal" href="#run-trimal">Run trimAl</a></li>
 </ul>
 </li>
 </ul>
@@ -439,14 +563,14 @@ after keyboard interrupting a running that has already submit sequences to the s
 <li><a class="reference internal" href="#em-email-address">-em [email address]</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Parse FASTA</a><ul>
+<li><a class="reference internal" href="#id5">Parse FASTA</a><ul>
 <li><a class="reference internal" href="#dh">-dh</a></li>
 <li><a class="reference internal" href="#tax">-tax</a></li>
-<li><a class="reference internal" href="#dbn">-dbn</a></li>
-<li><a class="reference internal" href="#dbd">-dbd</a></li>
-<li><a class="reference internal" href="#pfs">-pfs</a></li>
-<li><a class="reference internal" href="#pfev-e-value">-pfev [E-value]</a></li>
-<li><a class="reference internal" href="#pfas">-pfas</a></li>
+<li><a class="reference internal" href="#name">-name</a></li>
+<li><a class="reference internal" href="#dom">-dom</a></li>
+<li><a class="reference internal" href="#pfam">-pfam</a></li>
+<li><a class="reference internal" href="#pev-e-value">-pev [E-value]</a></li>
+<li><a class="reference internal" href="#pas">-pas</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#make-alignment">Make alignment</a></li>

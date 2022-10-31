@@ -1,33 +1,23 @@
-# G:
-# cd G:\Desktop\Protein_Phylogeny_Tool_project\Program\Code
-# python3 main_standalone.py -i ./test/Hydrogenase_test.fasta -o ./test/
-# python3 main_standalone.py -i ./test/Hydrogenase_test.fasta -o ./test/ -tax -dom -bl -bs -bif -leg -iqmod LG+I+G4
-# python3 main_standalone.py -i ./test3/groupA_FeFe_hyddb-results_acc_seq_converted.fasta -o ./test3/ -iqmod LG+I+G4
-# python3 main_standalone.py -i ./test3/groupA_FeFe_hyddb-results_acc_seq_converted.fasta -o ./test3/ -tax -dom -bl -bs -bif -leg -iqmod LG+I+G4 -redo
-# epta -i ./test3/Hydrogenase_test.fasta -o ./test3/ -iqmod LG+I+G4
-# python3 main.py -i ./test3/Hydrogenase_test0.fasta -o ./test3/ -bl -bs -bif -leg -iqmod LG+I+G4 -redo
-# python3 main.py -i ./test/Hydrogenase_test.fasta -o ./test/ -bl -bs -bif -leg -tax -dom
+from .cmd_check import cmd_check
+from .check_point import check_point, file_rmv
+from .fasta_parser import fasta_parser
+from .pfamscan_standalone import pfam_main
+from .mafft_standalone import mafft_standalone
+from .muscle_standalone import muscle_standalone
+from .trimal_standalone import trimAl_standalone
+from .iqtree_standalone import iqtree_standalone
+from .ete3_epta import ete3_run
 
-from cmd_check import cmd_check
-from check_point import check_point, file_rmv
-from fasta_parser import fasta_parser
-from pfamscan_standalone import pfam_main
-from mafft_standalone import mafft_standalone
-from muscle_standalone import muscle_standalone
-from trimal_standalone import trimAl_standalone
-from iqtree_standalone import iqtree_standalone
-from ete3_epta import ete3_run
-
-from multi_align_lite import muilt_align
-from pfamscan_lite import run_pfamscan
-from trimal_lite import trimla_lite
-from iqtree_lite import iqtree_lite
+from .multi_align_lite import muilt_align
+from .pfamscan_lite import run_pfamscan
+from .trimal_lite import trimal_lite
+from .iqtree_lite import iqtree_lite
 
 import os
 import time
 import logging
 import argparse
-from global_var import args
+from .global_var import args
 
 global args
 args = args()
@@ -138,6 +128,8 @@ def epta_lite():
         new_start = check_point()
     elif args.redo:
         file_rmv()
+    elif args.remake:
+        new_start = 'ete3'
 
     # print(new_start)
 

@@ -46,9 +46,9 @@ def cmd_check():
 
     # IQ-tree
     # SH test
-    # if int(args.alrt) == 0 and args.bnni:
-    #     logging.error('Error: Bootstrap is required to perform additional tree optimize.')
-    #     sys.exit(1)
+    if int(args.boots) == 0 and args.bnni:
+        logging.error('Error: Bootstrap is required to perform additional tree optimize.')
+        sys.exit(1)
     #
     # elif int(args.alrt) < 1000:
     #     logging.error('Error: replicates of SH-like test must >= 1000.')
@@ -57,6 +57,18 @@ def cmd_check():
     # Bootstrap number
     elif int(args.boots) < 1000:
         logging.error('Error: bootstrap number of IQ-tree must >= 1000.')
+        sys.exit(1)
+    else:
+        pass
+
+    if args.marktax and not args.tax:
+        logging.error('Error: \'-marktax\' flag must run with \'-tax\' command.')
+        sys.exit(1)
+    else:
+        pass
+
+    if args.redo and args.remake:
+        logging.error('Error: -redo flag and -remake flag cannot exist at the same time.')
         sys.exit(1)
     else:
         pass
