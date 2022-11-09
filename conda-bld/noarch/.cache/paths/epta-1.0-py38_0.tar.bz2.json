@@ -1,0 +1,175 @@
+{
+  "paths": [
+    {
+      "_path": "bin/epta",
+      "file_mode": "text",
+      "path_type": "hardlink",
+      "prefix_placeholder": "/home/zxr/miniconda3/envs/epta_test/conda-bld/epta_1667981590947/_h_env_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_placehold_pla",
+      "sha256": "3920c8a2a569940cb4cd9ce94a0b8a7c22cba2604a574428ff58e2b1b8fe2703",
+      "size_in_bytes": 1187
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/PKG-INFO",
+      "path_type": "hardlink",
+      "sha256": "0341bb2f49394db7de7eb59f0333e846be3ac7d18631b47eba9e39246bca5e15",
+      "size_in_bytes": 88
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/SOURCES.txt",
+      "path_type": "hardlink",
+      "sha256": "bf157a3d13022d4900848cbdcfc906322a1cf1aaf1a9c39b5969843b091aa2fb",
+      "size_in_bytes": 692
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/dependency_links.txt",
+      "path_type": "hardlink",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size_in_bytes": 1
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/entry_points.txt",
+      "path_type": "hardlink",
+      "sha256": "39d1661f6ccb62f4f08996333d32d78ed1e71c9e63c12c5714e297188b9f4298",
+      "size_in_bytes": 50
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/not-zip-safe",
+      "path_type": "hardlink",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "size_in_bytes": 1
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/EGG-INFO/top_level.txt",
+      "path_type": "hardlink",
+      "sha256": "b585207374d0563a64277fb7ab1ca2cdfb46080af2a78c7808d66d35bf15cb5f",
+      "size_in_bytes": 11
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/Config.ini",
+      "path_type": "hardlink",
+      "sha256": "f5022785cfe06ed73fb96569429da42c1ff3317270f5c5661ca4f6d3191ae431",
+      "size_in_bytes": 1571
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "1f00f605f678b8f62ee09ff0ba4f969dc336e9d8c0c6c735120ce998d2ab5a74",
+      "size_in_bytes": 454
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/check_point.py",
+      "path_type": "hardlink",
+      "sha256": "5b4fdb923dad815051e368e91df98e407fc870d783ff10121cdf1774179bd243",
+      "size_in_bytes": 5755
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/cmd_check.py",
+      "path_type": "hardlink",
+      "sha256": "c57b1ead5d96bdac14b5dda3b944d53e28acf47e7925f7079fcd5c1e5dfd0303",
+      "size_in_bytes": 2408
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/ete3_epta.py",
+      "path_type": "hardlink",
+      "sha256": "6b42a95807cccdcbaf9b9a983252eb3f1b2ae6475fecaa53ced1d59b81e81df9",
+      "size_in_bytes": 14073
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/fasta_parser.py",
+      "path_type": "hardlink",
+      "sha256": "cba96429903b9259b34652f01f3e75cc2bab7b3d8e9dfdcb6093c4bf7bca180e",
+      "size_in_bytes": 21697
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/global_var.py",
+      "path_type": "hardlink",
+      "sha256": "adc9ea1e85b46cc0c7bc329240f3a53924cfbc611499e55e3b21c3c067d329ef",
+      "size_in_bytes": 11240
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/iqtree_lite.py",
+      "path_type": "hardlink",
+      "sha256": "1174cddd50087a16be28515496f5a0b018922a29ed147d76e7954e014964af7a",
+      "size_in_bytes": 7769
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/iqtree_standalone.py",
+      "path_type": "hardlink",
+      "sha256": "c74ac63a0471d0cbed6735d153be7643c6013da72ae4d08f5d86422179bd45fe",
+      "size_in_bytes": 3605
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/mafft_standalone.py",
+      "path_type": "hardlink",
+      "sha256": "042f5aa65ea67cd305ded9b846be591dd54d7854b2785b5de4edbc102ea920c8",
+      "size_in_bytes": 3243
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/main.py",
+      "path_type": "hardlink",
+      "sha256": "6bba6694fc6f60f204fde981d593458a49b8e091eb37c91c74ae0b0a66033235",
+      "size_in_bytes": 4712
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/main_code.py",
+      "path_type": "hardlink",
+      "sha256": "c952daa85190c56f1bdcfa60dcc8c340b09d3c2ed2498a7f1c2be3320d91d29e",
+      "size_in_bytes": 5495
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/multi_align_lite.py",
+      "path_type": "hardlink",
+      "sha256": "e9975fe28a2759520e98b8b6b11a9295981cde883ca9cdf1dee67ee5b9245fc6",
+      "size_in_bytes": 7477
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/muscle_standalone.py",
+      "path_type": "hardlink",
+      "sha256": "88c867af9595764550b7a3198395c01fc0a11a37a5f08f0abf2a8ffef61cf9b3",
+      "size_in_bytes": 2420
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/pfamscan_lite.py",
+      "path_type": "hardlink",
+      "sha256": "2accbc5a2f7d8a6af43dc663a2b6a039cd22b09ba40fa390f1efe2fdaa25d006",
+      "size_in_bytes": 11119
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/pfamscan_standalone.py",
+      "path_type": "hardlink",
+      "sha256": "2d3eccb501d7aa5180ca052942bfd0f2305785391f4795df0554306f3a18d768",
+      "size_in_bytes": 7600
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/test/__init__.py",
+      "path_type": "hardlink",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_in_bytes": 0
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/test/test.fasta",
+      "path_type": "hardlink",
+      "sha256": "2d45c894680c057da1f9041837278d63dd8b0c38aee3fe6d301024afeeac471b",
+      "size_in_bytes": 23659
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/trimal_lite.py",
+      "path_type": "hardlink",
+      "sha256": "767d06861c0db2c2087e1f568772ad1840b84c7df3b1a40d7bd8bea65df6515b",
+      "size_in_bytes": 6707
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta-1.0-py3.8.egg/standalone/trimal_standalone.py",
+      "path_type": "hardlink",
+      "sha256": "7ddc8418d978f7730fc4176ce1115750903a0c18a3778c37893d5bc5f49283cf",
+      "size_in_bytes": 2767
+    },
+    {
+      "_path": "lib/python3.8/site-packages/epta.pth",
+      "path_type": "hardlink",
+      "sha256": "9ae0a9d3492fa775ed7f64af6018d77ac2fffcbd0cca890a145f4ef2aa0be4af",
+      "size_in_bytes": 21
+    }
+  ],
+  "paths_version": 1
+}

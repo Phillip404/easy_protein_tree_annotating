@@ -482,6 +482,26 @@ Annotate a tree file
 --------------------------
 
 **Annotate Taxonomy**
+By adding **-tax** flag in the command line, EPTA can automatically annotate taxonomy of all sequences' species.
+The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
+that longer than six rank will be shortened to that number. Given that the full organism lineage from NCBI commomly
+starts with kingdom, EPTA intercepts the second to the last rank. If the full lineage longer than six rank (in the most cases)
+, EPTA will intercept the second rank to the fifth rank and append the last rank then, which is the name of that specie.
+For example:
+
+  .. code-block:: text
+    :linenos:
+
+    Full organism lineage:
+    cellular organisms; Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia; Escherichia coli
+
+    EPTA annotated organism lineage:
+    Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia coli
+
+Correspondingly, if there are local sequence in the input file, pleas ensure that the full organism is attached.
+
+Besides annotate taxonomic information on the tree image, EPTA is also capable to color tree branches depends on taxonomic
+rank by adding **-marktax** in the command line. 
 
 **Annotate Domain**
 
