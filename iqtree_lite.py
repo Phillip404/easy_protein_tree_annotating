@@ -22,11 +22,11 @@ def iqtree_lite():
     if not os.path.exists(outpath):
         os.mkdir(outpath)
 
-    # SH test
-    if int(args.alrt)  == 0:
-        sh_info = 'Disable'
-    else:
-        sh_info = 'Enable'
+    # # SH test
+    # if int(args.alrt)  == 0:
+    #     sh_info = 'Disable'
+    # else:
+    #     sh_info = 'Enable'
 
     # test mode
     test_mod = str(args.iqmod).upper()
@@ -42,7 +42,6 @@ def iqtree_lite():
     logging.info('IQ-tree parameters:')
     logging.info('Run mode: %s    Rcluster percentage: %s' % (test_mod, rcluster_info))
     logging.info('Bootstrap mode: Ultrafast    Bootstrap number: %s' % (int(args.boots)))
-    logging.info('SH-like test: %s    SH-like test replicates: %s' % (sh_info, int(args.alrt)))
     logging.info('='*20)
     logging.info('Running IQ-tree...')
     logging.info('This process takes a bit longer time, please wait...')
@@ -94,6 +93,7 @@ def iqtree_lite():
         'vparam.write_sitelikelihoods_' : (None, '0'),
         'vparam.specify_model_' : (None, '%s' % (test_mod)),
         'vparam.specify_prefix_' : (None, 'IQ-tree'),
+        'vparam.num_replicates_' : (None, '1000')
     }
 
 
@@ -103,9 +103,9 @@ def iqtree_lite():
         files['vparam.bootstrap_type_'] = (None, 'bb')
         files['vparam.num_bootreps_'] = (None, '%s' % (int(args.boots)))
 
-    # SH test
-    if int(args.alrt)  != 0:
-        files['vparam.num_replicates_'] = (None, '%s' % (str(args.alrt)))
+    # # SH test
+    # if int(args.alrt)  != 0:
+    #     files['vparam.num_replicates_'] = (None, '%s' % (str(args.alrt)))
 
     # rcluster
     if args.rcluster != 0:

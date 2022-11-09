@@ -85,7 +85,7 @@ def args():
         test_config = abs_dir + delimiter.rstrip(delimiter) + 'Config.ini'
         test_out = './EPTA_test/'
         args.infile = test_path
-        print(args.infile)
+        # print(args.infile)
         args.outfile = test_out
 
     # ensure input and output path format is correct
@@ -203,8 +203,7 @@ def args():
     args.dom_color_list = eval(cfg['Tree Visualizing']['dom_color_list'])
     args.tax_color_list = eval(cfg['Tree Visualizing']['tax_color_list'])
 
-
-
+    # print(args)
     return args
 
 # args()
