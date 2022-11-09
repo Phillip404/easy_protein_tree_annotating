@@ -29,7 +29,16 @@ Play with EPTA
 
 ...
 
+Examples
+---------------------------
+Simple Tree
+^^^^^^^^^^^^^^
 
+Annotate Domain
+^^^^^^^^^^^^^^
+
+Annotate Domain and Taxonomy
+^^^^^^^^^^^^^^
 
 Make a tree from FASTA file
 ---------------------------
@@ -299,7 +308,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft
 
 There are also several command line flags for changing paramters of MAFFT:
 
@@ -311,7 +320,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -matrix bl62
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -matrix bl62
 
   **Opening Score And Extension Score**
   Commnad line flag of opening score setting is **'-op [Number]'**, identical to the command
@@ -324,7 +333,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -op 1.53 -ep 0.123
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -op 1.53 -ep 0.123
 
 
   **Tree Rebuilding Number**
@@ -377,7 +386,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -muscle
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -muscle
 
 trimAl
 ^^^^^^^^^^^
@@ -398,7 +407,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -tmod automated1
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -tmod automated1
 
 **Remove Spurious Sequences**
 
@@ -413,7 +422,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -rmss 0.75/80
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -rmss 0.75/80
 
 Make a tree from alignment file
 -------------------------------
@@ -428,10 +437,42 @@ As the default setting, IQ-tree automatically runs in the EPTA pipline. One can 
 manually add **-iqtree** flag to the command line to run IQ-tree.
 
 **IQ-tree Run Mode**
+EPTA provide three run mode for users to select model: **'-iqmod TEST'**, **-iqmod TESTNEW**
+and **-iqmod [A specific model]**. They are based on IQ-tree's command line, 'TEST' mode provides
+automatic model selection in a basic model list, similarly, 'TESTNEW' automatically select model
+from a advanced list. Users can also choose on known best model from the two list before. For more
+details of models, please check the model list of IQ-tree:
+
+`Model selection <http://www.iqtree.org/doc/Tutorial#choosing-the-right-substitution-model>`_
+`Substitution models <http://www.iqtree.org/doc/Substitution-Models>`_
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod LG+I+G4
 
 **Bootstrap**
+EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
+ultrafast bootstrap is 1000. The command flag of bootstrap is **-boost [bootstrap numbr]**, default
+value set as 1000.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000
 
 **Reduce Runtime**
+To reduce runtime and computational burden, EPTA introduced **-rcluster [percentage]** flag, which implements
+by IQ-tree, derived from the *relaxed hierarchical clustering algorithm*. This flag specify a percentage for the
+relaxed clustering algorithm, in order to speed up the computation by reduce the percentage of partition schemes.
+For example, **-rcluster 10** means only top 10% of partition schemes are considered in the running. This function
+is turned off in the default setting.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
 
 **Tree Optimize**
 
@@ -470,6 +511,31 @@ Specify output path.
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Email address that you want receive potential information from web tools.
+
+-standalone
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run standalone mode. (Only for standalone version)
+
+-lite
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run lite mode. (Only for standalone version)
+
+-test
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run test mode.
+
+-redo
+^^^^^^^^^^^^^^^^
+
+Skip manually confirm for check point checking, automatically rerun the full pipeline.
+
+-remake
+^^^^^^^^^^^^^^^^
+
+According to exsisting output file, remake the tree image only.
 
 
 Parse FASTA
@@ -531,15 +597,71 @@ Enable active sites prediction in Pfamscan.
 
 Make alignment
 --------------
+MAFFT
+""""""""""""""""""""
+-mafft
+^^^^^^^^^^^^^^^^
+-matrix
+^^^^^^^^^^^^^^^^
+-op
+^^^^^^^^^^^^^^^^
+-ep
+^^^^^^^^^^^^^^^^
+-retree
+^^^^^^^^^^^^^^^^
+-maxiterate
+^^^^^^^^^^^^^^^^
+-ffts
+^^^^^^^^^^^^^^^^
 
-Under construction
+MUSCLE
+""""""""""""""""""""
+-muscle
+^^^^^^^^^^^^^^^^
+
+trimAl
+""""""""""""""""""""
+-trimal
+^^^^^^^^^^^^^^^^
+-tmod
+^^^^^^^^^^^^^^^^
+-rmss
+^^^^^^^^^^^^^^^^
 
 Make phylogenetic tree
 ----------------------
 
-Under construction
+-iqtree
+^^^^^^^^^^^^^^^^
+-iqmod
+^^^^^^^^^^^^^^^^
+-boots
+^^^^^^^^^^^^^^^^
+-rcluster
+^^^^^^^^^^^^^^^^
+-mtree
+^^^^^^^^^^^^^^^^
+-bnni
+^^^^^^^^^^^^^^^^
+
 
 Tree Annotating
 ---------------
-
-Under construction
+-xzoom
+^^^^^^^^^^^^^^^^
+-yzoom
+^^^^^^^^^^^^^^^^
+-bs
+^^^^^^^^^^^^^^^^
+-bl
+^^^^^^^^^^^^^^^^
+-bif
+^^^^^^^^^^^^^^^^
+-leg
+^^^^^^^^^^^^^^^^
+-reroot
+^^^^^^^^^^^^^^^^
+-marktax
+^^^^^^^^^^^^^^^^
+-format
+^^^^^^^^^^^^^^^^

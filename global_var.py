@@ -81,9 +81,11 @@ def args():
     # set test file path for test mode
     if args.test:
         # set test file path
-        test_path = abs_dir + delimiter + 'test' + delimiter + 'test.fasta'
+        test_path = abs_dir.rstrip(delimiter) + delimiter + 'test' + delimiter + 'test.fasta'
+        test_config = abs_dir + delimiter.rstrip(delimiter) + 'Config.ini'
         test_out = './EPTA_test/'
         args.infile = test_path
+        print(args.infile)
         args.outfile = test_out
 
     # ensure input and output path format is correct
@@ -95,9 +97,13 @@ def args():
 
     # config file check
     if os.path.isdir(args.infile):
-        cfg_path = args.infile + 'Config.ini'
+        cfg_path = args.infile.rstrip(delimiter) + delimiter + '/Config.ini'
     elif os.path.isfile(args.infile):
         cfg_path = delimiter.join(args.infile.split(delimiter)[:-1]) + '/Config.ini'
+    elif args.test:
+        cfg_path = test_config
+    else:
+        cfg_path = args.infle.rstrip(delimiter) + delimiter + '/Config.ini'
     args.cfg_path = cfg_path
 
     if os.path.isfile(cfg_path):
