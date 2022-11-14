@@ -167,7 +167,7 @@ def ete3_drawing():
                       i += 1
 
             # annotate domains
-            if args.dom:
+            if args.dom or args.pfam:
                 global pfam_df
                 pfam_df = pd.read_csv('pfamscan_details.tsv', sep='\t')
 

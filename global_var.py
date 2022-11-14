@@ -19,7 +19,7 @@ def args():
     parser.add_argument('-dh',help='Keep duplicate headers in FASTA file.',action='store_true')
     parser.add_argument('-tax',help='Search for taxonomy information for each sequence.',action='store_true')
     parser.add_argument('-name',help='Search for protein name for each sequence.',action='store_true')
-    parser.add_argument('-dom',help='Search for domain information for each sequence in Entrenz database (no evalue and bit score).', action='store_true')
+    # parser.add_argument('-dom',help='Search for domain information for each sequence in Entrenz database (no evalue and bit score).', action='store_true')
     parser.add_argument('-pfam',help='Run Pfamsacn (domain prediction) for each sequence.',action='store_true')
     parser.add_argument('-pev',metavar='PfamScan E-value',help='Spicify a e-value of Pfamscan search.',type=str)
     parser.add_argument('-pas',help='Enable active sites prediction in Pfamscan.',action='store_true')
@@ -77,6 +77,7 @@ def args():
         abs_dir = script_path[:script_path.rfind(delimiter)] + delimiter
     else:
         abs_dir = './'
+    args.abspath = abs_dir
 
     # set test file path for test mode
     if args.test:
@@ -137,8 +138,9 @@ def args():
         args.ta = cfg.getboolean('FASTA parser','organism_lineage')
     if not args.name:
         args.name = cfg.getboolean('FASTA parser','protein_name_from_database')
-    if not args.dom:
-        args.dom = cfg.getboolean('FASTA parser','domain_from_database')
+    # if not args.dom:
+    #     args.dom = cfg.getboolean('FASTA parser','domain_from_database')
+    args.dom = False
     if not args.pfam:
         args.pfam = cfg.getboolean('FASTA parser','pfamscan_search')
     if not args.pev:

@@ -138,9 +138,12 @@ def run_pfamscan():
     # outfile = path + '01_Sequence_Alignment/Alignment_MAFFT.fasta'
     outfile = path + '/00_Parsed_Fasta/pfamscan_json.json'
 
+    delimiter = args.delim
+
+    abs_dir = args.abspath
 
     # check local Pfam database
-    pdata_path = sys.path[0] + '/Pfam_data/'
+    pdata_path = abs_dir + 'Pfam_data' + delimiter
 
     # print(pdata_path)
     if not os.path.exists(pdata_path + 'Pfam-A.hmm'):
@@ -177,6 +180,8 @@ def run_pfamscan():
     os.system('pfam_scan.pl -fasta %s -dir %s -outfile %s -json -e_dom %s -e_seq %s%s > %s'  % (infile, pdata_path, outfile, args.pev, args.pev, active_sites, outfile))
     with open(outfile,'r') as result:
         # read json
+        print(dir(result))
+        print(result.readlines)
         result = json.load(result)
         # parse json
         read_pfam_result(result)

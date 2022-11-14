@@ -77,7 +77,7 @@ def epta_standalone():
         logging.info('')
 
     # pfamScan
-    if args.dom and (new_start in wokrflow[:2] or new_start == None):
+    if args.pfam and (new_start in wokrflow[:2] or new_start == None):
         pfam_main()
         logging.info('')
 
@@ -141,7 +141,7 @@ def epta_lite():
         logging.info('')
 
     # pfamScan
-    if args.dom and (new_start in wokrflow[:2] or new_start == None):
+    if args.pfam and (new_start in wokrflow[:2] or new_start == None):
         run_pfamscan()
         logging.info('')
 
