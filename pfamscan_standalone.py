@@ -179,9 +179,9 @@ def run_pfamscan():
     start = time.perf_counter()
     os.system('pfam_scan.pl -fasta %s -dir %s -outfile %s -json -e_dom %s -e_seq %s%s > %s'  % (infile, pdata_path, outfile, args.pev, args.pev, active_sites, outfile))
     with open(outfile,'r') as result:
-        # read json
-        print(dir(result))
-        print(result.readlines)
+        # read json # require perl-json package
+        # print(dir(result))
+        # print(result.readlines)
         result = json.load(result)
         # parse json
         read_pfam_result(result)

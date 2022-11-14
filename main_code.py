@@ -176,9 +176,15 @@ def epta_lite():
     runtime = end - start
     logging.info('All proces done. Total runtime: %s second\n' % (round(runtime,2)))
 
+def run_epta():
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+        if args.lite:
+            epta_lite()
+        else:
+            epta_standalone()
+    elif sys.platform.startswith('win32'):
+        epta_lite()
+
 
 if __name__ == '__main__':
-    if args.lite:
-        epta_lite()
-    else:
-        epta_standalone()
+    run_epta()
