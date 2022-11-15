@@ -68,29 +68,29 @@ a subsystem on Windows platform:
       #. Follow the tutorial above to install the **Standalone version**.
 
     **Run** Standalone version:
-      #. Close all Linux subsystem instance
-      #. Download and install **Xserver** as graphic output connector from `vcxsrv Download <https://sourceforge.net/projects/vcxsrv/>`_
-      #. Install **Xserver** in **full mode**
-      #. Open **Xlaunch** set it as following:
+      1. Close all Linux subsystem instance
+      2. Download and install **Xserver** as graphic output connector from `vcxsrv Download <https://sourceforge.net/projects/vcxsrv/>`_
+      3. Install **Xserver** in **full mode**
+      4. Open **Xlaunch** set it as following:
 
-      .. image:: ../pics/xs1.png
-        :width: 450
-        :alt: Alternative text
-
-
-      .. image:: ../pics/xs2.png
-        :width: 450
-        :alt: Alternative text
+        .. image:: ../pics/xs1.png
+          :width: 450
+          :alt: Alternative text
 
 
-      .. image:: ../pics/xs3.png
-        :width: 450
-        :alt: Alternative text
+        .. image:: ../pics/xs2.png
+          :width: 450
+          :alt: Alternative text
 
 
-      .. image:: ../pics/xs4.png
-        :width: 450
-        :alt: Alternative text
+        .. image:: ../pics/xs3.png
+          :width: 450
+          :alt: Alternative text
 
-      #. Open **bash** window
-      #. Active EPTA environment and run EPTA
+
+        .. image:: ../pics/xs4.png
+          :width: 450
+          :alt: Alternative text
+
+      5. Open **bash** window
+      6. Active EPTA environment and run EPTA
