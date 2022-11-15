@@ -1,3 +1,0 @@
-[console_scripts]
-epta = lite.main:run_epta
-
