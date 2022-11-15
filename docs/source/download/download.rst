@@ -1,10 +1,33 @@
 Download
 ========
 
+Before Installation
+------------------------------
+EPTA needs Conda and Bioconda channel to complete the installation.
+
+  **Download Conda**:
+
+  `Conda Download Tutorial <https://conda.io/projects/conda/en/latest/user-guide/install/download.html>`_
+
+  `Mniconda Download (Recommended) <https://docs.conda.io/en/latest/miniconda.html>`_
+
+  `Anaconda Download <https://www.anaconda.com/products/distribution>`_
+
+  **Add Bioconda Channel**:
+
+  .. code-block:: bash
+
+    conda config --add channels defaults
+    conda config --add channels bioconda
+    conda config --add channels conda-forge
+    conda config --set channel_priority strict
+
+  `Bioconda Homepage <https://bioconda.github.io/>`_
+
 Install EPTA
 ------------------------------
 
-Standalone Version (Linux):
+Standalone Version (**Linux**):
 
   .. code-block:: bash
 
@@ -22,39 +45,52 @@ Lite version:
     conda activate epta-lite
     conda install -c phillip404 epta-lite -y
 
-  **Windows**
+  **Windows (>=Windows 10)**
 
   .. code-block:: bash
 
     conda create -n epta-lite python=3.8
     conda activate epta-lite
     conda install -c phillip404 epta-lite --only-deps -y
-    
+    pip install https://github.com/Phillip404/easy_protein_tree_annotating/raw/main/Packaging/Windows/epta-lite-1.0.tar.gz
 
-Download EPTA manually:
+Standalone Version For Windows (>=Windows 10):
 --------------------------
 
-You can also download EPTA Lite manually:
+Windows 10 and higher supports Linux subsystem, thus a standalone version could be run under such
+a subsystem on Windows platform:
 
-      #. Go to our Github page : https://github.com/Phillip404/easy_protein_tree_annotating
-      #. Press the green button **'Code'**
-      #. Click the subtag **'Download Zip'**
-      #. Unzip the zip file
-      #. Download **pandas** package
-      #. Download **biopython** package
-      #. Download **ETE3** package
-      #. Open your console, whatever it is
-      #. Go to the folder you unzipped EPTA
-      #. Run EPTA and check command line flags:
+    Standalone version **Installation**:
+      #. Open **Microsoft Store**
+      #. Search **Ubuntu**
+      #. Install **Unbuntu**
+      #. Type **bash** in Windows search bar and open it
+      #. Follow the tutorial above to install the **Standalone version**.
 
-          .. code-block:: bash
+    **Run** Standalone version:
+      #. Close all Linux subsystem instance
+      #. Download and install **Xserver** as graphic output connector from `vcxsrv Download <https://sourceforge.net/projects/vcxsrv/>`_
+      #. Install **Xserver** in **full mode**
+      #. Open **Xlaunch** set it as following:
 
-            -python3 main.py -h
+      .. image:: ../pics/xs1.png
+        :width: 450
+        :alt: Alternative text
 
-            .. Caution::
 
-              'python3' could be a different command according to your envorinment.
+      .. image:: ../pics/xs2.png
+        :width: 450
+        :alt: Alternative text
 
-              For example: python, py, py3
 
-      #. Enjoy your tree building!
+      .. image:: ../pics/xs3.png
+        :width: 450
+        :alt: Alternative text
+
+
+      .. image:: ../pics/xs4.png
+        :width: 450
+        :alt: Alternative text
+
+      #. Open **bash** window
+      #. Active EPTA environment and run EPTA

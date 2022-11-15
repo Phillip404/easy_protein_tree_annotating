@@ -49,53 +49,81 @@
             
   <section id="download">
 <h1>Download<a class="headerlink" href="#download" title="Permalink to this headline">¶</a></h1>
-<section id="install-epta-from-command-line">
-<h2>Install EPTA from command line<a class="headerlink" href="#install-epta-from-command-line" title="Permalink to this headline">¶</a></h2>
-<p>You can install EPTA easily from PIPL or Annaconda</p>
+<section id="before-installation">
+<h2>Before Installation<a class="headerlink" href="#before-installation" title="Permalink to this headline">¶</a></h2>
+<p>EPTA needs Conda and Bioconda channel to complete the installation.</p>
 <blockquote>
-<div><p><strong>Full version</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-conda create -n run_epta <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
--conda activate run_epta
--conda install epta
+<div><p><strong>Download Conda</strong>:</p>
+<p><a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/download.html">Conda Download Tutorial</a></p>
+<p><a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Mniconda Download (Recommended)</a></p>
+<p><a class="reference external" href="https://www.anaconda.com/products/distribution">Anaconda Download</a></p>
+<p><strong>Add Bioconda Channel</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+conda config --set channel_priority strict
 </pre></div>
 </div>
-<p><strong>Lite version</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-conda create -n run_epta_lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
--conda activate run_epta_lite
--conda install epta_lite
+<p><a class="reference external" href="https://bioconda.github.io/">Bioconda Homepage</a></p>
+</div></blockquote>
+</section>
+<section id="install-epta">
+<h2>Install EPTA<a class="headerlink" href="#install-epta" title="Permalink to this headline">¶</a></h2>
+<p>Standalone Version (<strong>Linux</strong>):</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+conda activate epta
+conda install -c phillip404 epta -y
+</pre></div>
+</div>
+</div></blockquote>
+<p>Lite version:</p>
+<blockquote>
+<div><p><strong>Linux &amp; MacOS</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta-lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+conda activate epta-lite
+conda install -c phillip404 epta-lite -y
+</pre></div>
+</div>
+<p><strong>Windows (&gt;=Windows 10)</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta-lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+conda activate epta-lite
+conda install -c phillip404 epta-lite --only-deps -y
+pip install https://github.com/Phillip404/easy_protein_tree_annotating/raw/main/Packaging/Windows/epta-lite-1.0.tar.gz
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="download-epta-manually">
-<h2>Download EPTA manually:<a class="headerlink" href="#download-epta-manually" title="Permalink to this headline">¶</a></h2>
-<p>You can also download EPTA Lite manually:</p>
+<section id="standalone-version-for-windows-windows-10">
+<h2>Standalone Version For Windows (&gt;=Windows 10):<a class="headerlink" href="#standalone-version-for-windows-windows-10" title="Permalink to this headline">¶</a></h2>
+<p>Windows 10 and higher supports Linux subsystem, thus a standalone version could be run under such
+a subsystem on Windows platform:</p>
 <blockquote>
-<div><ol class="arabic">
-<li><p>Go to our Github page : <a class="reference external" href="https://github.com/Phillip404/easy_protein_tree_annotating">https://github.com/Phillip404/easy_protein_tree_annotating</a></p></li>
-<li><p>Press the green button <strong>‘Code’</strong></p></li>
-<li><p>Click the subtag <strong>‘Download Zip’</strong></p></li>
-<li><p>Unzip the zip file</p></li>
-<li><p>Download <strong>pandas</strong> package</p></li>
-<li><p>Download <strong>biopython</strong> package</p></li>
-<li><p>Download <strong>ETE3</strong> package</p></li>
-<li><p>Open your console, whatever it is</p></li>
-<li><p>Go to the folder you unzipped EPTA</p></li>
-<li><p>Run EPTA and check command line flags:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-python3 main.py -h
-
-.. Caution::
-
-  <span class="s1">&#39;python3&#39;</span> could be a different <span class="nb">command</span> according to your envorinment.
-
-  For example: python, py, py3
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-<li><p>Enjoy your tree building!</p></li>
+<div><dl>
+<dt>Standalone version <strong>Installation</strong>:</dt><dd><ol class="arabic simple">
+<li><p>Open <strong>Microsoft Store</strong></p></li>
+<li><p>Search <strong>Ubuntu</strong></p></li>
+<li><p>Install <strong>Unbuntu</strong></p></li>
+<li><p>Type <strong>bash</strong> in Windows search bar and open it</p></li>
+<li><p>Follow the tutorial above to install the <strong>Standalone version</strong>.</p></li>
 </ol>
+</dd>
+<dt><strong>Run</strong> Standalone version:</dt><dd><ol class="arabic simple">
+<li><p>Close all Linux subsystem instance</p></li>
+<li><p>Download and install <strong>Xserver</strong> as graphic output connector from <a class="reference external" href="https://sourceforge.net/projects/vcxsrv/">vcxsrv Download</a></p></li>
+<li><p>Install <strong>Xserver</strong> in <strong>full mode</strong></p></li>
+<li><p>Open <strong>Xlaunch</strong> set it as following:</p></li>
+</ol>
+<a class="reference internal image-reference" href="../_images/xs1.png"><img alt="Alternative text" src="../_images/xs1.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="../_images/xs2.png"><img alt="Alternative text" src="../_images/xs2.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="../_images/xs3.png"><img alt="Alternative text" src="../_images/xs3.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="../_images/xs4.png"><img alt="Alternative text" src="../_images/xs4.png" style="width: 450px;" /></a>
+<ol class="arabic simple">
+<li><p>Open <strong>bash</strong> window</p></li>
+<li><p>Active EPTA environment and run EPTA</p></li>
+</ol>
+</dd>
+</dl>
 </div></blockquote>
 </section>
 </section>
@@ -110,8 +138,9 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Download</a><ul>
-<li><a class="reference internal" href="#install-epta-from-command-line">Install EPTA from command line</a></li>
-<li><a class="reference internal" href="#download-epta-manually">Download EPTA manually:</a></li>
+<li><a class="reference internal" href="#before-installation">Before Installation</a></li>
+<li><a class="reference internal" href="#install-epta">Install EPTA</a></li>
+<li><a class="reference internal" href="#standalone-version-for-windows-windows-10">Standalone Version For Windows (&gt;=Windows 10):</a></li>
 </ul>
 </li>
 </ul>

@@ -66,8 +66,9 @@ to help you to build a protein tree from FASTA files.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="download/download.html">Download</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="download/download.html#install-epta-from-command-line">Install EPTA from command line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="download/download.html#download-epta-manually">Download EPTA manually:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download/download.html#before-installation">Before Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download/download.html#install-epta">Install EPTA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download/download.html#standalone-version-for-windows-windows-10">Standalone Version For Windows (&gt;=Windows 10):</a></li>
 </ul>
 </li>
 </ul>
@@ -83,6 +84,12 @@ to help you to build a protein tree from FASTA files.</p>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#configuration-file">Configuration file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#log-file">Log file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#play-with-epta">Play with EPTA</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#simple-tree">Simple Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#annotate-domain">Annotate Domain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#annotate-domain-and-taxonomy">Annotate Domain and Taxonomy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="manual/manual.html#make-a-tree-from-fasta-file">Make a tree from FASTA file</a><ul>
@@ -108,9 +115,14 @@ to help you to build a protein tree from FASTA files.</p>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#i-file-or-path">-i [file or path]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#o-file-or-path">-o [file or path]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#em-email-address">-em [email address]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#standalone">-standalone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#lite">-lite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#test">-test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#redo">-redo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#remake">-remake</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#id5">Parse FASTA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#id1">Parse FASTA</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#dh">-dh</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#tax">-tax</a></li>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#name">-name</a></li>
@@ -120,9 +132,41 @@ to help you to build a protein tree from FASTA files.</p>
 <li class="toctree-l3"><a class="reference internal" href="manual/manual.html#pas">-pas</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#make-alignment">Make alignment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#make-phylogenetic-tree">Make phylogenetic tree</a></li>
-<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#tree-annotating">Tree Annotating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#make-alignment">Make alignment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#id2">-mafft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#matrix">-matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#op">-op</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#ep">-ep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#retree">-retree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#maxiterate">-maxiterate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#ffts">-ffts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#id4">-muscle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#id6">-trimal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#tmod">-tmod</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#rmss">-rmss</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#make-phylogenetic-tree">Make phylogenetic tree</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#iqtree">-iqtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#iqmod">-iqmod</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#boots">-boots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#rcluster">-rcluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#mtree">-mtree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#bnni">-bnni</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manual/manual.html#tree-annotating">Tree Annotating</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#xzoom">-xzoom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#yzoom">-yzoom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#bs">-bs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#bl">-bl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#bif">-bif</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#leg">-leg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#reroot">-reroot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#marktax">-marktax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manual/manual.html#format">-format</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

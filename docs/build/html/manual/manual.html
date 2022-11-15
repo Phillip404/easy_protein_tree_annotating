@@ -68,6 +68,18 @@ check or confirm configuration of a run.</p>
 <p>…</p>
 </section>
 </section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<section id="simple-tree">
+<h3>Simple Tree<a class="headerlink" href="#simple-tree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="annotate-domain">
+<h3>Annotate Domain<a class="headerlink" href="#annotate-domain" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="annotate-domain-and-taxonomy">
+<h3>Annotate Domain and Taxonomy<a class="headerlink" href="#annotate-domain-and-taxonomy" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
 <section id="make-a-tree-from-fasta-file">
 <h2>Make a tree from FASTA file<a class="headerlink" href="#make-a-tree-from-fasta-file" title="Permalink to this headline">¶</a></h2>
 <p>An annotated phylogenetic tree can be built directly from FASTA file, and able to add protein ID, description,
@@ -275,7 +287,7 @@ To enable this function, add <strong>-name</strong> flag to the command line.</p
 <p>Add <strong>‘-pfam’</strong> flag to the command line to run PfamScan to search domain information.</p>
 <p>Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.</p>
-<p>Alongside <strong>‘-pfam’</strong> flag, <strong>‘-pev [E-value]’</strong> and <a href="#id1"><span class="problematic" id="id2">**</span></a>’-pas’<a href="#id3"><span class="problematic" id="id4">**</span></a>[active sites] can be used to spicify a e-value and to enable active site functionality
+<p>Alongside <strong>‘-pfam’</strong> flag, <strong>‘-pev [E-value]’</strong> and <strong>‘-pas’</strong> [active sites] can be used to spicify a e-value and to enable active site functionality
 in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.</p>
 <p>We also introduced the ‘-em’ flag for users to provide an email address for receive protein messages from web services (for example, you are
@@ -324,7 +336,7 @@ trim.</p>
 <p>MAFFT will automatically run, do not need extra command line flags. However, users
 still able to run MAFFT manually by adding <strong>‘-mafft’</strong> flag.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft
 </pre></div>
 </div>
 <p>There are also several command line flags for changing paramters of MAFFT:</p>
@@ -333,7 +345,7 @@ still able to run MAFFT manually by adding <strong>‘-mafft’</strong> flag.</
 Commnad line flag of matrix selecting is <strong>‘-matrix [Matrix Abbreviation]’</strong>,
 identical to the command line flag ‘–bl’ or ‘–jtt’ of MAFFT.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -matrix bl62
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -matrix bl62
 </pre></div>
 </div>
 <p><strong>Opening Score And Extension Score</strong>
@@ -342,7 +354,7 @@ line flag ‘–op’ of MAFFT.</p>
 <p>Commnad line flag of extension score setting is <strong>‘-ep [Number]’</strong>, identical to the command
 line flag ‘–ep’ of MAFFT.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -op <span class="m">1</span>.53 -ep <span class="m">0</span>.123
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -op <span class="m">1</span>.53 -ep <span class="m">0</span>.123
 </pre></div>
 </div>
 <p><strong>Tree Rebuilding Number</strong></p>
@@ -380,7 +392,7 @@ algorithm.</p>
 <p>To run MUSCLE as the multiple sequence alignment program, add <strong>-muscle</strong> flag to
 the command line. MUSCLE will automatically run, do not need any parameter settings.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -muscle
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -muscle
 </pre></div>
 </div>
 </section>
@@ -389,7 +401,7 @@ the command line. MUSCLE will automatically run, do not need any parameter setti
 <h3>trimAl<a class="headerlink" href="#trimal" title="Permalink to this headline">¶</a></h3>
 <section id="run-trimal">
 <h4>Run trimAl<a class="headerlink" href="#run-trimal" title="Permalink to this headline">¶</a></h4>
-<p>As the default setting, rimAl automatically runs in the EPTA pipline. One can also
+<p>As the default setting, trimAl automatically runs in the EPTA pipline. One can also
 manually add <strong>-trimal</strong> flag to the command line to run trimAl.</p>
 <p><strong>trimAl Run Mode</strong></p>
 <p>Commnad line flag of selecting trimAl run mode <strong>‘-tmod [Mode]’</strong>. There are four
@@ -397,7 +409,7 @@ mode selectable, ‘automated1’, ‘gappyout’, ‘strict’, and ‘strictpl
 corresponding command of trimAl command line. Only ‘automated1’ mode is accessable in
 the Lite mode.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -tmod automated1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -tmod automated1
 </pre></div>
 </div>
 <p><strong>Remove Spurious Sequences</strong></p>
@@ -408,7 +420,7 @@ a given minimum overlap of a positions with other positions in the column. <stro
 is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum percentage of
 “good positions” that a sequence must have in order to be conserved.</p>
 <p>Command-line example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -rmss <span class="m">0</span>.75/80
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -rmss <span class="m">0</span>.75/80
 </pre></div>
 </div>
 </section>
@@ -416,10 +428,68 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 </section>
 <section id="make-a-tree-from-alignment-file">
 <h2>Make a tree from alignment file<a class="headerlink" href="#make-a-tree-from-alignment-file" title="Permalink to this headline">¶</a></h2>
+<p>EPTA implements IQ-tree as the tree building program in the pipeline. When running
+EPTA standalone version with large dataset (&gt;500), be aware that IQ-tree need corresponding
+large memory space to run.</p>
+<p>As the default setting, IQ-tree automatically runs in the EPTA pipline. One can also
+manually add <strong>-iqtree</strong> flag to the command line to run IQ-tree.</p>
+<p><strong>IQ-tree Run Mode</strong>
+EPTA provide three run mode for users to select model: <strong>‘-iqmod TEST’</strong>, <strong>-iqmod TESTNEW</strong>
+and <strong>-iqmod [A specific model]</strong>. They are based on IQ-tree’s command line, ‘TEST’ mode provides
+automatic model selection in a basic model list, similarly, ‘TESTNEW’ automatically select model
+from a advanced list. Users can also choose on known best model from the two list before. For more
+details of models, please check the model list of IQ-tree:</p>
+<p><a class="reference external" href="http://www.iqtree.org/doc/Tutorial#choosing-the-right-substitution-model">Model selection</a>
+<a class="reference external" href="http://www.iqtree.org/doc/Substitution-Models">Substitution models</a></p>
+<p>Command-line example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST
+
+epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod LG+I+G4
+</pre></div>
+</div>
+<p><strong>Bootstrap</strong>
+EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
+ultrafast bootstrap is 1000. The command flag of bootstrap is <strong>-boost [bootstrap numbr]</strong>, default
+value set as 1000.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots <span class="m">1000</span>
+</pre></div>
+</div>
+<p><strong>Reduce Runtime</strong>
+To reduce runtime and computational burden, EPTA introduced <strong>-rcluster [percentage]</strong> flag, which implements
+by IQ-tree, derived from the <em>relaxed hierarchical clustering algorithm</em>. This flag specify a percentage for the
+relaxed clustering algorithm, in order to speed up the computation by reduce the percentage of partition schemes.
+For example, <strong>-rcluster 10</strong> means only top 10% of partition schemes are considered in the running. This function
+is turned off in the default setting.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots <span class="m">1000</span> -rcluster <span class="m">10</span>
+</pre></div>
+</div>
+<p><strong>Tree Optimize</strong></p>
 </section>
 <section id="annotate-a-tree-file">
 <h2>Annotate a tree file<a class="headerlink" href="#annotate-a-tree-file" title="Permalink to this headline">¶</a></h2>
-<p>Under construction</p>
+<p><strong>Annotate Taxonomy</strong>
+By adding <strong>-tax</strong> flag in the command line, EPTA can automatically annotate taxonomy of all sequences’ species.
+The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
+that longer than six rank will be shortened to that number. Given that the full organism lineage from NCBI commomly
+starts with kingdom, EPTA intercepts the second to the last rank. If the full lineage longer than six rank (in the most cases)
+, EPTA will intercept the second rank to the fifth rank and append the last rank then, which is the name of that specie.
+For example:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Full organism lineage:
+<span class="linenos">2</span>cellular organisms; Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia; Escherichia coli
+<span class="linenos">3</span>
+<span class="linenos">4</span>EPTA annotated organism lineage:
+<span class="linenos">5</span>Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia coli
+</pre></div>
+</div>
+</div></blockquote>
+<p>Correspondingly, if there are local sequence in the input file, pleas ensure that the full organism is attached.</p>
+<p>Besides annotate taxonomic information on the tree image, EPTA is also capable to color tree branches depends on taxonomic
+rank by adding <strong>-marktax</strong> in the command line.</p>
+<p><strong>Annotate Domain</strong></p>
+<p><strong>Image Size</strong></p>
+<p><strong>Branch Setting</strong></p>
+<p><strong>IQ-tree Run Mode</strong></p>
 </section>
 </section>
 <section id="commands">
@@ -438,9 +508,29 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 <h3>-em [email address]<a class="headerlink" href="#em-email-address" title="Permalink to this headline">¶</a></h3>
 <p>Email address that you want receive potential information from web tools.</p>
 </section>
+<section id="standalone">
+<h3>-standalone<a class="headerlink" href="#standalone" title="Permalink to this headline">¶</a></h3>
+<p>Run standalone mode. (Only for standalone version)</p>
 </section>
-<section id="id5">
-<h2>Parse FASTA<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<section id="lite">
+<h3>-lite<a class="headerlink" href="#lite" title="Permalink to this headline">¶</a></h3>
+<p>Run lite mode. (Only for standalone version)</p>
+</section>
+<section id="test">
+<h3>-test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
+<p>Run test mode.</p>
+</section>
+<section id="redo">
+<h3>-redo<a class="headerlink" href="#redo" title="Permalink to this headline">¶</a></h3>
+<p>Skip manually confirm for check point checking, automatically rerun the full pipeline.</p>
+</section>
+<section id="remake">
+<h3>-remake<a class="headerlink" href="#remake" title="Permalink to this headline">¶</a></h3>
+<p>According to exsisting output file, remake the tree image only.</p>
+</section>
+</section>
+<section id="id1">
+<h2>Parse FASTA<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <section id="dh">
 <h3>-dh<a class="headerlink" href="#dh" title="Permalink to this headline">¶</a></h3>
 <p>Keep duplicate headers.</p>
@@ -492,15 +582,96 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 </section>
 <section id="make-alignment">
 <h2>Make alignment<a class="headerlink" href="#make-alignment" title="Permalink to this headline">¶</a></h2>
-<p>Under construction</p>
+<section id="id2">
+<h3>-mafft<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matrix">
+<h3>-matrix<a class="headerlink" href="#matrix" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="op">
+<h3>-op<a class="headerlink" href="#op" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ep">
+<h3>-ep<a class="headerlink" href="#ep" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="retree">
+<h3>-retree<a class="headerlink" href="#retree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="maxiterate">
+<h3>-maxiterate<a class="headerlink" href="#maxiterate" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ffts">
+<h3>-ffts<a class="headerlink" href="#ffts" title="Permalink to this headline">¶</a></h3>
+<section id="id3">
+<h4>MUSCLE<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="id4">
+<h3>-muscle<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<section id="id5">
+<h4>trimAl<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="id6">
+<h3>-trimal<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tmod">
+<h3>-tmod<a class="headerlink" href="#tmod" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rmss">
+<h3>-rmss<a class="headerlink" href="#rmss" title="Permalink to this headline">¶</a></h3>
+</section>
 </section>
 <section id="make-phylogenetic-tree">
 <h2>Make phylogenetic tree<a class="headerlink" href="#make-phylogenetic-tree" title="Permalink to this headline">¶</a></h2>
-<p>Under construction</p>
+<section id="iqtree">
+<h3>-iqtree<a class="headerlink" href="#iqtree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="iqmod">
+<h3>-iqmod<a class="headerlink" href="#iqmod" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="boots">
+<h3>-boots<a class="headerlink" href="#boots" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rcluster">
+<h3>-rcluster<a class="headerlink" href="#rcluster" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mtree">
+<h3>-mtree<a class="headerlink" href="#mtree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bnni">
+<h3>-bnni<a class="headerlink" href="#bnni" title="Permalink to this headline">¶</a></h3>
+</section>
 </section>
 <section id="tree-annotating">
 <h2>Tree Annotating<a class="headerlink" href="#tree-annotating" title="Permalink to this headline">¶</a></h2>
-<p>Under construction</p>
+<section id="xzoom">
+<h3>-xzoom<a class="headerlink" href="#xzoom" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="yzoom">
+<h3>-yzoom<a class="headerlink" href="#yzoom" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bs">
+<h3>-bs<a class="headerlink" href="#bs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bl">
+<h3>-bl<a class="headerlink" href="#bl" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bif">
+<h3>-bif<a class="headerlink" href="#bif" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="leg">
+<h3>-leg<a class="headerlink" href="#leg" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reroot">
+<h3>-reroot<a class="headerlink" href="#reroot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="marktax">
+<h3>-marktax<a class="headerlink" href="#marktax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="format">
+<h3>-format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+</section>
 </section>
 </section>
 
@@ -518,6 +689,12 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 <li><a class="reference internal" href="#configuration-file">Configuration file</a></li>
 <li><a class="reference internal" href="#log-file">Log file</a></li>
 <li><a class="reference internal" href="#play-with-epta">Play with EPTA</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
+<li><a class="reference internal" href="#simple-tree">Simple Tree</a></li>
+<li><a class="reference internal" href="#annotate-domain">Annotate Domain</a></li>
+<li><a class="reference internal" href="#annotate-domain-and-taxonomy">Annotate Domain and Taxonomy</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#make-a-tree-from-fasta-file">Make a tree from FASTA file</a><ul>
@@ -561,9 +738,14 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 <li><a class="reference internal" href="#i-file-or-path">-i [file or path]</a></li>
 <li><a class="reference internal" href="#o-file-or-path">-o [file or path]</a></li>
 <li><a class="reference internal" href="#em-email-address">-em [email address]</a></li>
+<li><a class="reference internal" href="#standalone">-standalone</a></li>
+<li><a class="reference internal" href="#lite">-lite</a></li>
+<li><a class="reference internal" href="#test">-test</a></li>
+<li><a class="reference internal" href="#redo">-redo</a></li>
+<li><a class="reference internal" href="#remake">-remake</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5">Parse FASTA</a><ul>
+<li><a class="reference internal" href="#id1">Parse FASTA</a><ul>
 <li><a class="reference internal" href="#dh">-dh</a></li>
 <li><a class="reference internal" href="#tax">-tax</a></li>
 <li><a class="reference internal" href="#name">-name</a></li>
@@ -573,9 +755,47 @@ is identical to the flag ‘-seqoverlap’ of trimAl, which means a minimum perc
 <li><a class="reference internal" href="#pas">-pas</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#make-alignment">Make alignment</a></li>
-<li><a class="reference internal" href="#make-phylogenetic-tree">Make phylogenetic tree</a></li>
-<li><a class="reference internal" href="#tree-annotating">Tree Annotating</a></li>
+<li><a class="reference internal" href="#make-alignment">Make alignment</a><ul>
+<li><a class="reference internal" href="#id2">-mafft</a></li>
+<li><a class="reference internal" href="#matrix">-matrix</a></li>
+<li><a class="reference internal" href="#op">-op</a></li>
+<li><a class="reference internal" href="#ep">-ep</a></li>
+<li><a class="reference internal" href="#retree">-retree</a></li>
+<li><a class="reference internal" href="#maxiterate">-maxiterate</a></li>
+<li><a class="reference internal" href="#ffts">-ffts</a><ul>
+<li><a class="reference internal" href="#id3">MUSCLE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">-muscle</a><ul>
+<li><a class="reference internal" href="#id5">trimAl</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6">-trimal</a></li>
+<li><a class="reference internal" href="#tmod">-tmod</a></li>
+<li><a class="reference internal" href="#rmss">-rmss</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-phylogenetic-tree">Make phylogenetic tree</a><ul>
+<li><a class="reference internal" href="#iqtree">-iqtree</a></li>
+<li><a class="reference internal" href="#iqmod">-iqmod</a></li>
+<li><a class="reference internal" href="#boots">-boots</a></li>
+<li><a class="reference internal" href="#rcluster">-rcluster</a></li>
+<li><a class="reference internal" href="#mtree">-mtree</a></li>
+<li><a class="reference internal" href="#bnni">-bnni</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tree-annotating">Tree Annotating</a><ul>
+<li><a class="reference internal" href="#xzoom">-xzoom</a></li>
+<li><a class="reference internal" href="#yzoom">-yzoom</a></li>
+<li><a class="reference internal" href="#bs">-bs</a></li>
+<li><a class="reference internal" href="#bl">-bl</a></li>
+<li><a class="reference internal" href="#bif">-bif</a></li>
+<li><a class="reference internal" href="#leg">-leg</a></li>
+<li><a class="reference internal" href="#reroot">-reroot</a></li>
+<li><a class="reference internal" href="#marktax">-marktax</a></li>
+<li><a class="reference internal" href="#format">-format</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

@@ -29,7 +29,16 @@ Play with EPTA
 
 ...
 
+Examples
+---------------------------
+Simple Tree
+^^^^^^^^^^^^^^
 
+Annotate Domain
+^^^^^^^^^^^^^^
+
+Annotate Domain and Taxonomy
+^^^^^^^^^^^^^^
 
 Make a tree from FASTA file
 ---------------------------
@@ -239,7 +248,7 @@ Add **'-pfam'** flag to the command line to run PfamScan to search domain inform
 Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.
 
-Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'**[active sites] can be used to spicify a e-value and to enable active site functionality
+Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'** [active sites] can be used to spicify a e-value and to enable active site functionality 
 in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.
 
@@ -299,7 +308,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft
 
 There are also several command line flags for changing paramters of MAFFT:
 
@@ -311,7 +320,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -matrix bl62
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -matrix bl62
 
   **Opening Score And Extension Score**
   Commnad line flag of opening score setting is **'-op [Number]'**, identical to the command
@@ -324,7 +333,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -op 1.53 -ep 0.123
+    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -op 1.53 -ep 0.123
 
 
   **Tree Rebuilding Number**
@@ -377,14 +386,14 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -muscle
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -muscle
 
 trimAl
 ^^^^^^^^^^^
 
 Run trimAl
 """"""""""""""""""""
-As the default setting, rimAl automatically runs in the EPTA pipline. One can also
+As the default setting, trimAl automatically runs in the EPTA pipline. One can also
 manually add **-trimal** flag to the command line to run trimAl.
 
 **trimAl Run Mode**
@@ -398,7 +407,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -tmod automated1
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -tmod automated1
 
 **Remove Spurious Sequences**
 
@@ -413,15 +422,94 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -trimal -rmss 0.75/80
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -rmss 0.75/80
 
 Make a tree from alignment file
 -------------------------------
 
+EPTA implements IQ-tree as the tree building program in the pipeline. When running
+EPTA standalone version with large dataset (>500), be aware that IQ-tree need corresponding
+large memory space to run.
+
+Run IQ-tree
+""""""""""""""""""""
+As the default setting, IQ-tree automatically runs in the EPTA pipline. One can also
+manually add **-iqtree** flag to the command line to run IQ-tree.
+
+**IQ-tree Run Mode**
+EPTA provide three run mode for users to select model: **'-iqmod TEST'**, **-iqmod TESTNEW**
+and **-iqmod [A specific model]**. They are based on IQ-tree's command line, 'TEST' mode provides
+automatic model selection in a basic model list, similarly, 'TESTNEW' automatically select model
+from a advanced list. Users can also choose on known best model from the two list before. For more
+details of models, please check the model list of IQ-tree:
+
+`Model selection <http://www.iqtree.org/doc/Tutorial#choosing-the-right-substitution-model>`_
+`Substitution models <http://www.iqtree.org/doc/Substitution-Models>`_
+
+Command-line example:
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod LG+I+G4
+
+**Bootstrap**
+EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
+ultrafast bootstrap is 1000. The command flag of bootstrap is **-boost [bootstrap numbr]**, default
+value set as 1000.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000
+
+**Reduce Runtime**
+To reduce runtime and computational burden, EPTA introduced **-rcluster [percentage]** flag, which implements
+by IQ-tree, derived from the *relaxed hierarchical clustering algorithm*. This flag specify a percentage for the
+relaxed clustering algorithm, in order to speed up the computation by reduce the percentage of partition schemes.
+For example, **-rcluster 10** means only top 10% of partition schemes are considered in the running. This function
+is turned off in the default setting.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
+
+**Tree Optimize**
+
+
+
 Annotate a tree file
 --------------------------
 
-Under construction
+**Annotate Taxonomy**
+By adding **-tax** flag in the command line, EPTA can automatically annotate taxonomy of all sequences' species.
+The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
+that longer than six rank will be shortened to that number. Given that the full organism lineage from NCBI commomly
+starts with kingdom, EPTA intercepts the second to the last rank. If the full lineage longer than six rank (in the most cases)
+, EPTA will intercept the second rank to the fifth rank and append the last rank then, which is the name of that specie.
+For example:
+
+  .. code-block:: text
+    :linenos:
+
+    Full organism lineage:
+    cellular organisms; Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia; Escherichia coli
+
+    EPTA annotated organism lineage:
+    Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia coli
+
+Correspondingly, if there are local sequence in the input file, pleas ensure that the full organism is attached.
+
+Besides annotate taxonomic information on the tree image, EPTA is also capable to color tree branches depends on taxonomic
+rank by adding **-marktax** in the command line.
+
+**Annotate Domain**
+
+**Image Size**
+
+**Branch Setting**
+
+**IQ-tree Run Mode**
 
 Commands
 ========
@@ -443,6 +531,31 @@ Specify output path.
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Email address that you want receive potential information from web tools.
+
+-standalone
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run standalone mode. (Only for standalone version)
+
+-lite
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run lite mode. (Only for standalone version)
+
+-test
+^^^^^^^^^^^^^^^^^^^^^^
+
+Run test mode.
+
+-redo
+^^^^^^^^^^^^^^^^
+
+Skip manually confirm for check point checking, automatically rerun the full pipeline.
+
+-remake
+^^^^^^^^^^^^^^^^
+
+According to exsisting output file, remake the tree image only.
 
 
 Parse FASTA
@@ -504,15 +617,71 @@ Enable active sites prediction in Pfamscan.
 
 Make alignment
 --------------
+MAFFT
+""""""""""""""""""""
+-mafft
+^^^^^^^^^^^^^^^^
+-matrix
+^^^^^^^^^^^^^^^^
+-op
+^^^^^^^^^^^^^^^^
+-ep
+^^^^^^^^^^^^^^^^
+-retree
+^^^^^^^^^^^^^^^^
+-maxiterate
+^^^^^^^^^^^^^^^^
+-ffts
+^^^^^^^^^^^^^^^^
 
-Under construction
+MUSCLE
+""""""""""""""""""""
+-muscle
+^^^^^^^^^^^^^^^^
+
+trimAl
+""""""""""""""""""""
+-trimal
+^^^^^^^^^^^^^^^^
+-tmod
+^^^^^^^^^^^^^^^^
+-rmss
+^^^^^^^^^^^^^^^^
 
 Make phylogenetic tree
 ----------------------
 
-Under construction
+-iqtree
+^^^^^^^^^^^^^^^^
+-iqmod
+^^^^^^^^^^^^^^^^
+-boots
+^^^^^^^^^^^^^^^^
+-rcluster
+^^^^^^^^^^^^^^^^
+-mtree
+^^^^^^^^^^^^^^^^
+-bnni
+^^^^^^^^^^^^^^^^
+
 
 Tree Annotating
 ---------------
-
-Under construction
+-xzoom
+^^^^^^^^^^^^^^^^
+-yzoom
+^^^^^^^^^^^^^^^^
+-bs
+^^^^^^^^^^^^^^^^
+-bl
+^^^^^^^^^^^^^^^^
+-bif
+^^^^^^^^^^^^^^^^
+-leg
+^^^^^^^^^^^^^^^^
+-reroot
+^^^^^^^^^^^^^^^^
+-marktax
+^^^^^^^^^^^^^^^^
+-format
+^^^^^^^^^^^^^^^^

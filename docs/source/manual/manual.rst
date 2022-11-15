@@ -248,7 +248,7 @@ Add **'-pfam'** flag to the command line to run PfamScan to search domain inform
 Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.
 
-Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'**[active sites] can be used to spicify a e-value and to enable active site functionality
+Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'** [active sites] can be used to spicify a e-value and to enable active site functionality 
 in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.
 
@@ -501,7 +501,7 @@ For example:
 Correspondingly, if there are local sequence in the input file, pleas ensure that the full organism is attached.
 
 Besides annotate taxonomic information on the tree image, EPTA is also capable to color tree branches depends on taxonomic
-rank by adding **-marktax** in the command line. 
+rank by adding **-marktax** in the command line.
 
 **Annotate Domain**
 
