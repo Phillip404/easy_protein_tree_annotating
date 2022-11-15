@@ -1,7 +1,7 @@
 import os
 import logging
 import argparse
-from global_var import args
+from .global_var import args
 import time
 
 args = args()
@@ -112,9 +112,7 @@ def check_info():
 
 def check_point():
     outfile = args.outfile.rstrip() + '00_Parsed_Fasta'
-    if args.remake:
-        new_start = 'ete3'
-    elif os.path.isdir(outfile) or os.path.isfile(outfile):
+    if os.path.isdir(outfile) or os.path.isfile(outfile):
         while True:
             # if continue, delete all file with open('a') property
             check = input('Output directory is existed, do you want to read check point? (Y/N) : ')

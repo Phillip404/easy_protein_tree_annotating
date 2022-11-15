@@ -6,7 +6,7 @@ import pandas as pd
 import os
 import logging
 import argparse
-from global_var import args
+from .global_var import args
 import time
 
 
@@ -167,10 +167,9 @@ def ete3_drawing():
                       i += 1
 
             # annotate domains
-            if args.dom or args.pfam:
+            if args.dom:
                 global pfam_df
-                pfam_path = args.outfile.rstrip(args.delim) + args.delim + '00_Parsed_Fasta' + args.delim + 'pfamscan_details.tsv'
-                pfam_df = pd.read_csv(pfam_path, sep='\t')
+                pfam_df = pd.read_csv('pfamscan_details.tsv', sep='\t')
 
                 # the order of domain list based on times that a domain shows in all proteins
                 domain_list = check_domain_times()

@@ -1,0 +1,2 @@
+[console_scripts]
+epta = standalone.main:run_epta

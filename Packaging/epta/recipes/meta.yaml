@@ -1,0 +1,40 @@
+{% set name = "epta" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../
+
+build:
+  noarch: generic
+  number: 0
+  script: {{ PYTHON }} setup.py install
+  preserve_egg_dir: True
+
+requirements:
+  build:
+    - numpy >=1.17,<=1.24.3
+    - python >3.8,<3.9
+    - setuptools >=59.8,<=65.5.0
+  host:
+    - numpy >=1.17,<=1.24.3
+    - python >3.8,<3.9
+    - setuptools >=59.8,<=65.5.0
+    - perl-json
+    - perl-json-xs
+  run:
+    - python >3.8,<3.9
+    - biopython 1.79
+    - pandas 1.2.3
+    - pfam_scan 1.6
+    - muscle 3.8.1551
+    - mafft 7.310
+    - trimal 1.4.1
+    - iqtree 2.2.0_beta
+    - ete3 3.1.2
+    - requests 2.28.1
+    - perl-json
+    - perl-json-xs

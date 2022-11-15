@@ -1,0 +1,32 @@
+{% set name = "epta-lite" %}
+{% set version = "1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  path: ../
+
+build:
+  number: 0
+  script:
+    {{ PYTHON }} setup.py install
+  preserve_egg_dir: True
+  noarch: generic
+
+requirements:
+  build:
+    - numpy >=1.17,<=1.24.3
+    - python >3.8,<3.9
+    - setuptools >=59.8,<=65.5.0
+  host:
+    - numpy >=1.17,<=1.24.3
+    - python >3.8,<3.9
+    - setuptools >=59.8,<=65.5.0
+  run:
+    - python >3.8,<3.9
+    - biopython 1.79
+    - pandas 1.2.3
+    - ete3 3.1.2
+    - requests 2.28.1

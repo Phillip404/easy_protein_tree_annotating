@@ -1,26 +1,35 @@
 Download
 ========
 
-Install EPTA from command line
+Install EPTA
 ------------------------------
 
-You can install EPTA easily from PIPL or Annaconda
-
-  **Full version**
+Standalone Version (Linux):
 
   .. code-block:: bash
 
-    -conda create -n run_epta python=3.8
-    -conda activate run_epta
-    -conda install epta
+    conda create -n epta python=3.8
+    conda activate epta
+    conda install -c phillip404 epta -y
 
-  **Lite version**
+Lite version:
+
+  **Linux & MacOS**
 
   .. code-block:: bash
 
-    -conda create -n run_epta_lite python=3.8
-    -conda activate run_epta_lite
-    -conda install epta_lite
+    conda create -n epta-lite python=3.8
+    conda activate epta-lite
+    conda install -c phillip404 epta-lite -y
+
+  **Windows**
+
+  .. code-block:: bash
+
+    conda create -n epta-lite python=3.8
+    conda activate epta-lite
+    conda install -c phillip404 epta-lite --only-deps -y
+    
 
 Download EPTA manually:
 --------------------------

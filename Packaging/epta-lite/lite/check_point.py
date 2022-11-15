@@ -1,7 +1,7 @@
 import os
 import logging
 import argparse
-from global_var import args
+from .global_var import args
 import time
 
 args = args()
