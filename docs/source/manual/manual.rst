@@ -241,14 +241,12 @@ Run PfamScan
 
 EPTA introduced PfamScan to allow users annotate protein domains on the tree.
 
-Add **'-dom'** flag to the command line to enable domain annotating.
-
-Add **'-pfam'** flag to the command line to run PfamScan to search domain information.
+Add **'-pfam'** flag to the command line to run PfamScan and enable domain annotating.
 
 Pfamscan search can provide name, accession number, hit sequence, envelope, e-value, bit score, and active site of a protein domain.
 Which is a recommended way to obtain protein domain information.
 
-Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'** [active sites] can be used to spicify a e-value and to enable active site functionality 
+Alongside **'-pfam'** flag, **'-pev [E-value]'** and **'-pas'** [active sites] can be used to spicify a e-value and to enable active site functionality
 in Pfamscan search. Meanwhile, both shortened domain data in the dataframe and a human-readable tsv file will be automatically generated after a
 Pfamscan search in order to provide detailed information of protein domains.
 
@@ -275,7 +273,7 @@ temporarily banned).
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -pev 10 -pas -em test@example.com
+    epta -i ./fasta_files -o ./test -tax -name -pfam -pev 10 -pas -em test@example.com
 
 .. Caution::
   According to the rule of the Pfamscan web service, one can submit at most 3000 sequences in a maximum of 30 batch jobs when using the Lite version.
@@ -308,7 +306,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft
+  epta -i ./fasta_files -o ./test -tax -name -pfam -mafft
 
 There are also several command line flags for changing paramters of MAFFT:
 
@@ -320,7 +318,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -matrix bl62
+    epta -i ./fasta_files -o ./test -tax -name -pfam -mafft -matrix bl62
 
   **Opening Score And Extension Score**
   Commnad line flag of opening score setting is **'-op [Number]'**, identical to the command
@@ -333,7 +331,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -op 1.53 -ep 0.123
+    epta -i ./fasta_files -o ./test -tax -name -pfam -mafft -op 1.53 -ep 0.123
 
 
   **Tree Rebuilding Number**
@@ -346,7 +344,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -retree 2
+    epta -i ./fasta_files -o ./test -tax -name  -pfam -em test@example.com -mafft -retree 2
 
   **Max Iterate Number**
 
@@ -357,7 +355,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -maxiterate 2
+    epta -i ./fasta_files -o ./test -tax -name  -pfam -em test@example.com -mafft -maxiterate 2
 
   **Fast Fourier Transform Algorithm**
 
@@ -371,7 +369,7 @@ There are also several command line flags for changing paramters of MAFFT:
 
   .. code-block:: bash
 
-    epta -i ./fasta_files -o ./test -tax -name -dom -pfam -em test@example.com -mafft -ffts localpair
+    epta -i ./fasta_files -o ./test -tax -name  -pfam -em test@example.com -mafft -ffts localpair
 
 
 MUSCLE
@@ -386,7 +384,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -muscle
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -muscle
 
 trimAl
 ^^^^^^^^^^^
@@ -407,7 +405,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -tmod automated1
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -tmod automated1
 
 **Remove Spurious Sequences**
 
@@ -422,7 +420,7 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -rmss 0.75/80
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -rmss 0.75/80
 
 Make a tree from alignment file
 -------------------------------
@@ -450,9 +448,9 @@ Command-line example:
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod LG+I+G4
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod LG+I+G4
 
 **Bootstrap**
 EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
@@ -461,7 +459,7 @@ value set as 1000.
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000
 
 **Reduce Runtime**
 To reduce runtime and computational burden, EPTA introduced **-rcluster [percentage]** flag, which implements
@@ -472,7 +470,7 @@ is turned off in the default setting.
 
 .. code-block:: bash
 
-  epta -i ./fasta_files -o ./test -tax -name -dom -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
 
 **Tree Optimize**
 
@@ -576,15 +574,11 @@ Search for taxonomy information for each sequence in Entrenz database.
 
 Search for protein name for each sequence in Entrenz database.
 
--dom
-^^^^^^^^^^^^^^^^
-
-Annotate protein domians on the tree.
 
 -pfam
 ^^^^^^^^^^^^^^^^
 
-Run Pfamsacn (domain prediction) for each sequence.
+Run Pfamsacn (domain prediction) for each sequence and then annotate protein domians on the tree.
 
 -pev [E-value]
 ^^^^^^^^^^^^^^^^

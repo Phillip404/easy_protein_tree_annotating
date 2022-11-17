@@ -54,7 +54,7 @@ Lite version:
     conda install -c phillip404 epta-lite --only-deps -y
     pip install https://github.com/Phillip404/easy_protein_tree_annotating/raw/main/Packaging/Windows/epta-lite-1.0.tar.gz
 
-Standalone Version For Windows (>=Windows 10):
+Standalone Version For Windows 10 or Higher:
 --------------------------
 
 Windows 10 and higher supports Linux subsystem, thus a standalone version could be run under such
@@ -73,21 +73,31 @@ a subsystem on Windows platform:
       3. Install **Xserver** in **full mode**
       4. Open **Xlaunch** set it as following:
 
+        STEP 1:
+
         .. image:: ../pics/xs1.png
           :width: 450
           :alt: Alternative text
 
+
+        STEP 2:
 
         .. image:: ../pics/xs2.png
           :width: 450
           :alt: Alternative text
 
 
+        STEP 3:
+
         .. image:: ../pics/xs3.png
           :width: 450
           :alt: Alternative text
+        .. note::
+          It is crucial to pick the option **Disable access control** in this step.
 
 
+        STEP 4:
+        
         .. image:: ../pics/xs4.png
           :width: 450
           :alt: Alternative text

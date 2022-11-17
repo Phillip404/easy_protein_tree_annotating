@@ -114,6 +114,7 @@ def check_point():
     outfile = args.outfile.rstrip() + '00_Parsed_Fasta'
     if args.remake:
         new_start = 'ete3'
+        return(new_start)
     elif os.path.isdir(outfile) or os.path.isfile(outfile):
         while True:
             # if continue, delete all file with open('a') property

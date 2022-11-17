@@ -167,7 +167,7 @@ def ete3_drawing():
                       i += 1
 
             # annotate domains
-            if args.dom or args.pfam:
+            if args.pfam:
                 global pfam_df
                 pfam_path = args.outfile.rstrip(args.delim) + args.delim + '00_Parsed_Fasta' + args.delim + 'pfamscan_details.tsv'
                 pfam_df = pd.read_csv(pfam_path, sep='\t')
@@ -288,7 +288,7 @@ def ete3_drawing():
         t.set_outgroup(ancestor)
 
     # add legend face
-    if args.dom and args.leg:
+    if args.pfam and args.leg:
         # print(domain_list)
         if len(domain_list) >= 10:
             lgd_elem = 10
