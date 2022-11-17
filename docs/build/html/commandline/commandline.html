@@ -1,0 +1,342 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Commandline Reference &#8212; Easy Protein Tree Annotating  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bizstyle.css" />
+    
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Manual" href="../manual/manual.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../manual/manual.html" title="Manual"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Easy Protein Tree Annotating  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Commandline Reference</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="commandline-reference">
+<h1>Commandline Reference<a class="headerlink" href="#commandline-reference" title="Permalink to this headline">¶</a></h1>
+<section id="general">
+<h2>General<a class="headerlink" href="#general" title="Permalink to this headline">¶</a></h2>
+<section id="i-file-or-path">
+<h3>-i [file or path]<a class="headerlink" href="#i-file-or-path" title="Permalink to this headline">¶</a></h3>
+<p>Specify input file in normal, gunzip, or tar.gz, or a path includes all needed input files.</p>
+</section>
+<section id="o-file-or-path">
+<h3>-o [file or path]<a class="headerlink" href="#o-file-or-path" title="Permalink to this headline">¶</a></h3>
+<p>Specify output path.</p>
+</section>
+<section id="em-email-address">
+<h3>-em [email address]<a class="headerlink" href="#em-email-address" title="Permalink to this headline">¶</a></h3>
+<p>Email address that you want receive potential information from web tools.</p>
+</section>
+<section id="standalone">
+<h3>-standalone<a class="headerlink" href="#standalone" title="Permalink to this headline">¶</a></h3>
+<p>Run standalone mode. (Only for standalone version)</p>
+</section>
+<section id="lite">
+<h3>-lite<a class="headerlink" href="#lite" title="Permalink to this headline">¶</a></h3>
+<p>Run lite mode. (Only for standalone version)</p>
+</section>
+<section id="test">
+<h3>-test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h3>
+<p>Run test mode.</p>
+</section>
+<section id="redo">
+<h3>-redo<a class="headerlink" href="#redo" title="Permalink to this headline">¶</a></h3>
+<p>Skip manually confirm for check point checking, automatically rerun the full pipeline.</p>
+</section>
+<section id="remake">
+<h3>-remake<a class="headerlink" href="#remake" title="Permalink to this headline">¶</a></h3>
+<p>According to exsisting output file, remake the tree image only.</p>
+</section>
+</section>
+<section id="parse-fasta">
+<h2>Parse FASTA<a class="headerlink" href="#parse-fasta" title="Permalink to this headline">¶</a></h2>
+<section id="dh">
+<h3>-dh<a class="headerlink" href="#dh" title="Permalink to this headline">¶</a></h3>
+<p>Keep duplicate headers.</p>
+</section>
+<section id="tax">
+<h3>-tax<a class="headerlink" href="#tax" title="Permalink to this headline">¶</a></h3>
+<p>Search for taxonomy information for each sequence in Entrenz database.</p>
+</section>
+<section id="name">
+<h3>-name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p>Search for protein name for each sequence in Entrenz database.</p>
+</section>
+<section id="pfam">
+<h3>-pfam<a class="headerlink" href="#pfam" title="Permalink to this headline">¶</a></h3>
+<p>Run Pfamsacn (domain prediction) for each sequence and then annotate protein domians on the tree.</p>
+</section>
+<section id="pev-e-value">
+<h3>-pev [E-value]<a class="headerlink" href="#pev-e-value" title="Permalink to this headline">¶</a></h3>
+<p>E-value of Pfamscan search.</p>
+<blockquote>
+<div><p><strong>Avaliable E-value</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">50</span>
+<span class="mi">20</span>
+<span class="mi">10</span>
+<span class="mi">5</span>
+<span class="mi">2</span>
+<span class="mi">1</span>
+<span class="mf">0.1</span>
+<span class="mf">0.01</span>
+<span class="mf">0.001</span>
+<span class="mf">0.0001</span>
+<span class="mf">1e-5</span>
+<span class="mf">1e-10</span>
+<span class="mf">1e-50</span>
+<span class="mf">1e-100</span>
+<span class="mf">1e-300</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="pas">
+<h3>-pas<a class="headerlink" href="#pas" title="Permalink to this headline">¶</a></h3>
+<p>Enable active sites prediction in Pfamscan.</p>
+</section>
+</section>
+<section id="make-alignment">
+<h2>Make alignment<a class="headerlink" href="#make-alignment" title="Permalink to this headline">¶</a></h2>
+<section id="mafft">
+<h3>-mafft<a class="headerlink" href="#mafft" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matrix">
+<h3>-matrix<a class="headerlink" href="#matrix" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="op">
+<h3>-op<a class="headerlink" href="#op" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ep">
+<h3>-ep<a class="headerlink" href="#ep" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="retree">
+<h3>-retree<a class="headerlink" href="#retree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="maxiterate">
+<h3>-maxiterate<a class="headerlink" href="#maxiterate" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ffts">
+<h3>-ffts<a class="headerlink" href="#ffts" title="Permalink to this headline">¶</a></h3>
+<section id="muscle">
+<h4>MUSCLE<a class="headerlink" href="#muscle" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="id1">
+<h3>-muscle<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<section id="trimal">
+<h4>trimAl<a class="headerlink" href="#trimal" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="id2">
+<h3>-trimal<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tmod">
+<h3>-tmod<a class="headerlink" href="#tmod" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rmss">
+<h3>-rmss<a class="headerlink" href="#rmss" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="make-phylogenetic-tree">
+<h2>Make phylogenetic tree<a class="headerlink" href="#make-phylogenetic-tree" title="Permalink to this headline">¶</a></h2>
+<section id="iqtree">
+<h3>-iqtree<a class="headerlink" href="#iqtree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="iqmod">
+<h3>-iqmod<a class="headerlink" href="#iqmod" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="boots">
+<h3>-boots<a class="headerlink" href="#boots" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rcluster">
+<h3>-rcluster<a class="headerlink" href="#rcluster" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mtree">
+<h3>-mtree<a class="headerlink" href="#mtree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bnni">
+<h3>-bnni<a class="headerlink" href="#bnni" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tree-annotating">
+<h2>Tree Annotating<a class="headerlink" href="#tree-annotating" title="Permalink to this headline">¶</a></h2>
+<section id="xzoom">
+<h3>-xzoom<a class="headerlink" href="#xzoom" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="yzoom">
+<h3>-yzoom<a class="headerlink" href="#yzoom" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bs">
+<h3>-bs<a class="headerlink" href="#bs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bl">
+<h3>-bl<a class="headerlink" href="#bl" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bif">
+<h3>-bif<a class="headerlink" href="#bif" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="leg">
+<h3>-leg<a class="headerlink" href="#leg" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reroot">
+<h3>-reroot<a class="headerlink" href="#reroot" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="marktax">
+<h3>-marktax<a class="headerlink" href="#marktax" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="format">
+<h3>-format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Commandline Reference</a><ul>
+<li><a class="reference internal" href="#general">General</a><ul>
+<li><a class="reference internal" href="#i-file-or-path">-i [file or path]</a></li>
+<li><a class="reference internal" href="#o-file-or-path">-o [file or path]</a></li>
+<li><a class="reference internal" href="#em-email-address">-em [email address]</a></li>
+<li><a class="reference internal" href="#standalone">-standalone</a></li>
+<li><a class="reference internal" href="#lite">-lite</a></li>
+<li><a class="reference internal" href="#test">-test</a></li>
+<li><a class="reference internal" href="#redo">-redo</a></li>
+<li><a class="reference internal" href="#remake">-remake</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parse-fasta">Parse FASTA</a><ul>
+<li><a class="reference internal" href="#dh">-dh</a></li>
+<li><a class="reference internal" href="#tax">-tax</a></li>
+<li><a class="reference internal" href="#name">-name</a></li>
+<li><a class="reference internal" href="#pfam">-pfam</a></li>
+<li><a class="reference internal" href="#pev-e-value">-pev [E-value]</a></li>
+<li><a class="reference internal" href="#pas">-pas</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-alignment">Make alignment</a><ul>
+<li><a class="reference internal" href="#mafft">-mafft</a></li>
+<li><a class="reference internal" href="#matrix">-matrix</a></li>
+<li><a class="reference internal" href="#op">-op</a></li>
+<li><a class="reference internal" href="#ep">-ep</a></li>
+<li><a class="reference internal" href="#retree">-retree</a></li>
+<li><a class="reference internal" href="#maxiterate">-maxiterate</a></li>
+<li><a class="reference internal" href="#ffts">-ffts</a><ul>
+<li><a class="reference internal" href="#muscle">MUSCLE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">-muscle</a><ul>
+<li><a class="reference internal" href="#trimal">trimAl</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">-trimal</a></li>
+<li><a class="reference internal" href="#tmod">-tmod</a></li>
+<li><a class="reference internal" href="#rmss">-rmss</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-phylogenetic-tree">Make phylogenetic tree</a><ul>
+<li><a class="reference internal" href="#iqtree">-iqtree</a></li>
+<li><a class="reference internal" href="#iqmod">-iqmod</a></li>
+<li><a class="reference internal" href="#boots">-boots</a></li>
+<li><a class="reference internal" href="#rcluster">-rcluster</a></li>
+<li><a class="reference internal" href="#mtree">-mtree</a></li>
+<li><a class="reference internal" href="#bnni">-bnni</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tree-annotating">Tree Annotating</a><ul>
+<li><a class="reference internal" href="#xzoom">-xzoom</a></li>
+<li><a class="reference internal" href="#yzoom">-yzoom</a></li>
+<li><a class="reference internal" href="#bs">-bs</a></li>
+<li><a class="reference internal" href="#bl">-bl</a></li>
+<li><a class="reference internal" href="#bif">-bif</a></li>
+<li><a class="reference internal" href="#leg">-leg</a></li>
+<li><a class="reference internal" href="#reroot">-reroot</a></li>
+<li><a class="reference internal" href="#marktax">-marktax</a></li>
+<li><a class="reference internal" href="#format">-format</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../manual/manual.html"
+                        title="previous chapter">Manual</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/commandline/commandline.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../manual/manual.html" title="Manual"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Easy Protein Tree Annotating  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Commandline Reference</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Xuran Zhao.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.2.
+    </div>
+  </body>
+</html>

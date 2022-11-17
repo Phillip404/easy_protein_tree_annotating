@@ -287,6 +287,19 @@ def ete3_drawing():
         ancestor = t.get_common_ancestor(A,B)
         t.set_outgroup(ancestor)
 
+    ts = TreeStyle()
+    ts.layout_fn = mylayout
+    # ts.show_leaf_name = False
+
+    if args.bl:
+        ts.show_branch_length = True
+
+    if args.bs:
+        ts.show_branch_support = True
+
+    ts.scale = 750*args.xzoom
+    ts.branch_vertical_margin = 15*args.yzoom
+
     # add legend face
     if args.pfam and args.leg:
         # print(domain_list)
@@ -300,18 +313,6 @@ def ete3_drawing():
             ts.legend.add_face(TextFace(domain_list[q]), column=1)
         ts.legend_position = 4
 
-    ts = TreeStyle()
-    ts.layout_fn = mylayout
-    # ts.show_leaf_name = False
-
-    if args.bl:
-        ts.show_branch_length = True
-
-    if args.bs:
-        ts.show_branch_support = True
-
-    ts.scale = 750*args.xzoom
-    ts.branch_vertical_margin = 15*args.yzoom
     # render the tree
     # image_path = path + ''.join(''.join(args.infile.split('/')[-1]).split('.')[:-1]) + '.png'
     image_path = path + 'tree_image.%s' % str(args.format).lower()

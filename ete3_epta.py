@@ -287,19 +287,6 @@ def ete3_drawing():
         ancestor = t.get_common_ancestor(A,B)
         t.set_outgroup(ancestor)
 
-    # add legend face
-    if args.pfam and args.leg:
-        # print(domain_list)
-        if len(domain_list) >= 10:
-            lgd_elem = 10
-        elif len(domain_list) < 10:
-            lgd_elem =  len(domain_list)
-        for q in range (0,lgd_elem):
-            # ts.legend.add_face(RectFace(width=ts.scale*2, fgcolor=color_list[q], bgcolor=color_list[q], column=0, row=q))
-            ts.legend.add_face(RectFace(width=ts.scale/4, height=ts.scale/40, fgcolor=color_list[q], bgcolor=color_list[q]), column=0)
-            ts.legend.add_face(TextFace(domain_list[q]), column=1)
-        ts.legend_position = 4
-
     ts = TreeStyle()
     ts.layout_fn = mylayout
     # ts.show_leaf_name = False
@@ -312,6 +299,20 @@ def ete3_drawing():
 
     ts.scale = 750*args.xzoom
     ts.branch_vertical_margin = 15*args.yzoom
+
+    # add legend face
+    if args.pfam and args.leg:
+        # print(domain_list)
+        if len(domain_list) >= 10:
+            lgd_elem = 10
+        elif len(domain_list) < 10:
+            lgd_elem =  len(domain_list)
+        for q in range (0,lgd_elem):
+            # ts.legend.add_face(RectFace(width=ts.scale*2, fgcolor=color_list[q], bgcolor=color_list[q], column=0, row=q))
+            ts.legend.add_face(RectFace(width=ts.scale/4, height=ts.scale/40, fgcolor=color_list[q], bgcolor=color_list[q]), column=0)
+            ts.legend.add_face(TextFace(domain_list[q]), column=1)
+        ts.legend_position = 4
+        
     # render the tree
     # image_path = path + ''.join(''.join(args.infile.split('/')[-1]).split('.')[:-1]) + '.png'
     image_path = path + 'tree_image.%s' % str(args.format).lower()

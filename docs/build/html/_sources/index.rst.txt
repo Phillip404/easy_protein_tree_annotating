@@ -25,13 +25,28 @@ Download
 
    download/download
 
+Quick Start
+------------
+Play with EPTA:
+
+.. toctree::
+   :maxdepth: 2
+
+   manual/quickstart
 
 Manual
 ------------
-
 Learn how to use EPTA:
 
 .. toctree::
    :maxdepth: 3
 
    manual/manual
+
+Commandline Reference
+------------
+
+.. toctree::
+  :maxdepth: 1
+
+  manual/commandline
