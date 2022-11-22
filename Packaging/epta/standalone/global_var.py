@@ -58,7 +58,7 @@ def args():
     ########################################
 
     # check os platform
-    if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         delimiter  = '/'
     elif sys.platform.startswith('win32') and args.standalone:
         print('Running Standalone Mode detected, only Lite Mode supported on Windows.')
@@ -67,6 +67,8 @@ def args():
         args.lite = True
     elif sys.platform.startswith('win32'):
         delimiter  = '\\'
+    else:
+        delimiter  = '/'
     args.delim = delimiter
 
 

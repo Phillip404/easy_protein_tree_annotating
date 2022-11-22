@@ -15,6 +15,88 @@ build:
   preserve_egg_dir: True
 
 requirements:
+  # build:
+  #   - _libgcc_mutex 0.1 conda_forge
+  #   - _openmp_mutex 4.5 2_gnu
+  #   - bzip2 1.0.8 h7f98852_4
+  #   - ca-certificates 2022.9.24 ha878542_0
+  #   - ld_impl_linux-64 2.39 hc81fddc_0
+  #   - libblas 3.9.0 16_linux64_openblas
+  #   - libcblas 3.9.0 16_linux64_openblas
+  #   - libffi 3.4.2 h7f98852_5
+  #   - libgcc-ng 12.2.0 h65d4601_19
+  #   - libgfortran-ng 12.2.0 h69a702a_19
+  #   - libgfortran5 12.2.0 h337968e_19
+  #   - libgomp 12.2.0 h65d4601_19
+  #   - liblapack 3.9.0 16_linux64_openblas
+  #   - libnsl 2.0.0 h7f98852_0
+  #   - libopenblas 0.3.21 pthreads_h78a6416_3
+  #   - libsqlite 3.39.4 h753d276_0
+  #   - libstdcxx-ng 12.2.0 h46fd767_19
+  #   - libuuid 2.32.1 h7f98852_1000
+  #   - libzlib 1.2.13 h166bdaf_4
+  #   - ncurses 6.3 h27087fc_1
+  #   - numpy 1.23.4 py38h7042d01_1
+  #   - openssl 3.0.7 h166bdaf_0
+  #   - pip 22.3.1 pyhd8ed1ab_0
+  #   - python 3.8.13 ha86cf86_0_cpython
+  #   - python_abi 3.8 2_cp38
+  #   - readline 8.1.2 h0f457ee_0
+  #   - setuptools 65.5.0 pyhd8ed1ab_0
+  #   - sqlite 3.39.4 h4ff8645_0
+  #   - tk 8.6.12 h27826a3_0
+  #   - wheel 0.38.4 pyhd8ed1ab_0
+  #   - xz 5.2.6 h166bdaf_0
+  # host:
+  #   - _libgcc_mutex 0.1 conda_forge
+  #   - _openmp_mutex 4.5 2_gnu
+  #   - bzip2 1.0.8 h7f98852_4
+  #   - ca-certificates 2022.9.24 ha878542_0
+  #   - ld_impl_linux-64 2.39 hc81fddc_0
+  #   - libblas 3.9.0 16_linux64_openblas
+  #   - libcblas 3.9.0 16_linux64_openblas
+  #   - libffi 3.4.2 h7f98852_5
+  #   - libgcc-ng 12.2.0 h65d4601_19
+  #   - libgfortran-ng 12.2.0 h69a702a_19
+  #   - libgfortran5 12.2.0 h337968e_19
+  #   - libgomp 12.2.0 h65d4601_19
+  #   - liblapack 3.9.0 16_linux64_openblas
+  #   - libnsl 2.0.0 h7f98852_0
+  #   - libopenblas 0.3.21 pthreads_h78a6416_3
+  #   - libsqlite 3.39.4 h753d276_0
+  #   - libstdcxx-ng 12.2.0 h46fd767_19
+  #   - libuuid 2.32.1 h7f98852_1000
+  #   - libzlib 1.2.13 h166bdaf_4
+  #   - ncurses 6.3 h27087fc_1
+  #   - numpy 1.23.4 py38h7042d01_1
+  #   - openssl 3.0.7 h166bdaf_0
+  #   - perl 5.32.1 2_h7f98852_perl5
+  #   - perl-common-sense 3.75 pl5321hd8ed1ab_0
+  #   - perl-json 4.10 pl5321hdfd78af_0
+  #   - perl-json-xs 2.34 pl5321h9f5acd7_5
+  #   - perl-types-serialiser 1.01 pl5321hdfd78af_0
+  #   - pip 22.3.1 pyhd8ed1ab_0
+  #   - python 3.8.13 ha86cf86_0_cpython
+  #   - python_abi 3.8 2_cp38
+  #   - readline 8.1.2 h0f457ee_0
+  #   - setuptools 65.5.0 pyhd8ed1ab_0
+  #   - sqlite 3.39.4 h4ff8645_0
+  #   - tk 8.6.12 h27826a3_0
+  #   - wheel 0.38.4 pyhd8ed1ab_0
+  #   - xz 5.2.6 h166bdaf_0
+  run:
+    - python 3.8.13 ha86cf86_0_cpython
+    - biopython 1.79 py38h0a891b7_3
+    - pandas 1.2.3 py38ha9443f7_0
+    - pfam_scan 1.6 pl5.22.0_0
+    - muscle 3.8.1551 h7d875b9_6
+    - mafft 7.310 h87f3376_5
+    - trimal 1.4.1 h9f5acd7_6
+    - iqtree 2.2.0_beta hb97b32f_1
+    - ete3 3.1.2 pyh9f0ad1d_0
+    - requests 2.28.1 pyhd8ed1ab_1
+    - perl-json 2.90 1
+    - perl-json-xs 2.34 0
   build:
     - numpy >=1.17,<=1.24.3
     - python >3.8,<3.9
@@ -25,16 +107,16 @@ requirements:
     - setuptools >=59.8,<=65.5.0
     - perl-json
     - perl-json-xs
-  run:
-    - python >3.8,<3.9
-    - biopython 1.79
-    - pandas 1.2.3
-    - pfam_scan 1.6
-    - muscle 3.8.1551
-    - mafft 7.310
-    - trimal 1.4.1
-    - iqtree 2.2.0_beta
-    - ete3 3.1.2
-    - requests 2.28.1
-    - perl-json
-    - perl-json-xs
+  # run:
+  #   - python >3.8,<3.9
+  #   - biopython 1.79
+  #   - pandas 1.2.3
+  #   - pfam_scan 1.6
+  #   - muscle 3.8.1551
+  #   - mafft 7.310
+  #   - trimal 1.4.1
+  #   - iqtree 2.2.0_beta
+  #   - ete3 3.1.2
+  #   - requests 2.28.1
+  #   - perl-json
+  #   - perl-json-xs
