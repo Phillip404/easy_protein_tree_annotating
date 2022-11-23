@@ -33,6 +33,7 @@ Standalone Version (**Linux**):
 
     conda create -n epta python=3.8
     conda activate epta
+    conda config --set channel_priority flexible
     conda install -c phillip404 epta -y
 
 Lite version:
@@ -43,14 +44,16 @@ Lite version:
 
     conda create -n epta-lite python=3.8
     conda activate epta-lite
+    conda config --set channel_priority flexible
     conda install -c phillip404 epta-lite -y
 
   **Windows (>=Windows 10)**
 
   .. code-block:: bash
 
-    conda create -n epta-lite python=3.8
+    conda create -n epta-lite python==3.8.13
     conda activate epta-lite
+    conda config --set channel_priority flexible
     conda install -c phillip404 epta-lite --only-deps -y
     pip install https://github.com/Phillip404/easy_protein_tree_annotating/raw/main/Packaging/Windows/epta-lite-1.0.tar.gz
 
@@ -97,7 +100,7 @@ a subsystem on Windows platform:
 
 
         STEP 4:
-        
+
         .. image:: ../pics/xs4.png
           :width: 450
           :alt: Alternative text
