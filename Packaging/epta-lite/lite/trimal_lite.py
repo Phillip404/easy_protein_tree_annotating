@@ -190,7 +190,7 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(message)s',
                             datefmt='%m-%d %H:%M',
-                            filename=args.outfile + '%slog_file.log', % (delimiter)
+                            filename=args.outfile + '%slog_file.log' % (delimiter),
                             filemode='w')
         console = logging.StreamHandler()
         console.setLevel(logging.INFO)

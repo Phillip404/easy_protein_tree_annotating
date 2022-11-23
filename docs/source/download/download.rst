@@ -51,7 +51,7 @@ Lite version:
 
   .. code-block:: bash
 
-    conda create -n epta-lite python==3.8.13
+    conda create -n epta-lite python==3.8
     conda activate epta-lite
     conda config --set channel_priority flexible
     conda install -c phillip404 epta-lite --only-deps -y
