@@ -12,6 +12,9 @@ from global_var import args
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 # #####################################TEST####################################
 # def create_log():
 #     # issue a log files
@@ -82,7 +85,7 @@ def outfile_check():
                     logging.debug ('Output directory is existed, do you want to OVERWRITE it? (Y/N) : Y')
 
                     # specify path of parsed fasta file
-                    path = args.outfile.rstrip() + '00_Parsed_Fasta/Parsed_Fasta.fasta'
+                    path = args.outfile.rstrip() + '00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter)
                     path2 = args.outfile.rstrip() + 'check_point.log'
                     # if the file exist, delete it so that a new empty one will be create later
                     # I do that because I used open(,'w+') in gz reader, it requires a empty file to write in
@@ -132,9 +135,9 @@ def load_infolder():
     # logging.info ('='*20)
     for file in files:
         # check file
-        if os.path.isfile(path + '/' + file):
+        if os.path.isfile(path + delimiter + file):
             # read file in input folder
-            load_infile(path + '/' + file)
+            load_infile(path + delimiter + file)
 
 # function reads gunzip file
 def read_gz(gzfile):
@@ -204,7 +207,7 @@ def read_fasta(fasta):
     global dataframe
 
     # create output folder and file
-    outpath = args.outfile.rstrip() + '/00_Parsed_Fasta/'
+    outpath = args.outfile.rstrip() + '%s00_Parsed_Fasta%s' % (delimiter,delimiter)
     if not os.path.exists(outpath):
         os.makedirs(outpath)
     global outfasta

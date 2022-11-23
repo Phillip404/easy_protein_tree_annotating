@@ -12,18 +12,21 @@ import time
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 def annotate_name():
     path = ''.join(args.outfile.rsplit())
-    index = path + '/info_index.tsv'
+    index = path + '%sinfo_index.tsv' % (delimiter)
     dataframe = pd.read_csv(index, sep='\t')
 
-    contree = path.rstrip('/') + '/02_Tree_File/IQ-tree.contree'
+    contree = path.rstrip(delimiter) + '%s02_Tree_File%sIQ-tree.contree' % (delimiter,delimiter)
     # folder = args.outfile.rstrip('/') + '/02_Tree_File'
     treefile = open(contree,'r')
     treefile = ''.join(treefile.readlines())
     # print(treefile)
 
-    new_treefile = open(path + '/02_Tree_File/new_IQ-tree.contree','w')
+    new_treefile = open(path + '%s02_Tree_File%snew_IQ-tree.contree' % (delimiter,delimiter),'w')
 
 
 
@@ -86,7 +89,7 @@ def ete3_drawing():
     path = ''.join(args.outfile.rsplit())
     index = path + 'info_index.tsv'
     dataframe = pd.read_csv(index, sep='\t')
-    new_tree = path + '/02_Tree_File/new_IQ-tree.contree'
+    new_tree = path + '%s02_Tree_File%snew_IQ-tree.contree' % (delimiter,delimiter)
     t = PhyloTree(new_tree)
 
     # color_list = ['LightCoral', 'Gold', 'Aquamarine', 'YellowGreen', 'Pink', 'Tan', 'Orange', 'Orchid', 'DarkSeaGreen', 'SkyBlue']
@@ -312,7 +315,7 @@ def ete3_drawing():
             ts.legend.add_face(RectFace(width=ts.scale/4, height=ts.scale/40, fgcolor=color_list[q], bgcolor=color_list[q]), column=0)
             ts.legend.add_face(TextFace(domain_list[q]), column=1)
         ts.legend_position = 4
-        
+
     # render the tree
     # image_path = path + ''.join(''.join(args.infile.split('/')[-1]).split('.')[:-1]) + '.png'
     image_path = path + 'tree_image.%s' % str(args.format).lower()

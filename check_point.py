@@ -6,6 +6,9 @@ import time
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 # #####################################TEST####################################
 # def create_log():
 #     # issue a log files
@@ -139,7 +142,7 @@ def check_point():
 def file_rmv():
     if args.redo:
         # specify path of parsed fasta file
-        path = args.outfile.rstrip() + '00_Parsed_Fasta/Parsed_Fasta.fasta'
+        path = args.outfile.rstrip() + '00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter)
         path2 = args.outfile.rstrip() + 'check_point.log'
         # if the file exist, delete it so that a new empty one will be create later
         # I do that because I used open(,'w+') in gz reader, it requires a empty file to write in

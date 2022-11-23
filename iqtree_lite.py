@@ -8,17 +8,20 @@ from global_var import args
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 def iqtree_lite():
 
     logging.info('Initializing IQ-Tree...')
 
     # define infile
-    path = ''.join(args.outfile.rsplit('/',1)) + '/01_Sequence_Alignment/'
+    path = ''.join(args.outfile.rsplit(delimiter,1)) + '%s01_Sequence_Alignment%s' % (delimiter,delimiter)
     # print(path)
 
     infile = path + 'trimAl_FASTA.fasta'
 
-    outpath = ''.join(args.outfile.rsplit('/',1)) + '/02_Tree_File/'
+    outpath = ''.join(args.outfile.rsplit(delimiter,1)) + '%s02_Tree_File%s' % (delimiter,delimiter)
     if not os.path.exists(outpath):
         os.mkdir(outpath)
 

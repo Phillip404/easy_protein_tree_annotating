@@ -33,14 +33,17 @@ import pandas as pd
 global args
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 def mafft():
     logging.info('Initializing MAFFT...')
 
     if args.infile.endswith('.fasta') or args.infile.endswith('.FASTA'):
-        args.infile = '/'.join(args.infile.replace('\\','/').split('/')[:-1])
+        args.infile = delimiter.join(args.infile.rstrip(delimiter).split(delimiter)[:-1])
 
-    in_file = args.outfile + '/00_Parsed_Fasta/Parsed_Fasta.fasta'
-    out_path = args.outfile + '/01_Sequence_Alignment/'
+    in_file = args.outfile + '%s00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter, delimiter)
+    out_path = args.outfile + '%s01_Sequence_Alignment%s' % (delimiter, delimiter)
     if not os.path.exists(out_path):
         os.makedirs(out_path)
 
@@ -132,10 +135,10 @@ def muscle():
     logging.info('Initializing Muscle...')
 
     if args.infile.endswith('.fasta') or args.infile.endswith('.FASTA'):
-        args.infile = '/'.join(args.infile.replace('\\','/').split('/')[:-1])
+        args.infile = delimiter.join(args.infile.rstrip(delimiter).split(delimiter)[:-1])
 
-    in_file = args.outfile + '/00_Parsed_Fasta/Parsed_Fasta.fasta'
-    out_path = args.outfile + '/01_Sequence_Alignment/'
+    in_file = args.outfile + '%s00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter, delimiter)
+    out_path = args.outfile + '%s01_Sequence_Alignment%s' % (delimiter, delimiter)
 
     if not os.path.exists(out_path):
         os.makedirs(out_path)
