@@ -12,18 +12,21 @@ import time
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 def annotate_name():
     path = ''.join(args.outfile.rsplit())
-    index = path + '/info_index.tsv'
+    index = path + '%sinfo_index.tsv' % (delimiter)
     dataframe = pd.read_csv(index, sep='\t')
 
-    contree = path.rstrip('/') + '/02_Tree_File/IQ-tree.contree'
+    contree = path.rstrip(delimiter) + '%s02_Tree_File%sIQ-tree.contree' % (delimiter,delimiter)
     # folder = args.outfile.rstrip('/') + '/02_Tree_File'
     treefile = open(contree,'r')
     treefile = ''.join(treefile.readlines())
     # print(treefile)
 
-    new_treefile = open(path + '/02_Tree_File/new_IQ-tree.contree','w')
+    new_treefile = open(path + '%s02_Tree_File%snew_IQ-tree.contree' % (delimiter,delimiter),'w')
 
 
 
@@ -86,7 +89,7 @@ def ete3_drawing():
     path = ''.join(args.outfile.rsplit())
     index = path + 'info_index.tsv'
     dataframe = pd.read_csv(index, sep='\t')
-    new_tree = path + '/02_Tree_File/new_IQ-tree.contree'
+    new_tree = path + '%s02_Tree_File%snew_IQ-tree.contree' % (delimiter,delimiter)
     t = PhyloTree(new_tree)
 
     # color_list = ['LightCoral', 'Gold', 'Aquamarine', 'YellowGreen', 'Pink', 'Tan', 'Orange', 'Orchid', 'DarkSeaGreen', 'SkyBlue']

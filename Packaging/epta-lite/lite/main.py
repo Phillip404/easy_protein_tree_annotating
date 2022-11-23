@@ -23,10 +23,13 @@ from .global_var import args
 global args
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 # create log file
 def create_log():
     # issue a log files
-    log_file = args.outfile + '/log_file.log'
+    log_file = args.outfile + '%slog_file.log' % (delimiter)
 
     if not os.path.exists(log_file):
         open(log_file,'a+')
@@ -167,9 +170,8 @@ def epta_lite():
     runtime = end - start
     logging.info('All proces done. Total runtime: %s second\n' % (round(runtime,2)))
 
-
 def run_epta():
-    if sys.platform.startswith('linux') or sys.platform.startswith('darwim'):
+    if sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         if args.lite:
             epta_lite()
         else:

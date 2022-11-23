@@ -8,12 +8,15 @@ from .global_var import args
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 def trimal_lite():
 
     logging.info('Initializing trimAl...')
 
     # define infile
-    path = ''.join(args.outfile.rsplit('/',1)) + '/01_Sequence_Alignment/'
+    path = ''.join(args.outfile.rsplit(delimiter,1)) + '%s01_Sequence_Alignment%s' % (delimiter,delimiter)
     # print(path)
 
     if args.muscle:
@@ -187,7 +190,7 @@ if __name__ == '__main__':
         logging.basicConfig(level=logging.DEBUG,
                             format='%(asctime)s %(message)s',
                             datefmt='%m-%d %H:%M',
-                            filename=args.outfile + '/log_file.log',
+                            filename=args.outfile + '%slog_file.log', % (delimiter)
                             filemode='w')
         console = logging.StreamHandler()
         console.setLevel(logging.INFO)

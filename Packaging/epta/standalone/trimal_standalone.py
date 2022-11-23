@@ -6,6 +6,8 @@ import time
 
 args = args()
 
+global delimiter
+delimiter = args.delim
 
 # #####################################TEST####################################
 # def create_log():
@@ -29,7 +31,7 @@ def trimAl_standalone():
     logging.info('Initializing trimAl...')
 
     # define infile
-    path = ''.join(args.outfile.rsplit('/',1)) + '/01_Sequence_Alignment/'
+    path = ''.join(args.outfile.rsplit(delimiter,1)) + '%s01_Sequence_Alignment%s' % (delimiter, delimiter)
     # print(path)
 
     if args.muscle:

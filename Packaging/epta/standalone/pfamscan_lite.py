@@ -11,6 +11,9 @@ from configparser import ConfigParser
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 # #####################################TEST####################################
 # def create_log():
 #     # issue a log files
@@ -94,7 +97,7 @@ def pfam_post(seq, email=args.email, database=None, evalue=args.pev, asp=args.pa
     except:
         logging.info ('Error: Failed to submit job to Pfamscan sequence search.')
         if len(seq.split('\n')) < 2:
-            logging.info ('Error: Please check ./00_Parsed_Fasta/Parsed_Fasta.fasta file under output path.')
+            logging.info ('Error: Please check .%s00_Parsed_Fasta%sParsed_Fasta.fasta file under output path.' % (delimiter,delimiter))
         else:
             logging.info ('Error: Unknow reason. Probably because of a bad connection to Pfamscan web service.')
         exit()
@@ -240,13 +243,13 @@ def pfam_form():
             pform = pform.append(record)
 
     # print(pform)
-    pform.to_csv(args.outfile + '00_Parsed_Fasta/pfamscan_details.tsv',sep='\t')
+    pform.to_csv(args.outfile + '00_Parsed_Fasta%spfamscan_details.tsv' % (delimiter),sep='\t')
 
 def pfam_submit(batch_list):
     global dataframe
     # print('submit')
 
-    path = args.outfile + '00_Parsed_Fasta/Parsed_Fasta.fasta'
+    path = args.outfile + '00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter)
     sequences = open(path,'r')
     # linecache.getline(sequences,2)
     sequences = sequences.readlines()

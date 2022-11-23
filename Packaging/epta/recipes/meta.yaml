@@ -84,19 +84,21 @@ requirements:
   #   - tk 8.6.12 h27826a3_0
   #   - wheel 0.38.4 pyhd8ed1ab_0
   #   - xz 5.2.6 h166bdaf_0
-  run:
-    - python 3.8.13 ha86cf86_0_cpython
-    - biopython 1.79 py38h0a891b7_3
-    - pandas 1.2.3 py38ha9443f7_0
-    - pfam_scan 1.6 pl5.22.0_0
-    - muscle 3.8.1551 h7d875b9_6
-    - mafft 7.310 h87f3376_5
-    - trimal 1.4.1 h9f5acd7_6
-    - iqtree 2.2.0_beta hb97b32f_1
-    - ete3 3.1.2 pyh9f0ad1d_0
-    - requests 2.28.1 pyhd8ed1ab_1
-    - perl-json 2.90 1
-    - perl-json-xs 2.34 0
+  #   - perl-io-tty 1.12 0
+  #   - perl-ipc-run 0.94 0
+  # run:
+  #   - python 3.8.13 ha86cf86_0_cpython
+  #   - biopython 1.79 py38h0a891b7_3
+  #   - pandas 1.2.3 py38ha9443f7_0
+  #   - pfam_scan 1.6 pl5.22.0_0
+  #   - muscle 3.8.1551 h7d875b9_6
+  #   - mafft 7.310 h87f3376_5
+  #   - trimal 1.4.1 h9f5acd7_6
+  #   - iqtree 2.2.0_beta hb97b32f_1
+  #   - ete3 3.1.2 pyh9f0ad1d_0
+  #   - requests 2.28.1 pyhd8ed1ab_1
+  #   - perl-json 2.90 1
+  #   - perl-json-xs 2.34 0
   build:
     - numpy >=1.17,<=1.24.3
     - python >3.8,<3.9
@@ -107,16 +109,20 @@ requirements:
     - setuptools >=59.8,<=65.5.0
     - perl-json
     - perl-json-xs
-  # run:
-  #   - python >3.8,<3.9
-  #   - biopython 1.79
-  #   - pandas 1.2.3
-  #   - pfam_scan 1.6
-  #   - muscle 3.8.1551
-  #   - mafft 7.310
-  #   - trimal 1.4.1
-  #   - iqtree 2.2.0_beta
-  #   - ete3 3.1.2
-  #   - requests 2.28.1
-  #   - perl-json
-  #   - perl-json-xs
+    - perl-io-tty
+    - perl-ipc-run
+  run:
+    - python >3.8,<3.9
+    - biopython 1.79
+    - pandas 1.2.3
+    - pfam_scan 1.6
+    - muscle 3.8.1551
+    - mafft 7.310
+    - trimal 1.4.1
+    - iqtree 2.2.0_beta
+    - ete3 3.1.2
+    - requests 2.28.1
+    - perl-json
+    - perl-json-xs
+    - perl-io-tty
+    - perl-ipc-run

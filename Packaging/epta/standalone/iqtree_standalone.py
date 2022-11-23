@@ -5,6 +5,9 @@ from .global_var import args
 import time
 
 args = args()
+
+global delimiter
+delimiter = args.delim
 #
 # #####################################TEST####################################
 # def create_log():
@@ -31,10 +34,10 @@ def iqtree_standalone():
     # define file path
     path = ''.join(args.outfile.rsplit())
     # print(path)
-    infile = path + '/01_Sequence_Alignment/trimAl_FASTA.fasta'
+    infile = path + '%s01_Sequence_Alignment%strimAl_FASTA.fasta' % (delimiter,delimiter)
     # outfile = path + '01_Sequence_Alignment/Alignment_MAFFT.fasta'
-    prefix = path + '/02_Tree_File/IQ-tree'
-    outfolder = path + '/02_Tree_File/'
+    prefix = path + '%s02_Tree_File%sIQ-tree' % (delimiter, delimiter)
+    outfolder = path + '%s02_Tree_File%s' (delimiter, delimiter)
     if not os.path.exists(outfolder):
         os.mkdir(outfolder)
 
@@ -98,8 +101,8 @@ def iqtree_standalone():
     runtime = end - start
     logging.info('IQ-tree processing done. Runtime: %s second\n' % (round(runtime,2)))
 
-    check_point = path + '/check_point.log'
-    file_check = outfolder + '/IQ-tree.contree'
+    check_point = path + '%scheck_point.log' % (delimiter)
+    file_check = outfolder + '%sIQ-tree.contree' % (delimiter)
     with open(check_point, mode='a+') as check_point:
         record = ''.join(check_point.readlines())
         if record.find('iqtree') == -1 and os.path.exists(file_check) and os.path.getsize(file_check) >= 1:

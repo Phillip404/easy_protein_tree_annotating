@@ -9,6 +9,9 @@ import pandas as pd
 
 args = args()
 
+global delimiter
+delimiter = args.delim
+
 # #####################################TEST####################################
 # def create_log():
 #     # issue a log files
@@ -126,17 +129,17 @@ def pfam_form():
             pform = pform.append(record)
 
     # print(pform)
-    pform.to_csv(args.outfile + '/00_Parsed_Fasta/pfamscan_details.tsv',sep='\t')
+    pform.to_csv(args.outfile + '%s00_Parsed_Fasta%spfamscan_details.tsv',sep='\t') % (delimiter, delimiter)
 
 def run_pfamscan():
     logging.info('Initializing PfamScan...')
 
     # define file path
-    path = ''.join(args.outfile.rsplit('/',1))
+    path = ''.join(args.outfile.rsplit(delimiter,1))
     # print(path)
-    infile = path + '/00_Parsed_Fasta/Parsed_Fasta.fasta'
+    infile = path + '%s00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter, delimiter)
     # outfile = path + '01_Sequence_Alignment/Alignment_MAFFT.fasta'
-    outfile = path + '/00_Parsed_Fasta/pfamscan_json.json'
+    outfile = path + '%s00_Parsed_Fasta%spfamscan_json.json' % (delimiter, delimiter)
 
     delimiter = args.delim
 
@@ -179,7 +182,7 @@ def run_pfamscan():
     start = time.perf_counter()
     os.system('pfam_scan.pl -fasta %s -dir %s -outfile %s -json -e_dom %s -e_seq %s%s > %s'  % (infile, pdata_path, outfile, args.pev, args.pev, active_sites, outfile))
     with open(outfile,'r') as result:
-        # read json
+        # read json # require perl-json package
         # print(dir(result))
         # print(result.readlines)
         result = json.load(result)

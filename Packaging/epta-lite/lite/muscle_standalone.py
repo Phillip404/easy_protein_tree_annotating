@@ -5,6 +5,10 @@ from .global_var import args
 import time
 
 args = args()
+
+global delimiter
+delimiter = args.delim
+
 #
 # #####################################TEST####################################
 # def create_log():
@@ -39,10 +43,10 @@ def muscle_standalone():
     path = ''.join(args.outfile.rsplit())
     print(path)
     # print(path)
-    infile = path + '/00_Parsed_Fasta/Parsed_Fasta.fasta'
+    infile = path + '%s00_Parsed_Fasta%sParsed_Fasta.fasta' % (delimiter, delimiter)
     # outfile = path + '01_Sequence_Alignment/Alignment_Muscle.fasta'
-    outfolder = path + '/01_Sequence_Alignment/'
-    outfile = path + '/01_Sequence_Alignment/Alignment_MUSCLE.fasta'
+    outfolder = path + '%s01_Sequence_Alignment%s' % (delimiter, delimiter)
+    outfile = path + '%s01_Sequence_Alignment%sAlignment_MUSCLE.fasta' % (delimiter, delimiter)
     if not os.path.exists(outfolder):
         os.mkdir(outfolder)
 
