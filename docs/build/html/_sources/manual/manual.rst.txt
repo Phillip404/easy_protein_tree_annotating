@@ -459,8 +459,14 @@ is turned off in the default setting.
   epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
 
 **Tree Optimize**
+EPTA provides two command flags to enhance tree quality by increase run time. **-mtree** turns full tree search on to
+increse the accuracy, and **-bnni** performs an additional step to further optimize UFBoot trees by nearest neighbor
+interchange (NNI) based directly on bootstrap alignments. . One point needs to be awared is that both flags significantly
+increase the run time.
 
+.. code-block:: bash
 
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000 -mtree -bnni
 
 Annotate a tree file
 --------------------------
@@ -487,8 +493,19 @@ Correspondingly, if there are local sequence in the input file, pleas ensure tha
 Besides annotate taxonomic information on the tree image, EPTA is also capable to color tree branches depends on taxonomic
 rank by adding **-marktax** in the command line.
 
-**Annotate Domain**
+.. code-block:: bash
 
+  epta -i ./fasta_files -o ./test -tax -marktax
+
+**Annotate Domain**
+By adding **-pfam** flag in the command line, EPTA can automatically annotate domains of all sequences. The top 10
+frequent domain will be colored, and the rest domains will be annotated in gray. What's more, for colored domains,
+besides show domain names on each domain face, **-leg** command can make a lengend in the right bottom corner of the
+image to illustrate domain names and corresponding color.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -pfam -leg
 
 **Image Size**
 Command flag **-xzoom [Magnification]**, **-yzoom [Magnification]** are introduced to adjust the image size horizontally and
@@ -499,3 +516,10 @@ vertically. The basic magnification is 1. The default DPI of output png image is
   epta -i ./fasta_files -o ./test -tax -name  -pfam -xzoom 1.5 -yzoom 1.5
 
 **Branch Setting**
+There are three attribute value of branches in EPTA, genetic distance, bootstrap value, and bifurcate number, corresponding
+to the following commands: **-bl** (branch length), **-bs** (branch support), and **-bif** (bifurcation). None of them is enabled
+in the defualt setting. Therefore, users need to enable corresponding command flag to show the value on tree image.
+
+.. code-block:: bash
+
+  epta -i ./fasta_files -o ./test -tax -name  -pfam -bl -bs -bif

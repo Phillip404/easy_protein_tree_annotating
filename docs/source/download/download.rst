@@ -20,7 +20,6 @@ EPTA needs Conda and Bioconda channel to complete the installation.
     conda config --add channels defaults
     conda config --add channels bioconda
     conda config --add channels conda-forge
-    conda config --set channel_priority strict
 
   `Bioconda Homepage <https://bioconda.github.io/>`_
 

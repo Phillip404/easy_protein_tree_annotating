@@ -37,7 +37,7 @@ def iqtree_standalone():
     infile = path + '%s01_Sequence_Alignment%strimAl_FASTA.fasta' % (delimiter,delimiter)
     # outfile = path + '01_Sequence_Alignment/Alignment_MAFFT.fasta'
     prefix = path + '%s02_Tree_File%sIQ-tree' % (delimiter, delimiter)
-    outfolder = path + '%s02_Tree_File%s' (delimiter, delimiter)
+    outfolder = path + '%s02_Tree_File%s' % (delimiter, delimiter)
     if not os.path.exists(outfolder):
         os.mkdir(outfolder)
 

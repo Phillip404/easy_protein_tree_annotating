@@ -86,8 +86,8 @@ def ete3_drawing():
     annotate_name()
 
     global path
-    path = ''.join(args.outfile.rsplit())
-    index = path + 'info_index.tsv'
+    path = args.outfile.rstrip(delimiter)
+    index = path + '%sinfo_index.tsv' % (delimiter)
     dataframe = pd.read_csv(index, sep='\t')
     new_tree = path + '%s02_Tree_File%snew_IQ-tree.contree' % (delimiter,delimiter)
     t = PhyloTree(new_tree)
@@ -189,11 +189,11 @@ def ete3_drawing():
                         domain_name = pfam_df['hmm_name'][j]
                         col_num = domain_list.index(domain_name)
                         if  col_num < 10:
-                            if 2>1:
+                            if args.leg:
                                 domain_name = ''
-                            simple_motifs.append([start,end,'[]', None, 10, color_list[col_num], color_list[col_num], 'arial|1|black|%s'%(domain_name)])
+                            simple_motifs.append([start,end,'[]', None, 10, color_list[col_num], color_list[col_num], 'arial|2|black|%s'%(domain_name)])
                         else:
-                            simple_motifs.append([start,end,'[]', None, 10, 'LightGrey', 'LightGrey', 'arial|1|black|%s'%(domain_name)])
+                            simple_motifs.append([start,end,'[]', None, 10, 'LightGrey', 'LightGrey', 'arial|2|black|%s'%(domain_name)])
                             # simple_motifs.append([start-10,end+10,'[]', None, 10, 'Snow', 'Gainsboro', 'arial|1|black|%s'%(domain_name)])
                         j += 1
                     else:
@@ -268,18 +268,15 @@ def ete3_drawing():
                 bif_face = TextFace(str(bif_num),fsize=8,ftype='Verdana',fstyle='normal',fgcolor='navy',penwidth='5',bold=False)
                 node.add_face(bif_face, column=0, position='branch-top')
 
-
     # reroot the tree
     if args.reroot:
         children_list = reroot()
         # print(children_list)
-
-
         for node in t.traverse():
             # print(str(node.describe))
             # print(children_list[0])
             node_desc = str(node.describe)
-            y = children_list[0]
+            # y = children_list[0]
             if node_desc == children_list[0]:
                 A = node
                 # print(A)
@@ -288,7 +285,10 @@ def ete3_drawing():
                 # print(B)
 
         ancestor = t.get_common_ancestor(A,B)
+        # print(ancestor.describe)
+        t.unroot()
         t.set_outgroup(ancestor)
+
 
     ts = TreeStyle()
     ts.layout_fn = mylayout
@@ -312,13 +312,18 @@ def ete3_drawing():
             lgd_elem =  len(domain_list)
         for q in range (0,lgd_elem):
             # ts.legend.add_face(RectFace(width=ts.scale*2, fgcolor=color_list[q], bgcolor=color_list[q], column=0, row=q))
-            ts.legend.add_face(RectFace(width=ts.scale/4, height=ts.scale/40, fgcolor=color_list[q], bgcolor=color_list[q]), column=0)
-            ts.legend.add_face(TextFace(domain_list[q]), column=1)
+            rect_face = RectFace(width=ts.scale/15, height=ts.scale/40, fgcolor=color_list[q], bgcolor=color_list[q])
+            rect_face.margin_top = 2
+            ts.legend.add_face(rect_face, column=0)
+            text_face = TextFace(domain_list[q])
+            text_face.margin_top = 2
+            text_face.margin_left = 5
+            ts.legend.add_face(text_face, column=1)
         ts.legend_position = 4
 
     # render the tree
     # image_path = path + ''.join(''.join(args.infile.split('/')[-1]).split('.')[:-1]) + '.png'
-    image_path = path + 'tree_image.%s' % str(args.format).lower()
+    image_path = path + delimiter + 'tree_image.%s' % str(args.format).lower()
     t.render(image_path, h=100*len(dataframe['ID']), dpi=300, tree_style=ts)
     # t.show(tree_style=ts)
 

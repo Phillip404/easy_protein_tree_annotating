@@ -122,102 +122,202 @@
 </div>
 </div></blockquote>
 </section>
-<section id="pas">
-<h3>-pas<a class="headerlink" href="#pas" title="Permalink to this headline">¶</a></h3>
-<p>Enable active sites prediction in Pfamscan.</p>
-</section>
 </section>
 <section id="make-alignment">
 <h2>Make alignment<a class="headerlink" href="#make-alignment" title="Permalink to this headline">¶</a></h2>
 <section id="mafft">
 <h3>-mafft<a class="headerlink" href="#mafft" title="Permalink to this headline">¶</a></h3>
+<p>Enable MAFFT</p>
 </section>
 <section id="matrix">
 <h3>-matrix<a class="headerlink" href="#matrix" title="Permalink to this headline">¶</a></h3>
+<p>Score matrix for align sequences.</p>
+<blockquote>
+<div><p><strong>Avaliable Matrix</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bl30</span>
+<span class="n">bl45</span>
+<span class="n">bl62</span>
+<span class="n">bl80</span>
+<span class="n">jtt100</span>
+<span class="n">jtt200</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="op">
 <h3>-op<a class="headerlink" href="#op" title="Permalink to this headline">¶</a></h3>
+<p>Gap Open penalty.</p>
 </section>
 <section id="ep">
 <h3>-ep<a class="headerlink" href="#ep" title="Permalink to this headline">¶</a></h3>
+<p>Gap extension penalty.</p>
 </section>
 <section id="retree">
 <h3>-retree<a class="headerlink" href="#retree" title="Permalink to this headline">¶</a></h3>
+<p>Tree rebuilding number.</p>
+<blockquote>
+<div><p><strong>Avaliable Value</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">5</span>
+<span class="mi">10</span>
+<span class="mi">20</span>
+<span class="mi">50</span>
+<span class="mi">80</span>
+<span class="mi">100</span> <span class="p">(</span><span class="n">long</span> <span class="n">run</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="maxiterate">
 <h3>-maxiterate<a class="headerlink" href="#maxiterate" title="Permalink to this headline">¶</a></h3>
+<p>Maximum number of iterations to perform when refining the alignment.</p>
+<blockquote>
+<div><p><strong>Avaliable Value</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">5</span>
+<span class="mi">10</span>
+<span class="mi">20</span>
+<span class="mi">50</span>
+<span class="mi">80</span>
+<span class="mi">100</span> <span class="p">(</span><span class="n">long</span> <span class="n">run</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="ffts">
 <h3>-ffts<a class="headerlink" href="#ffts" title="Permalink to this headline">¶</a></h3>
+<p>Perform fast fourier transform.</p>
+<blockquote>
+<div><p><strong>Avaliable Mode</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">localpair</span>
+<span class="n">globalpair</span>
+<span class="n">genafpair</span>
+</pre></div>
+</div>
+</div></blockquote>
 <section id="muscle">
 <h4>MUSCLE<a class="headerlink" href="#muscle" title="Permalink to this headline">¶</a></h4>
 </section>
 </section>
 <section id="id1">
 <h3>-muscle<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Enable muscle.</p>
 <section id="trimal">
 <h4>trimAl<a class="headerlink" href="#trimal" title="Permalink to this headline">¶</a></h4>
 </section>
 </section>
 <section id="id2">
 <h3>-trimal<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Enable trimal.</p>
 </section>
 <section id="tmod">
 <h3>-tmod<a class="headerlink" href="#tmod" title="Permalink to this headline">¶</a></h3>
+<p>trimal run mode.</p>
+<blockquote>
+<div><p><strong>Avaliable Mode</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">automated1</span>
+<span class="n">gappyout</span>
+<span class="n">strict</span>
+<span class="n">strictplus</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="rmss">
 <h3>-rmss<a class="headerlink" href="#rmss" title="Permalink to this headline">¶</a></h3>
+<p>Remove spurious sequences (residue overlap/sequence overlap).</p>
+<p>Residue overlap means the minimum overlap of a positions with other positions in the column
+to be considered a “good position”.</p>
+<p>Sequence overlap means the minimum percentage of “good positions” that a sequence must have in
+order to be conserved.</p>
 </section>
 </section>
 <section id="make-phylogenetic-tree">
 <h2>Make phylogenetic tree<a class="headerlink" href="#make-phylogenetic-tree" title="Permalink to this headline">¶</a></h2>
 <section id="iqtree">
 <h3>-iqtree<a class="headerlink" href="#iqtree" title="Permalink to this headline">¶</a></h3>
+<p>Enable iqtree.</p>
 </section>
 <section id="iqmod">
 <h3>-iqmod<a class="headerlink" href="#iqmod" title="Permalink to this headline">¶</a></h3>
+<p>Run mode of iqtree.</p>
+<blockquote>
+<div><p><strong>Avaliable Mode</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TEST</span>
+<span class="n">TESTNEW</span>
+<span class="n">One</span> <span class="ow">or</span> <span class="n">more</span> <span class="n">spicified</span> <span class="n">models</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 <section id="boots">
 <h3>-boots<a class="headerlink" href="#boots" title="Permalink to this headline">¶</a></h3>
+<p>Bootstrap number.</p>
 </section>
 <section id="rcluster">
 <h3>-rcluster<a class="headerlink" href="#rcluster" title="Permalink to this headline">¶</a></h3>
+<p>Specify the percentage for the relaxed clustering algorithm to speed up the computation instead of
+the default slow greedy algorithm.</p>
 </section>
 <section id="mtree">
 <h3>-mtree<a class="headerlink" href="#mtree" title="Permalink to this headline">¶</a></h3>
+<p>Turn on full tree search for each model considered, to obtain more accurate result.</p>
 </section>
 <section id="bnni">
 <h3>-bnni<a class="headerlink" href="#bnni" title="Permalink to this headline">¶</a></h3>
+<p>Perform an additional step to further optimize UFBoot trees by nearest neighbor interchange (NNI) based
+directly on bootstrap alignments.</p>
 </section>
 </section>
 <section id="tree-annotating">
 <h2>Tree Annotating<a class="headerlink" href="#tree-annotating" title="Permalink to this headline">¶</a></h2>
 <section id="xzoom">
 <h3>-xzoom<a class="headerlink" href="#xzoom" title="Permalink to this headline">¶</a></h3>
+<p>Horizontal magnification, default is 1.</p>
 </section>
 <section id="yzoom">
 <h3>-yzoom<a class="headerlink" href="#yzoom" title="Permalink to this headline">¶</a></h3>
+<p>Vertical magnification, default is 1.</p>
 </section>
 <section id="bs">
 <h3>-bs<a class="headerlink" href="#bs" title="Permalink to this headline">¶</a></h3>
+<p>Show bootstrap support value.</p>
 </section>
 <section id="bl">
 <h3>-bl<a class="headerlink" href="#bl" title="Permalink to this headline">¶</a></h3>
+<p>Show genomic distance value.</p>
 </section>
 <section id="bif">
 <h3>-bif<a class="headerlink" href="#bif" title="Permalink to this headline">¶</a></h3>
+<p>Show bifurcate number.</p>
 </section>
 <section id="leg">
 <h3>-leg<a class="headerlink" href="#leg" title="Permalink to this headline">¶</a></h3>
+<p>Generate domain legend.</p>
 </section>
 <section id="reroot">
 <h3>-reroot<a class="headerlink" href="#reroot" title="Permalink to this headline">¶</a></h3>
+<p>Reroot the tree.</p>
 </section>
 <section id="marktax">
 <h3>-marktax<a class="headerlink" href="#marktax" title="Permalink to this headline">¶</a></h3>
+<p>Color branches according to taxonomy.</p>
 </section>
 <section id="format">
 <h3>-format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+<p>Output image format.</p>
+<blockquote>
+<div><p><strong>Avaliable Type</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">png</span>
+<span class="n">pdf</span>
+<span class="n">svg</span>
+</pre></div>
+</div>
+</div></blockquote>
 </section>
 </section>
 </section>
@@ -249,7 +349,6 @@
 <li><a class="reference internal" href="#name">-name</a></li>
 <li><a class="reference internal" href="#pfam">-pfam</a></li>
 <li><a class="reference internal" href="#pev-e-value">-pev [E-value]</a></li>
-<li><a class="reference internal" href="#pas">-pas</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#make-alignment">Make alignment</a><ul>

@@ -17,7 +17,7 @@ def trimal_lite():
 
     # define infile
     path = ''.join(args.outfile.rsplit(delimiter,1)) + '%s01_Sequence_Alignment%s' % (delimiter,delimiter)
-    # print(path)
+    print(path)
 
     if args.muscle:
         filename = 'Alignment_MUSCLE.fasta'
@@ -26,6 +26,7 @@ def trimal_lite():
         filename = 'Alignment_MAFFT.fasta'
         infile = path + 'Alignment_MAFFT.fasta'
     else:
+        filename = 'Alignment_MAFFT.fasta'
         infile = path + 'Alignment_MAFFT.fasta'
 
     outfile = path + 'trimAl_FASTA.fasta'
@@ -66,7 +67,8 @@ def trimal_lite():
 
     files = {
         'tool' : (None,'TRIMAL_XSEDE'),
-        'input.infile_' : (filename, open(infile, 'rb')),
+        'input.infile_' : (filename, open(infile, 'r')),
+        'vparam.out_filename_' : (None,'trimAl_FASTA.fasta'),
         'vparam.out_htmlfilename_' : (None, '0'),
         'vparam.print_scc_' : (None, '0'),
         'vparam.print_sct_' : (None, '0'),
@@ -81,16 +83,13 @@ def trimal_lite():
         'vparam.specify_gappyout_' : (None, '0'),
         'vparam.specify_noallgaps_' : (None, '0'),
         'vparam.specify_nogaps_' : (None, '0'),
-        'vparam.specify_resoverlap_' : (None, '0'),
-        'vparam.specify_seqoverlap_' : (None, '0'),
         'vparam.specify_strict_' : (None, '0'),
-        'vparam.specify_strictplus_' : (None, '0'),
+        'vparam.specify_strictplus_' : (None, '0')
     }
-
 
     # run mode
     if tmode == 'gappyout':
-        files['vparam.specify_automated1_'] = (None, '1')
+        files['vparam.specify_gappyout_'] = (None, '1')
     elif tmode == 'strict':
         files['vparam.specify_strict_'] = (None, '1')
     elif tmode == 'strictplus':
@@ -102,7 +101,7 @@ def trimal_lite():
         files['vparam.specify_resoverlap_'] = (None, str(residue))
         files['vparam.specify_seqoverlap_'] = (None, str(sequence))
 
-
+    # print(files)
 
 
 
@@ -144,9 +143,7 @@ def trimal_lite():
             break
 
     # fetch result file list
-    headers = {
-        'cipres-appkey': 'EPTA-CF81D2F792D849FA89C1427A76E38ED3',
-    }
+    headers = {'cipres-appkey': 'EPTA-CF81D2F792D849FA89C1427A76E38ED3',}
 
     response = requests.get('https://cipresrest.sdsc.edu/cipresrest/v1/job/z77434/'+job_handle+'/output', headers=headers, auth=('z77434', '123123321z'))
 
@@ -154,11 +151,11 @@ def trimal_lite():
     # test_file = open('urltest.txt','w')
     # print (response.text,file=test_file)
 
-    # rind result file id
+    # search result file's ID
     root = ET.XML(response.text)
     for tag in root.iter('jobfile'):
         # print(str(tag.find('filename').text))
-        if tag.find('filename').text == 'STDOUT':
+        if tag.find('filename').text == 'trimAl_FASTA.fasta':
             filename = tag.find('filename').text
             file_id = tag.find('outputDocumentId').text
 
@@ -168,16 +165,17 @@ def trimal_lite():
             response = requests.get('https://cipresrest.sdsc.edu/cipresrest/v1/job/z77434/'+job_handle+'/output/'+file_id, headers=headers, auth=('z77434', '123123321z'), stream=True)
 
             # print (response.content)
-            # print('Downloading result file.')
-
-            outfile = open(outfile, 'w')
+            outfile = open(path + delimiter + tag.find('filename').text, 'w')
             outfile.write(response.content.decode('utf8'))
+            # outfile = open(outfile, 'w')
+            # outfile.write(response.content.decode('utf8'))
+            # print('Downloading result file.')
 
     end = time.perf_counter()
     runtime = end - start
     logging.info('trimAl processing done. Runtime: %s second\n' % (round(runtime,2)))
 
-    path = args.outfile + 'check_point.log'
+    path = args.outfile.rstrip(delimiter) + '%scheck_point.log' % (delimiter)
     with open(path, mode='a+') as check_point:
         record = ''.join(check_point.readlines())
         if record.find('trimal') == -1:

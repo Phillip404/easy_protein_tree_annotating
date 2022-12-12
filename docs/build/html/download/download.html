@@ -18,7 +18,7 @@
     <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Use EPTA" href="../manual/manual.html" />
+    <link rel="next" title="Quick Start" href="../manual/quickstart.html" />
     <link rel="prev" title="Introduction" href="../intro/intro.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="../manual/manual.html" title="Use EPTA"
+          <a href="../manual/quickstart.html" title="Quick Start"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../intro/intro.html" title="Introduction"
@@ -61,7 +61,6 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda config --add channels defaults
 conda config --add channels bioconda
 conda config --add channels conda-forge
-conda config --set channel_priority strict
 </pre></div>
 </div>
 <p><a class="reference external" href="https://bioconda.github.io/">Bioconda Homepage</a></p>
@@ -73,6 +72,7 @@ conda config --set channel_priority strict
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
 conda activate epta
+conda config --set channel_priority flexible
 conda install -c phillip404 epta -y
 </pre></div>
 </div>
@@ -82,12 +82,14 @@ conda install -c phillip404 epta -y
 <div><p><strong>Linux &amp; MacOS</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta-lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
 conda activate epta-lite
+conda config --set channel_priority flexible
 conda install -c phillip404 epta-lite -y
 </pre></div>
 </div>
 <p><strong>Windows (&gt;=Windows 10)</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta-lite <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create -n epta-lite <span class="nv">python</span><span class="o">==</span><span class="m">3</span>.8
 conda activate epta-lite
+conda config --set channel_priority flexible
 conda install -c phillip404 epta-lite --only-deps -y
 pip install https://github.com/Phillip404/easy_protein_tree_annotating/raw/main/Packaging/Windows/epta-lite-1.0.tar.gz
 </pre></div>
@@ -159,8 +161,8 @@ a subsystem on Windows platform:</p>
   <p class="topless"><a href="../intro/intro.html"
                         title="previous chapter">Introduction</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../manual/manual.html"
-                        title="next chapter">Use EPTA</a></p>
+  <p class="topless"><a href="../manual/quickstart.html"
+                        title="next chapter">Quick Start</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -189,7 +191,7 @@ a subsystem on Windows platform:</p>
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="../manual/manual.html" title="Use EPTA"
+          <a href="../manual/quickstart.html" title="Quick Start"
              >next</a> |</li>
         <li class="right" >
           <a href="../intro/intro.html" title="Introduction"
