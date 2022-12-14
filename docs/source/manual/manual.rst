@@ -476,6 +476,7 @@ Annotate a tree file
 --------------------------
 
 **Annotate Taxonomy**
+""""""""""""""""""""
 
 By adding **-tax** flag in the command line, EPTA can automatically annotate taxonomy of all sequences' species.
 The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
@@ -514,6 +515,7 @@ image to illustrate domain names and corresponding color.
   epta -i ./fasta_files -o ./test -pfam -leg
 
 **Image Size**
+""""""""""""""""""""
 
 Command flag **-xzoom [Magnification]**, **-yzoom [Magnification]** are introduced to adjust the image size horizontally and
 vertically. The basic magnification is 1. The default DPI of output png image is 300, and do not change with image size.
@@ -523,6 +525,7 @@ vertically. The basic magnification is 1. The default DPI of output png image is
   epta -i ./fasta_files -o ./test -tax -name  -pfam -xzoom 1.5 -yzoom 1.5
 
 **Branch Setting**
+""""""""""""""""""""
 
 There are three attribute value of branches in EPTA, genetic distance, bootstrap value, and bifurcate number, corresponding
 to the following commands: **-bl** (branch length), **-bs** (branch support), and **-bif** (bifurcation). None of them is enabled
