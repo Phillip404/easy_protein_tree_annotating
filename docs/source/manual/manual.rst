@@ -421,6 +421,7 @@ As the default setting, IQ-tree automatically runs in the EPTA pipline. One can 
 manually add **-iqtree** flag to the command line to run IQ-tree.
 
 **IQ-tree Run Mode**
+
 EPTA provide three run mode for users to select model: **'-iqmod TEST'**, **-iqmod TESTNEW**
 and **-iqmod [A specific model]**. They are based on IQ-tree's command line, 'TEST' mode provides
 automatic model selection in a basic model list, similarly, 'TESTNEW' automatically select model
@@ -439,6 +440,7 @@ Command-line example:
   epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod LG+I+G4
 
 **Bootstrap**
+
 EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
 ultrafast bootstrap is 1000. The command flag of bootstrap is **-boost [bootstrap numbr]**, default
 value set as 1000.
@@ -448,6 +450,7 @@ value set as 1000.
   epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000
 
 **Reduce Runtime**
+
 To reduce runtime and computational burden, EPTA introduced **-rcluster [percentage]** flag, which implements
 by IQ-tree, derived from the *relaxed hierarchical clustering algorithm*. This flag specify a percentage for the
 relaxed clustering algorithm, in order to speed up the computation by reduce the percentage of partition schemes.
@@ -459,6 +462,7 @@ is turned off in the default setting.
   epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots 1000 -rcluster 10
 
 **Tree Optimize**
+
 EPTA provides two command flags to enhance tree quality by increase run time. **-mtree** turns full tree search on to
 increse the accuracy, and **-bnni** performs an additional step to further optimize UFBoot trees by nearest neighbor
 interchange (NNI) based directly on bootstrap alignments. . One point needs to be awared is that both flags significantly
@@ -472,6 +476,7 @@ Annotate a tree file
 --------------------------
 
 **Annotate Taxonomy**
+
 By adding **-tax** flag in the command line, EPTA can automatically annotate taxonomy of all sequences' species.
 The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
 that longer than six rank will be shortened to that number. Given that the full organism lineage from NCBI commomly
@@ -498,6 +503,7 @@ rank by adding **-marktax** in the command line.
   epta -i ./fasta_files -o ./test -tax -marktax
 
 **Annotate Domain**
+
 By adding **-pfam** flag in the command line, EPTA can automatically annotate domains of all sequences. The top 10
 frequent domain will be colored, and the rest domains will be annotated in gray. What's more, for colored domains,
 besides show domain names on each domain face, **-leg** command can make a lengend in the right bottom corner of the
@@ -516,6 +522,7 @@ vertically. The basic magnification is 1. The default DPI of output png image is
   epta -i ./fasta_files -o ./test -tax -name  -pfam -xzoom 1.5 -yzoom 1.5
 
 **Branch Setting**
+
 There are three attribute value of branches in EPTA, genetic distance, bootstrap value, and bifurcate number, corresponding
 to the following commands: **-bl** (branch length), **-bs** (branch support), and **-bif** (bifurcation). None of them is enabled
 in the defualt setting. Therefore, users need to enable corresponding command flag to show the value on tree image.
