@@ -514,6 +514,7 @@ image to illustrate domain names and corresponding color.
   epta -i ./fasta_files -o ./test -pfam -leg
 
 **Image Size**
+
 Command flag **-xzoom [Magnification]**, **-yzoom [Magnification]** are introduced to adjust the image size horizontally and
 vertically. The basic magnification is 1. The default DPI of output png image is 300, and do not change with image size.
 
