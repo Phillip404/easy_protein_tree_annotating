@@ -328,15 +328,15 @@ still able to run MAFFT manually by adding <strong>‘-mafft’</strong> flag.</
 </div>
 <p>There are also several command line flags for changing paramters of MAFFT:</p>
 <blockquote>
-<div><p><strong>Matrix</strong>
-Commnad line flag of matrix selecting is <strong>‘-matrix [Matrix Abbreviation]’</strong>,
+<div><p><strong>Matrix</strong></p>
+<p>Commnad line flag of matrix selecting is <strong>‘-matrix [Matrix Abbreviation]’</strong>,
 identical to the command line flag ‘–bl’ or ‘–jtt’ of MAFFT.</p>
 <p>Command-line example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name -pfam -mafft -matrix bl62
 </pre></div>
 </div>
-<p><strong>Opening Score And Extension Score</strong>
-Commnad line flag of opening score setting is <strong>‘-op [Number]’</strong>, identical to the command
+<p><strong>Opening Score And Extension Score</strong></p>
+<p>Commnad line flag of opening score setting is <strong>‘-op [Number]’</strong>, identical to the command
 line flag ‘–op’ of MAFFT.</p>
 <p>Commnad line flag of extension score setting is <strong>‘-ep [Number]’</strong>, identical to the command
 line flag ‘–ep’ of MAFFT.</p>
@@ -420,8 +420,8 @@ EPTA standalone version with large dataset (&gt;500), be aware that IQ-tree need
 large memory space to run.</p>
 <p>As the default setting, IQ-tree automatically runs in the EPTA pipline. One can also
 manually add <strong>-iqtree</strong> flag to the command line to run IQ-tree.</p>
-<p><strong>IQ-tree Run Mode</strong>
-EPTA provide three run mode for users to select model: <strong>‘-iqmod TEST’</strong>, <strong>-iqmod TESTNEW</strong>
+<p><strong>IQ-tree Run Mode</strong></p>
+<p>EPTA provide three run mode for users to select model: <strong>‘-iqmod TEST’</strong>, <strong>-iqmod TESTNEW</strong>
 and <strong>-iqmod [A specific model]</strong>. They are based on IQ-tree’s command line, ‘TEST’ mode provides
 automatic model selection in a basic model list, similarly, ‘TESTNEW’ automatically select model
 from a advanced list. Users can also choose on known best model from the two list before. For more
@@ -434,15 +434,15 @@ details of models, please check the model list of IQ-tree:</p>
 epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod LG+I+G4
 </pre></div>
 </div>
-<p><strong>Bootstrap</strong>
-EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
+<p><strong>Bootstrap</strong></p>
+<p>EPTA assessing branch support via ultrafast bootstrap of IQ-tree. The minimun number of
 ultrafast bootstrap is 1000. The command flag of bootstrap is <strong>-boost [bootstrap numbr]</strong>, default
 value set as 1000.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots <span class="m">1000</span>
 </pre></div>
 </div>
-<p><strong>Reduce Runtime</strong>
-To reduce runtime and computational burden, EPTA introduced <strong>-rcluster [percentage]</strong> flag, which implements
+<p><strong>Reduce Runtime</strong></p>
+<p>To reduce runtime and computational burden, EPTA introduced <strong>-rcluster [percentage]</strong> flag, which implements
 by IQ-tree, derived from the <em>relaxed hierarchical clustering algorithm</em>. This flag specify a percentage for the
 relaxed clustering algorithm, in order to speed up the computation by reduce the percentage of partition schemes.
 For example, <strong>-rcluster 10</strong> means only top 10% of partition schemes are considered in the running. This function
@@ -450,8 +450,8 @@ is turned off in the default setting.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name  -pfam -mafft -trimal -iqmod TEST -boots <span class="m">1000</span> -rcluster <span class="m">10</span>
 </pre></div>
 </div>
-<p><strong>Tree Optimize</strong>
-EPTA provides two command flags to enhance tree quality by increase run time. <strong>-mtree</strong> turns full tree search on to
+<p><strong>Tree Optimize</strong></p>
+<p>EPTA provides two command flags to enhance tree quality by increase run time. <strong>-mtree</strong> turns full tree search on to
 increse the accuracy, and <strong>-bnni</strong> performs an additional step to further optimize UFBoot trees by nearest neighbor
 interchange (NNI) based directly on bootstrap alignments. . One point needs to be awared is that both flags significantly
 increase the run time.</p>
@@ -461,8 +461,7 @@ increase the run time.</p>
 </section>
 <section id="annotate-a-tree-file">
 <h2>Annotate a tree file<a class="headerlink" href="#annotate-a-tree-file" title="Permalink to this headline">¶</a></h2>
-<p><strong>Annotate Taxonomy</strong>
-By adding <strong>-tax</strong> flag in the command line, EPTA can automatically annotate taxonomy of all sequences’ species.
+<p>By adding <strong>-tax</strong> flag in the command line, EPTA can automatically annotate taxonomy of all sequences’ species.
 The maximum rank of the organism lineage EPTA can annotating on the phylogenetic tree is six. Any organism lineage
 that longer than six rank will be shortened to that number. Given that the full organism lineage from NCBI commomly
 starts with kingdom, EPTA intercepts the second to the last rank. If the full lineage longer than six rank (in the most cases)
@@ -483,22 +482,20 @@ rank by adding <strong>-marktax</strong> in the command line.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -marktax
 </pre></div>
 </div>
-<p><strong>Annotate Domain</strong>
-By adding <strong>-pfam</strong> flag in the command line, EPTA can automatically annotate domains of all sequences. The top 10
+<p><strong>Annotate Domain</strong></p>
+<p>By adding <strong>-pfam</strong> flag in the command line, EPTA can automatically annotate domains of all sequences. The top 10
 frequent domain will be colored, and the rest domains will be annotated in gray. What’s more, for colored domains,
 besides show domain names on each domain face, <strong>-leg</strong> command can make a lengend in the right bottom corner of the
 image to illustrate domain names and corresponding color.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -pfam -leg
 </pre></div>
 </div>
-<p><strong>Image Size</strong>
-Command flag <strong>-xzoom [Magnification]</strong>, <strong>-yzoom [Magnification]</strong> are introduced to adjust the image size horizontally and
+<p>Command flag <strong>-xzoom [Magnification]</strong>, <strong>-yzoom [Magnification]</strong> are introduced to adjust the image size horizontally and
 vertically. The basic magnification is 1. The default DPI of output png image is 300, and do not change with image size.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name  -pfam -xzoom <span class="m">1</span>.5 -yzoom <span class="m">1</span>.5
 </pre></div>
 </div>
-<p><strong>Branch Setting</strong>
-There are three attribute value of branches in EPTA, genetic distance, bootstrap value, and bifurcate number, corresponding
+<p>There are three attribute value of branches in EPTA, genetic distance, bootstrap value, and bifurcate number, corresponding
 to the following commands: <strong>-bl</strong> (branch length), <strong>-bs</strong> (branch support), and <strong>-bif</strong> (bifurcation). None of them is enabled
 in the defualt setting. Therefore, users need to enable corresponding command flag to show the value on tree image.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>epta -i ./fasta_files -o ./test -tax -name  -pfam -bl -bs -bif

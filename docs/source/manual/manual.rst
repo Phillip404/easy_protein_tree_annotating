@@ -297,6 +297,7 @@ Command-line example:
 There are also several command line flags for changing paramters of MAFFT:
 
   **Matrix**
+
   Commnad line flag of matrix selecting is **'-matrix [Matrix Abbreviation]'**,
   identical to the command line flag '--bl' or '--jtt' of MAFFT.
 
@@ -307,6 +308,7 @@ There are also several command line flags for changing paramters of MAFFT:
     epta -i ./fasta_files -o ./test -tax -name -pfam -mafft -matrix bl62
 
   **Opening Score And Extension Score**
+
   Commnad line flag of opening score setting is **'-op [Number]'**, identical to the command
   line flag '--op' of MAFFT.
 
