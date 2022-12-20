@@ -39,6 +39,7 @@ def pfam_int():
     dataframe['Domain Full Record [Pfamscan]'] = ''
 
 def read_pfam_result(result):
+    global delimiter
     for domain in result:
         domain = dict(domain)
         # data type check
@@ -79,6 +80,7 @@ def read_pfam_result(result):
 
 def pfam_form():
     global dataframe
+    global delimiter
 
     # dataframe = pd.read_csv('./test/info_index.tsv',sep='\t')
     # create a new dataframe for pfamscan data
@@ -132,6 +134,7 @@ def pfam_form():
     pform.to_csv(args.outfile + '%s00_Parsed_Fasta%spfamscan_details.tsv',sep='\t') % (delimiter, delimiter)
 
 def run_pfamscan():
+    global delimiter
     logging.info('Initializing PfamScan...')
 
     # define file path

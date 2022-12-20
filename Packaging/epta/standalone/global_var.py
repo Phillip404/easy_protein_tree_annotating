@@ -106,7 +106,7 @@ def args():
     elif args.test:
         cfg_path = test_config
     else:
-        cfg_path = args.infle.rstrip(delimiter) + delimiter + '/Config.ini'
+        cfg_path = args.infile.rstrip(delimiter) + delimiter + '/Config.ini'
     args.cfg_path = cfg_path
 
     if os.path.isfile(cfg_path):
