@@ -5,6 +5,12 @@ Introduction：
 
 EPTA, the abbreviation of Easy Protein Tree Annotating, is a user-friendly protein tree generation and annotating tool. EPTA takes the FASTA file as input and outputs a protein phylogenetic tree with annotated taxonomy and domain of each sequence automatically. EPTA has 40 parameters to ensure users can run it more flexibly, and it is also capable of running on Windows, Linux, and Mac operating systems.
 
+Installation：
+---------------
+EPTA has been packaged and distributed as a Conda package. For more information, check the [**Manual Pgae**]([https://duckduckgo.com](https://easy-protein-tree-annotating.readthedocs.io/en/latest/download/download.html#install-epta)).
+**Conda channel:** https://anaconda.org/phillip404/repo
+
+
 Features and Functionality:
 ---------------
 
