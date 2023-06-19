@@ -33,4 +33,5 @@ Features and Functionality:
 
 **Compatibility and Performance:** EPTA is designed to run efficiently on different performance platforms and operating systems. It utilizes web server computing capabilities to handle large datasets, ensuring optimal performance on low-performance platforms.
 
-**Documentation and Support:** The tool provides comprehensive documentation, including tutorials, FAQs, and user guides, to assist users in utilizing its features effectively. **Manual Page:** https://easy-protein-tree-annotating.readthedocs.io/en/latest/
+**Documentation and Support:** The tool provides comprehensive documentation, including tutorials, FAQs, and user guides, to assist users in utilizing its features effectively. 
+**Manual Page:** https://easy-protein-tree-annotating.readthedocs.io/en/latest/
