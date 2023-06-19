@@ -7,7 +7,8 @@ EPTA, the abbreviation of Easy Protein Tree Annotating, is a user-friendly prote
 
 Installation：
 ---------------
-EPTA has been packaged and distributed as a Conda package. For more information, check the [**Manual Pgae**]([https://duckduckgo.com](https://easy-protein-tree-annotating.readthedocs.io/en/latest/download/download.html#install-epta)).
+EPTA has been packaged and distributed as a Conda package. For more information, check the [**Manual Pgae**](https://easy-protein-tree-annotating.readthedocs.io/en/latest/download/download.html#install-epta).
+
 **Conda channel:** https://anaconda.org/phillip404/repo
 
 
